@@ -1,0 +1,10 @@
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\IInterface\bin\Debug\IInterface.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\IInterface\bin\Debug\IInterface.pdb
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\IInterface\obj\Debug\IInterface.csprojResolveAssemblyReference.cache
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\IInterface\obj\Debug\IInterface.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\IInterface\obj\Debug\IInterface.pdb
+D:\LeoApp\LeoApp\AplicacionTransformacion\IInterface\bin\Debug\IInterface.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\IInterface\bin\Debug\IInterface.pdb
+D:\LeoApp\LeoApp\AplicacionTransformacion\IInterface\obj\Debug\IInterface.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\IInterface\obj\Debug\IInterface.pdb
+D:\LeoApp\LeoApp\AplicacionTransformacion\IInterface\obj\Debug\IInterface.csprojResolveAssemblyReference.cache

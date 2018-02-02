@@ -1,0 +1,20 @@
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Data\bin\Debug\Data.dll.config
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Data\bin\Debug\Data.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Data\bin\Debug\Data.pdb
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Data\bin\Debug\EntityFramework.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Data\bin\Debug\EntityFramework.xml
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Data\obj\Debug\Data.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Data\obj\Debug\Data.pdb
+D:\LeoApp\LeoApp\AplicacionTransformacion\Data\bin\Debug\Data.dll.config
+D:\LeoApp\LeoApp\AplicacionTransformacion\Data\bin\Debug\Data.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\Data\bin\Debug\Data.pdb
+D:\LeoApp\LeoApp\AplicacionTransformacion\Data\bin\Debug\EntityFramework.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\Data\bin\Debug\EntityFramework.xml
+D:\LeoApp\LeoApp\AplicacionTransformacion\Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\LeoApp\LeoApp\AplicacionTransformacion\Data\obj\Debug\Data.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\Data\obj\Debug\Data.pdb
+D:\LeoApp\LeoApp\AplicacionTransformacion\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache

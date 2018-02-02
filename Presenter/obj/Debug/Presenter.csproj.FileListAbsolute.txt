@@ -1,0 +1,28 @@
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\bin\Debug\Presenter.dll.config
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\bin\Debug\Presenter.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\bin\Debug\Presenter.pdb
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\bin\Debug\Data.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\bin\Debug\IInterface.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\bin\Debug\Data.pdb
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\bin\Debug\IInterface.pdb
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.xml
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\obj\Debug\Presenter.csprojResolveAssemblyReference.cache
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\obj\Debug\Presenter.dll
+C:\Users\Leonardo\documents\visual studio 2015\Projects\AplicacionTransformacion\Presenter\obj\Debug\Presenter.pdb
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\Presenter.dll.config
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\Presenter.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\Presenter.pdb
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\Data.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.SqlServer.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\IInterface.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\Data.pdb
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\IInterface.pdb
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.xml
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.SqlServer.xml
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\obj\Debug\Presenter.csprojResolveAssemblyReference.cache
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\obj\Debug\Presenter.dll
+D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\obj\Debug\Presenter.pdb

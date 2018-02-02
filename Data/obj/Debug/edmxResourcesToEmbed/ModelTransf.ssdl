@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BDInfoTransformacionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tbAdjunto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdContenido" Type="int" />
+    <Property Name="RutaAdjunto" Type="nvarchar(max)" />
+    <Property Name="Nombre" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tbAplicacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="AW" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="tbContenido">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdAplicacion" Type="int" />
+    <Property Name="IdTema" Type="int" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="200" />
+    <Property Name="Descripcion" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tbPasoAmbiente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdAplicacion" Type="int" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="Ambiente" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="NumeroOC" Type="nvarchar" MaxLength="10" />
+    <Property Name="Resultado" Type="nvarchar(max)" />
+    <Property Name="Harvest" Type="nvarchar" MaxLength="20" />
+    <Property Name="RutaAdjunto" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tbTema">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdAplicacion" Type="int" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbUsuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PrimerNombre" Type="nvarchar" MaxLength="20" />
+    <Property Name="SegundoNombre" Type="nvarchar" MaxLength="20" />
+    <Property Name="PrimerApellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="SegundoApellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="Celular" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tbAdjunto_tbItemTemaProyecto">
+    <End Role="tbContenido" Type="Self.tbContenido" Multiplicity="0..1" />
+    <End Role="tbAdjunto" Type="Self.tbAdjunto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbContenido">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbAdjunto">
+        <PropertyRef Name="IdContenido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbContenido_tbProyecto">
+    <End Role="tbAplicacion" Type="Self.tbAplicacion" Multiplicity="0..1" />
+    <End Role="tbTema" Type="Self.tbTema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbAplicacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbTema">
+        <PropertyRef Name="IdAplicacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbContenido_tbTema">
+    <End Role="tbTema" Type="Self.tbTema" Multiplicity="0..1" />
+    <End Role="tbContenido" Type="Self.tbContenido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTema">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbContenido">
+        <PropertyRef Name="IdTema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbPasoAmbiente_tbAplicacion">
+    <End Role="tbAplicacion" Type="Self.tbAplicacion" Multiplicity="0..1" />
+    <End Role="tbPasoAmbiente" Type="Self.tbPasoAmbiente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbAplicacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbPasoAmbiente">
+        <PropertyRef Name="IdAplicacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbPasoAmbiente_tbUsuario">
+    <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+    <End Role="tbPasoAmbiente" Type="Self.tbPasoAmbiente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbPasoAmbiente">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BDInfoTransformacionModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbAdjunto" EntityType="Self.tbAdjunto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbAplicacion" EntityType="Self.tbAplicacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbContenido" EntityType="Self.tbContenido" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbPasoAmbiente" EntityType="Self.tbPasoAmbiente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbTema" EntityType="Self.tbTema" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbAdjunto_tbItemTemaProyecto" Association="Self.FK_tbAdjunto_tbItemTemaProyecto">
+      <End Role="tbContenido" EntitySet="tbContenido" />
+      <End Role="tbAdjunto" EntitySet="tbAdjunto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbContenido_tbProyecto" Association="Self.FK_tbContenido_tbProyecto">
+      <End Role="tbAplicacion" EntitySet="tbAplicacion" />
+      <End Role="tbTema" EntitySet="tbTema" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbContenido_tbTema" Association="Self.FK_tbContenido_tbTema">
+      <End Role="tbTema" EntitySet="tbTema" />
+      <End Role="tbContenido" EntitySet="tbContenido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbPasoAmbiente_tbAplicacion" Association="Self.FK_tbPasoAmbiente_tbAplicacion">
+      <End Role="tbAplicacion" EntitySet="tbAplicacion" />
+      <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbPasoAmbiente_tbUsuario" Association="Self.FK_tbPasoAmbiente_tbUsuario">
+      <End Role="tbUsuario" EntitySet="tbUsuario" />
+      <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

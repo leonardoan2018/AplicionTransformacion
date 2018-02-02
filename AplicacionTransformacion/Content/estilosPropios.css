@@ -1,0 +1,340 @@
+﻿#imagenBC {
+    background-image: url("../../Content/Imagenes/Bancolombia.png");
+    background-repeat: no-repeat;
+    height: 73px;
+    background-size: 90%;
+ 
+}
+
+.footer {
+    margin-bottom: 10px;
+    margin-top: 25px;
+    text-align:center;
+}
+
+.top-buffer {
+    margin-top: 10px;
+}
+
+
+.TituloPopup {|
+    height: 31px;
+    background: black;
+    border-radius: 4.5px 4.5px 0 0;
+    color: white;
+    /*text-align: left;*/
+    padding-left: 5px;
+    font-size: 0.875em;
+}
+
+.imgBttPopup {
+    vertical-align: top;
+    float: right;
+    width: 20px;
+    height: 20px;
+}
+
+.Pnlmensajes {
+    border: 1.5px solid rgb(3, 3, 3);
+    border-radius: 5px;
+}
+
+.CuerpoMensajePopup {
+    width: 100%;
+    display: table;
+    margin-bottom: 10px;
+    height: 3px;
+}
+
+.ContenidoPopup {
+    max-width: 500px;
+    background-color: white;
+    border-radius: 0 0 5px 5px;
+    padding: 1em;
+    margin: auto;
+}
+
+.modalBackground {
+    background-color: #666;
+    opacity: 0.9;
+}
+
+.MensajePopup {
+    display: table-cell;
+    font-size: 0.750em;
+}
+
+.ImgPopup {
+    width: 50px;
+    vertical-align: middle;
+}
+
+.botonEscondido {
+    display: none;
+}
+
+/*.ContenedorTotalSeguridad {
+    text-align: center;
+    min-width: 220px;
+    margin-bottom:20px;
+    /*overflow:auto;
+    min-height:400px;*/
+}
+
+.ContentFormuSeguridad {
+    width: 90%;
+    display: inline-block;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: central;
+    background-color: #F7F6F3;
+    border: 1px solid grey;
+    margin: auto;
+}
+
+.ContentFormuCrear {
+    max-width: 640px;
+}
+
+.ContentFormuCrear2 {
+    max-width: 1015px;
+}
+
+.TituloFormularioSeguridad {
+    color: white;
+    background-color: black;
+    font-weight: bold;
+    font-size: 1em;
+    font-family: Arial;
+    padding: 5px;
+}
+
+.formuDatosUsuSeguridad {
+    padding: 5px;
+}
+
+.columnaSeguridadPermisos {
+    /*max-width:183px;*/
+    min-height: 240px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.lbSubTituloSeguridad {
+    font-family: Arial;
+    font-size: 0.750em;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.listSeguridad {
+    width: 175px;
+    height: 192px;
+    font-size: 0.750em;
+    font-family: Arial;
+    margin-bottom: 5px;
+}
+
+.contenidoIzquierda {
+    text-align: left;
+}
+
+.ibttSeguridad {
+    width: 20px;
+    height: 20px;
+}
+
+.columnaSeguridadPermisos {
+    /*max-width:183px;*/
+    min-height: 240px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.columnaSeguridadValidacion {
+    display: inline-block;
+    width: 100%;
+    min-height: 42px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.columnaSeguridadValCrearUsu {
+    width: 90%;
+    max-width: 480px;
+    margin-top: 10px;
+}
+
+.validationsummary {
+    border: 1px solid #b08b34;
+    background: transparent url('../Content/Imagenes/WarningUser.png') no-repeat 13px 30px;
+    padding: 0px 0px 13px 0px;
+    font-size: 1em;
+    font-family: Arial;
+    width: 100%;
+}
+
+.espacioBotones {
+    margin-left: 4px;
+}
+
+.scrollGrilla {
+    width: 100%;
+    height: auto;
+    overflow: scroll;
+    margin-bottom: 25px;
+}
+
+.headerGrilla {
+    text-align: center;
+}
+
+.btnEstilo {
+    font-family: source-sans-pro;
+    background-color: #384662;
+    color: #fff;
+    border-color: #2e6da4;
+}
+
+
+.fuenteTitulo {
+    font-family: source-sans-pro;
+    font-weight: 700;
+    text-align: center;
+    color: #384662;
+    font-size: 30px;
+}
+
+
+.fuenteSubtitulo {
+    font-family: source-sans-pro;
+    font-weight: 700;
+    text-align: center;
+    color: #494949;
+    font-size: 25px;
+}
+
+.fuenteTituloAcordion {
+    font-family: source-sans-pro;
+    font-weight: 700;
+    text-align: left;
+    color: #494949;
+    font-size: 20px;
+}
+
+.fuenteTextoNormal {
+    font-family: source-sans-proregular;
+    color: #909090;
+    font-size: 14px;
+}
+
+
+
+.fuenteTextoInformativo {
+    font-family: source-sans-prolight;
+    text-align: left;
+    color: #494949;
+    font-size: 12px;
+}
+
+@font-face {
+    font-family: 'source-sans-prolight';
+    src: url('../fonts/source-sans-pro.light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'source-sans-proregular';
+    src: url('../fonts/source-sans-pro.regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'source-sans-pro';
+    font-weight: 700;
+    src: url('../fonts/source-sans-pro.bold.ttf') format('truetype');
+}
+
+/*.navbar-inverse {
+    background-color: #f0f0f0;
+    border-color: #f0f0f0;
+}*/
+
+.fuenteFooter {
+    font-family: source-sans-proregular;
+    font-size: 14px;
+}
+
+
+.nav.navbar-nav.navbar-right {
+    margin-right: 15px;
+}
+
+/*disenos Fuente,Navbar*/
+.disenoNavbar {
+    background-color: #f0f0f0;
+}
+
+.nav.navbar-nav.navbar-right li a {
+    font-family: source-sans-pro;
+    font-weight: 700;
+    text-align: center;
+    color: #494949;
+    font-size: 15px;
+}
+
+.nav.navbar-nav.navbar-left li a {
+    font-family: source-sans-pro;
+    font-weight: 700;
+    text-align: left;
+    color: #494949;
+    font-size: 15px;
+}
+
+/*.panel-heading {
+background-color: #f0f0f0;
+border-color: #ddd;
+
+}*/
+
+.tamanioGrilla {
+    min-width: 330%;
+}
+
+.tamanioGrillaHallazgos {
+    min-width: 180%;
+}
+
+.anchoPantalla {
+    max-width: 80%;
+}
+
+
+.modal-static { 
+    position: fixed;
+    top: 50% !important; 
+    left: 50% !important; 
+    margin-top: -100px;  
+    margin-left: -100px; 
+    overflow: visible !important;
+}
+.modal-static,
+.modal-static .modal-dialog,
+.modal-static .modal-content {
+    width: 200px; 
+    height: 200px; 
+}
+.modal-static .modal-dialog,
+.modal-static .modal-content {
+    padding: 0 !important; 
+    margin: 0 !important;
+}
+.modal-static .modal-content .icon {
+}
+
+.botonesModulo {
+    margin-bottom: 3px;
+}
+
+
+
