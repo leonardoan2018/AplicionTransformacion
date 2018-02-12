@@ -1,9 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmTemasContenido.aspx.cs" Inherits="AplicacionTransformacion.Forms.FrmTemasContenido" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-      <script src="../Scripts/Transversal.js"></script>
-    
+    <script src="../Scripts/Transversal.js"></script>
+
     <script>
+
+        $(document).ready(function () {
+
+            $.datepicker.setDefaults($.datepicker.regional["es"]);
+
+            $("#<%= txtFechaHallazgo.ClientID %>").datepicker({
+                dateFormat: 'dd/mm/yy',
+                maxDate: (0)
+            });
+
+
+        });
+
 
         function verificarEntradaContenido() {
             $("p").remove();
@@ -34,6 +49,34 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentContenido" runat="server">
 
+
+     <div class="row top-buffer">
+
+                    <div class="col-xs-12 col-md-6">
+                        <asp:Label ID="Label6" runat="server" Text="Nombre del producto" CssClass="form-label fuenteTextoNormal"></asp:Label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-apple" aria-hidden="true"></i></span>
+                            <asp:TextBox ID="txtProductoNombre" runat="server" CssClass="form-control input-md"></asp:TextBox>
+                            <div id="listPlacement" style="max-height: 500px; overflow-y: scroll;"></div>
+                            <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender2" CompletionListElementID="listPlacement" runat="server" TargetControlID="txtProductoNombre" ServiceMethod="GetCompletionList" UseContextKey="true" CompletionInterval="10" MinimumPrefixLength="1" EnableCaching="false" CompletionSetCount="1" FirstRowSelected="false" CompletionListCssClass="completionList" CompletionListItemCssClass="listItem" CompletionListHighlightedItemCssClass="itemHighlighted"></ajaxToolkit:AutoCompleteExtender>
+                        </div>
+                    </div>
+         </div>
+
+
+
+
+
+    <div class="container row">
+
+        <div class="col-xs-12 col-md-2">
+            <asp:Label ID="Label5" runat="server" Text="Fecha hallazgo" CssClass="fuenteTextoNormal"></asp:Label>
+            <div class="input-group date" data-provide="datepicker">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i></span>
+                <asp:TextBox ID="txtFechaHallazgo" runat="server" CssClass="form-control input-md"></asp:TextBox>
+            </div>
+        </div>
+    </div>
 
     <asp:UpdatePanel ID="upAplicacionesTemas" runat="server">
         <ContentTemplate>
@@ -113,7 +156,7 @@
                 </div>
 
                 <div class="container row fuenteSubtitulo">
-                   <asp:Label ID="lblTituloContenido" runat="server" Text="" CssClass="form-label fuenteSubtitulo"></asp:Label> 
+                    <asp:Label ID="lblTituloContenido" runat="server" Text="" CssClass="form-label fuenteSubtitulo"></asp:Label>
                 </div>
 
                 <div class="container row">

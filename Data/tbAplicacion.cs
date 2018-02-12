@@ -19,6 +19,7 @@ namespace Data
         {
             this.tbPasoAmbiente = new HashSet<tbPasoAmbiente>();
             this.tbTema = new HashSet<tbTema>();
+            this.tbCategoriaHD = new HashSet<tbCategoriaHD>();
         }
     
         public int Id { get; set; }
@@ -29,5 +30,7 @@ namespace Data
         public virtual ICollection<tbPasoAmbiente> tbPasoAmbiente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTema> tbTema { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbCategoriaHD> tbCategoriaHD { get; set; }
     }
 }

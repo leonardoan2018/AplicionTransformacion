@@ -17,6 +17,17 @@
         <AssociationConnector Association="BDInfoTransformacionModel.FK_tbContenido_tbTema" />
         <EntityTypeShape EntityType="BDInfoTransformacionModel.tbAdjunto" Width="1.5" PointX="7.5" PointY="5.375" />
         <AssociationConnector Association="BDInfoTransformacionModel.FK_tbAdjunto_tbItemTemaProyecto" />
+        <EntityTypeShape EntityType="BDInfoTransformacionModel.tbAmbiente" Width="1.5" PointX="5.25" PointY="9.625" />
+        <EntityTypeShape EntityType="BDInfoTransformacionModel.tbCategoriaHD" Width="1.5" PointX="3" PointY="12.5" />
+        <EntityTypeShape EntityType="BDInfoTransformacionModel.tbGruposInstalacion" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="BDInfoTransformacionModel.tbHojaDatos" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbCategoriaHD_tbAplicacion" />
+        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbGruposInstalacion_tbPasoAmbiente" />
+        <EntityTypeShape EntityType="BDInfoTransformacionModel.tbItemSubcategoria" Width="1.5" PointX="7.5" PointY="10.875" />
+        <EntityTypeShape EntityType="BDInfoTransformacionModel.tbSubCategoriaHD" Width="1.5" PointX="5.25" PointY="12.5" />
+        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbAmbiente" />
+        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbSubCategoriaHD_tbCategoriaHD" />
+        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbSubCategoriaHD" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

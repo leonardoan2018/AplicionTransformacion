@@ -73,13 +73,31 @@
     <Compile Include="tbAdjunto.cs">
       <DependentUpon>ModelTransf.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbAmbiente.cs">
+      <DependentUpon>ModelTransf.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbAplicacion.cs">
+      <DependentUpon>ModelTransf.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbCategoriaHD.cs">
       <DependentUpon>ModelTransf.tt</DependentUpon>
     </Compile>
     <Compile Include="tbContenido.cs">
       <DependentUpon>ModelTransf.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbGruposInstalacion.cs">
+      <DependentUpon>ModelTransf.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbHojaDatos.cs">
+      <DependentUpon>ModelTransf.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbItemSubcategoria.cs">
+      <DependentUpon>ModelTransf.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbPasoAmbiente.cs">
+      <DependentUpon>ModelTransf.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSubCategoriaHD.cs">
       <DependentUpon>ModelTransf.tt</DependentUpon>
     </Compile>
     <Compile Include="tbTema.cs">

@@ -14,6 +14,12 @@ namespace Data
     
     public partial class tbPasoAmbiente
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbPasoAmbiente()
+        {
+            this.tbGruposInstalacion = new HashSet<tbGruposInstalacion>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> IdAplicacion { get; set; }
         public Nullable<int> IdUsuario { get; set; }
@@ -26,5 +32,7 @@ namespace Data
     
         public virtual tbAplicacion tbAplicacion { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbGruposInstalacion> tbGruposInstalacion { get; set; }
     }
 }

@@ -8,3 +8,8 @@ D:\LeoApp\LeoApp\AplicacionTransformacion\IInterface\bin\Debug\IInterface.pdb
 D:\LeoApp\LeoApp\AplicacionTransformacion\IInterface\obj\Debug\IInterface.dll
 D:\LeoApp\LeoApp\AplicacionTransformacion\IInterface\obj\Debug\IInterface.pdb
 D:\LeoApp\LeoApp\AplicacionTransformacion\IInterface\obj\Debug\IInterface.csprojResolveAssemblyReference.cache
+D:\ProyectosGit\AplicacionTransformacion\IInterface\bin\Debug\IInterface.dll
+D:\ProyectosGit\AplicacionTransformacion\IInterface\bin\Debug\IInterface.pdb
+D:\ProyectosGit\AplicacionTransformacion\IInterface\obj\Debug\IInterface.csprojResolveAssemblyReference.cache
+D:\ProyectosGit\AplicacionTransformacion\IInterface\obj\Debug\IInterface.dll
+D:\ProyectosGit\AplicacionTransformacion\IInterface\obj\Debug\IInterface.pdb

@@ -19,6 +19,13 @@
     <Property Name="RutaAdjunto" Type="nvarchar(max)" />
     <Property Name="Nombre" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="tbAmbiente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="tbAplicacion">
     <Key>
       <PropertyRef Name="Id" />
@@ -26,6 +33,14 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
     <Property Name="AW" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="tbCategoriaHD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdAplicacion" Type="int" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="tbContenido">
     <Key>
@@ -36,6 +51,33 @@
     <Property Name="IdTema" Type="int" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="200" />
     <Property Name="Descripcion" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tbGruposInstalacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="IdPaso" Type="int" />
+    <Property Name="NombreGrupo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Responsable" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbHojaDatos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdProyecto" Type="int" />
+    <Property Name="IdAmbiente" Type="int" />
+  </EntityType>
+  <EntityType Name="tbItemSubcategoria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdAmbiente" Type="int" />
+    <Property Name="IdSubcategoria" Type="int" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="2000" />
   </EntityType>
   <EntityType Name="tbPasoAmbiente">
     <Key>
@@ -50,6 +92,14 @@
     <Property Name="Resultado" Type="nvarchar(max)" />
     <Property Name="Harvest" Type="nvarchar" MaxLength="20" />
     <Property Name="RutaAdjunto" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tbSubCategoriaHD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCategoria" Type="int" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="tbTema">
     <Key>
@@ -82,6 +132,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tbCategoriaHD_tbAplicacion">
+    <End Role="tbAplicacion" Type="Self.tbAplicacion" Multiplicity="0..1" />
+    <End Role="tbCategoriaHD" Type="Self.tbCategoriaHD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbAplicacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbCategoriaHD">
+        <PropertyRef Name="IdAplicacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tbContenido_tbProyecto">
     <End Role="tbAplicacion" Type="Self.tbAplicacion" Multiplicity="0..1" />
     <End Role="tbTema" Type="Self.tbTema" Multiplicity="*" />
@@ -103,6 +165,42 @@
       </Principal>
       <Dependent Role="tbContenido">
         <PropertyRef Name="IdTema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbGruposInstalacion_tbPasoAmbiente">
+    <End Role="tbPasoAmbiente" Type="Self.tbPasoAmbiente" Multiplicity="0..1" />
+    <End Role="tbGruposInstalacion" Type="Self.tbGruposInstalacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbPasoAmbiente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbGruposInstalacion">
+        <PropertyRef Name="IdPaso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbItemSubcategoria_tbAmbiente">
+    <End Role="tbAmbiente" Type="Self.tbAmbiente" Multiplicity="0..1" />
+    <End Role="tbItemSubcategoria" Type="Self.tbItemSubcategoria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbAmbiente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbItemSubcategoria">
+        <PropertyRef Name="IdAmbiente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbItemSubcategoria_tbSubCategoriaHD">
+    <End Role="tbSubCategoriaHD" Type="Self.tbSubCategoriaHD" Multiplicity="0..1" />
+    <End Role="tbItemSubcategoria" Type="Self.tbItemSubcategoria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbSubCategoriaHD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbItemSubcategoria">
+        <PropertyRef Name="IdSubcategoria" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -130,17 +228,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tbSubCategoriaHD_tbCategoriaHD">
+    <End Role="tbCategoriaHD" Type="Self.tbCategoriaHD" Multiplicity="0..1" />
+    <End Role="tbSubCategoriaHD" Type="Self.tbSubCategoriaHD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbCategoriaHD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbSubCategoriaHD">
+        <PropertyRef Name="IdCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="BDInfoTransformacionModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbAdjunto" EntityType="Self.tbAdjunto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbAmbiente" EntityType="Self.tbAmbiente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbAplicacion" EntityType="Self.tbAplicacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbCategoriaHD" EntityType="Self.tbCategoriaHD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbContenido" EntityType="Self.tbContenido" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbGruposInstalacion" EntityType="Self.tbGruposInstalacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbHojaDatos" EntityType="Self.tbHojaDatos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbItemSubcategoria" EntityType="Self.tbItemSubcategoria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbPasoAmbiente" EntityType="Self.tbPasoAmbiente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbSubCategoriaHD" EntityType="Self.tbSubCategoriaHD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbTema" EntityType="Self.tbTema" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_tbAdjunto_tbItemTemaProyecto" Association="Self.FK_tbAdjunto_tbItemTemaProyecto">
       <End Role="tbContenido" EntitySet="tbContenido" />
       <End Role="tbAdjunto" EntitySet="tbAdjunto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbCategoriaHD_tbAplicacion" Association="Self.FK_tbCategoriaHD_tbAplicacion">
+      <End Role="tbAplicacion" EntitySet="tbAplicacion" />
+      <End Role="tbCategoriaHD" EntitySet="tbCategoriaHD" />
     </AssociationSet>
     <AssociationSet Name="FK_tbContenido_tbProyecto" Association="Self.FK_tbContenido_tbProyecto">
       <End Role="tbAplicacion" EntitySet="tbAplicacion" />
@@ -150,6 +270,18 @@
       <End Role="tbTema" EntitySet="tbTema" />
       <End Role="tbContenido" EntitySet="tbContenido" />
     </AssociationSet>
+    <AssociationSet Name="FK_tbGruposInstalacion_tbPasoAmbiente" Association="Self.FK_tbGruposInstalacion_tbPasoAmbiente">
+      <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+      <End Role="tbGruposInstalacion" EntitySet="tbGruposInstalacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbItemSubcategoria_tbAmbiente" Association="Self.FK_tbItemSubcategoria_tbAmbiente">
+      <End Role="tbAmbiente" EntitySet="tbAmbiente" />
+      <End Role="tbItemSubcategoria" EntitySet="tbItemSubcategoria" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbItemSubcategoria_tbSubCategoriaHD" Association="Self.FK_tbItemSubcategoria_tbSubCategoriaHD">
+      <End Role="tbSubCategoriaHD" EntitySet="tbSubCategoriaHD" />
+      <End Role="tbItemSubcategoria" EntitySet="tbItemSubcategoria" />
+    </AssociationSet>
     <AssociationSet Name="FK_tbPasoAmbiente_tbAplicacion" Association="Self.FK_tbPasoAmbiente_tbAplicacion">
       <End Role="tbAplicacion" EntitySet="tbAplicacion" />
       <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
@@ -157,6 +289,10 @@
     <AssociationSet Name="FK_tbPasoAmbiente_tbUsuario" Association="Self.FK_tbPasoAmbiente_tbUsuario">
       <End Role="tbUsuario" EntitySet="tbUsuario" />
       <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbSubCategoriaHD_tbCategoriaHD" Association="Self.FK_tbSubCategoriaHD_tbCategoriaHD">
+      <End Role="tbCategoriaHD" EntitySet="tbCategoriaHD" />
+      <End Role="tbSubCategoriaHD" EntitySet="tbSubCategoriaHD" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

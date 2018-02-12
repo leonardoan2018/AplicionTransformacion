@@ -53,7 +53,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentContenido" runat="server">
 
     <div class="container row top-buffer fuenteTitulo">
-        Aplicaciones hola pipe 234
+        Aplicaciones
     </div>
 
     <%-- Aplicaciones --%>
@@ -270,5 +270,7 @@
             </div>
         </div>
     </div>
+
+ 
 
 </asp:Content>

@@ -43,6 +43,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=18.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AjaxControlToolkit.18.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>C:\Users\lamontea\Documents\Visual Studio 2015\Projects\AppTransformacion\AppTransformacion\bin\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -217,7 +222,9 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Forms\FrmAdministacion.aspx" />
+    <Content Include="Forms\FrmHojaDatos.aspx" />
     <Content Include="Forms\FrmTemasContenido.aspx" />
+    <Content Include="Librerias\AjaxControlToolkit.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -405,6 +412,13 @@
     </Compile>
     <Compile Include="Forms\FrmAdministacion.aspx.designer.cs">
       <DependentUpon>FrmAdministacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmHojaDatos.aspx.cs">
+      <DependentUpon>FrmHojaDatos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmHojaDatos.aspx.designer.cs">
+      <DependentUpon>FrmHojaDatos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmTemasContenido.aspx.cs">
       <DependentUpon>FrmTemasContenido.aspx</DependentUpon>

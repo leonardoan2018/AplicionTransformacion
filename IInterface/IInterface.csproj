@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAdministracion.cs" />
+    <Compile Include="IHojaDatos.cs" />
     <Compile Include="ITemaContenido.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

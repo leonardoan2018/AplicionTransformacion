@@ -20,6 +20,7 @@
 </head>
 <body>
     <form runat="server">
+        
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -38,6 +39,7 @@
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
                    
+          
 
 
                 <%--Site Scripts--%>
@@ -89,6 +91,11 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href='<%=Page.ResolveUrl("~/Forms/FrmTemasContenido.aspx") %>'>Contenidos</a></li>
+
+                    </ul>
+
+                       <ul class="nav navbar-nav navbar-right">
+                        <li><a href='<%=Page.ResolveUrl("~/Forms/FrmHojaDatos.aspx") %>'>Hoja de datos</a></li>
 
                     </ul>
 

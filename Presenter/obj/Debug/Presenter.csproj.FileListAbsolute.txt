@@ -26,3 +26,17 @@ D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.Sq
 D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\obj\Debug\Presenter.csprojResolveAssemblyReference.cache
 D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\obj\Debug\Presenter.dll
 D:\LeoApp\LeoApp\AplicacionTransformacion\Presenter\obj\Debug\Presenter.pdb
+D:\ProyectosGit\AplicacionTransformacion\Presenter\bin\Debug\Presenter.dll.config
+D:\ProyectosGit\AplicacionTransformacion\Presenter\bin\Debug\Presenter.dll
+D:\ProyectosGit\AplicacionTransformacion\Presenter\bin\Debug\Presenter.pdb
+D:\ProyectosGit\AplicacionTransformacion\Presenter\bin\Debug\Data.dll
+D:\ProyectosGit\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.dll
+D:\ProyectosGit\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.SqlServer.dll
+D:\ProyectosGit\AplicacionTransformacion\Presenter\bin\Debug\IInterface.dll
+D:\ProyectosGit\AplicacionTransformacion\Presenter\bin\Debug\Data.pdb
+D:\ProyectosGit\AplicacionTransformacion\Presenter\bin\Debug\IInterface.pdb
+D:\ProyectosGit\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.xml
+D:\ProyectosGit\AplicacionTransformacion\Presenter\bin\Debug\EntityFramework.SqlServer.xml
+D:\ProyectosGit\AplicacionTransformacion\Presenter\obj\Debug\Presenter.csprojResolveAssemblyReference.cache
+D:\ProyectosGit\AplicacionTransformacion\Presenter\obj\Debug\Presenter.dll
+D:\ProyectosGit\AplicacionTransformacion\Presenter\obj\Debug\Presenter.pdb

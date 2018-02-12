@@ -13,6 +13,7 @@ using ICSharpCode.SharpZipLib.Zip;
 using System.Drawing.Imaging;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Web.Services;
 
 namespace AplicacionTransformacion.Forms
 {
@@ -271,6 +272,23 @@ namespace AplicacionTransformacion.Forms
 
         #endregion
 
+        [System.Web.Services.WebMethod]
+        [System.Web.Script.Services.ScriptMethod]
+        public static List<string> GetCompletionList(string prefixText, int count)
+        {
+            try
+            {
+
+                List<string> lista = new List<string>();
+
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         protected void lbtEliminarAdjunto_Click(object sender, EventArgs e)
         {

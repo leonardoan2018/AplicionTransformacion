@@ -8,6 +8,7 @@ using System.IO;
 using Presenter;
 using IInterface;
 
+
 namespace AplicacionTransformacion.Forms
 {
     public partial class FrmAdministacion : System.Web.UI.Page, IAdministracion
@@ -38,8 +39,6 @@ namespace AplicacionTransformacion.Forms
         }
 
         #endregion
-
-
 
         #region Metodos Set - Get
 
@@ -247,6 +246,13 @@ namespace AplicacionTransformacion.Forms
 
         #endregion
 
+
+        /// <summary>
+        /// Método que se ejecuta cuando se digita una palabra en el texbox producto detalle factura
+        /// </summary>
+    
+
+
         protected void imgbttTemas_Click(object sender, EventArgs e)
         {
            
@@ -291,5 +297,7 @@ namespace AplicacionTransformacion.Forms
                 throw ex;
             }
         }
+
+    
     }
 }

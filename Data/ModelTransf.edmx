@@ -24,6 +24,13 @@
           <Property Name="RutaAdjunto" Type="nvarchar(max)" />
           <Property Name="Nombre" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="tbAmbiente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tbAplicacion">
           <Key>
             <PropertyRef Name="Id" />
@@ -31,6 +38,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
           <Property Name="AW" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tbCategoriaHD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAplicacion" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tbContenido">
           <Key>
@@ -41,6 +56,33 @@
           <Property Name="IdTema" Type="int" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="200" />
           <Property Name="Descripcion" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbGruposInstalacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdPaso" Type="int" />
+          <Property Name="NombreGrupo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Responsable" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbHojaDatos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProyecto" Type="int" />
+          <Property Name="IdAmbiente" Type="int" />
+        </EntityType>
+        <EntityType Name="tbItemSubcategoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAmbiente" Type="int" />
+          <Property Name="IdSubcategoria" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="2000" />
         </EntityType>
         <EntityType Name="tbPasoAmbiente">
           <Key>
@@ -55,6 +97,14 @@
           <Property Name="Resultado" Type="nvarchar(max)" />
           <Property Name="Harvest" Type="nvarchar" MaxLength="20" />
           <Property Name="RutaAdjunto" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tbSubCategoriaHD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCategoria" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tbTema">
           <Key>
@@ -87,6 +137,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tbCategoriaHD_tbAplicacion">
+          <End Role="tbAplicacion" Type="Self.tbAplicacion" Multiplicity="0..1" />
+          <End Role="tbCategoriaHD" Type="Self.tbCategoriaHD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAplicacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbCategoriaHD">
+              <PropertyRef Name="IdAplicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tbContenido_tbProyecto">
           <End Role="tbAplicacion" Type="Self.tbAplicacion" Multiplicity="0..1" />
           <End Role="tbTema" Type="Self.tbTema" Multiplicity="*" />
@@ -108,6 +170,42 @@
             </Principal>
             <Dependent Role="tbContenido">
               <PropertyRef Name="IdTema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbGruposInstalacion_tbPasoAmbiente">
+          <End Role="tbPasoAmbiente" Type="Self.tbPasoAmbiente" Multiplicity="0..1" />
+          <End Role="tbGruposInstalacion" Type="Self.tbGruposInstalacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPasoAmbiente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbGruposInstalacion">
+              <PropertyRef Name="IdPaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbItemSubcategoria_tbAmbiente">
+          <End Role="tbAmbiente" Type="Self.tbAmbiente" Multiplicity="0..1" />
+          <End Role="tbItemSubcategoria" Type="Self.tbItemSubcategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAmbiente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbItemSubcategoria">
+              <PropertyRef Name="IdAmbiente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbItemSubcategoria_tbSubCategoriaHD">
+          <End Role="tbSubCategoriaHD" Type="Self.tbSubCategoriaHD" Multiplicity="0..1" />
+          <End Role="tbItemSubcategoria" Type="Self.tbItemSubcategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSubCategoriaHD">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbItemSubcategoria">
+              <PropertyRef Name="IdSubcategoria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -135,17 +233,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tbSubCategoriaHD_tbCategoriaHD">
+          <End Role="tbCategoriaHD" Type="Self.tbCategoriaHD" Multiplicity="0..1" />
+          <End Role="tbSubCategoriaHD" Type="Self.tbSubCategoriaHD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCategoriaHD">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbSubCategoriaHD">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BDInfoTransformacionModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbAdjunto" EntityType="Self.tbAdjunto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbAmbiente" EntityType="Self.tbAmbiente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbAplicacion" EntityType="Self.tbAplicacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCategoriaHD" EntityType="Self.tbCategoriaHD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbContenido" EntityType="Self.tbContenido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbGruposInstalacion" EntityType="Self.tbGruposInstalacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbHojaDatos" EntityType="Self.tbHojaDatos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbItemSubcategoria" EntityType="Self.tbItemSubcategoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbPasoAmbiente" EntityType="Self.tbPasoAmbiente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbSubCategoriaHD" EntityType="Self.tbSubCategoriaHD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbTema" EntityType="Self.tbTema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tbAdjunto_tbItemTemaProyecto" Association="Self.FK_tbAdjunto_tbItemTemaProyecto">
             <End Role="tbContenido" EntitySet="tbContenido" />
             <End Role="tbAdjunto" EntitySet="tbAdjunto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbCategoriaHD_tbAplicacion" Association="Self.FK_tbCategoriaHD_tbAplicacion">
+            <End Role="tbAplicacion" EntitySet="tbAplicacion" />
+            <End Role="tbCategoriaHD" EntitySet="tbCategoriaHD" />
           </AssociationSet>
           <AssociationSet Name="FK_tbContenido_tbProyecto" Association="Self.FK_tbContenido_tbProyecto">
             <End Role="tbAplicacion" EntitySet="tbAplicacion" />
@@ -155,6 +275,18 @@
             <End Role="tbTema" EntitySet="tbTema" />
             <End Role="tbContenido" EntitySet="tbContenido" />
           </AssociationSet>
+          <AssociationSet Name="FK_tbGruposInstalacion_tbPasoAmbiente" Association="Self.FK_tbGruposInstalacion_tbPasoAmbiente">
+            <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+            <End Role="tbGruposInstalacion" EntitySet="tbGruposInstalacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbItemSubcategoria_tbAmbiente" Association="Self.FK_tbItemSubcategoria_tbAmbiente">
+            <End Role="tbAmbiente" EntitySet="tbAmbiente" />
+            <End Role="tbItemSubcategoria" EntitySet="tbItemSubcategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbItemSubcategoria_tbSubCategoriaHD" Association="Self.FK_tbItemSubcategoria_tbSubCategoriaHD">
+            <End Role="tbSubCategoriaHD" EntitySet="tbSubCategoriaHD" />
+            <End Role="tbItemSubcategoria" EntitySet="tbItemSubcategoria" />
+          </AssociationSet>
           <AssociationSet Name="FK_tbPasoAmbiente_tbAplicacion" Association="Self.FK_tbPasoAmbiente_tbAplicacion">
             <End Role="tbAplicacion" EntitySet="tbAplicacion" />
             <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
@@ -162,6 +294,10 @@
           <AssociationSet Name="FK_tbPasoAmbiente_tbUsuario" Association="Self.FK_tbPasoAmbiente_tbUsuario">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSubCategoriaHD_tbCategoriaHD" Association="Self.FK_tbSubCategoriaHD_tbCategoriaHD">
+            <End Role="tbCategoriaHD" EntitySet="tbCategoriaHD" />
+            <End Role="tbSubCategoriaHD" EntitySet="tbSubCategoriaHD" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -187,6 +323,7 @@
           <Property Name="AW" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbPasoAmbiente" Relationship="Self.FK_tbPasoAmbiente_tbAplicacion" FromRole="tbAplicacion" ToRole="tbPasoAmbiente" />
           <NavigationProperty Name="tbTema" Relationship="BDInfoTransformacionModel.FK_tbContenido_tbProyecto" FromRole="tbAplicacion" ToRole="tbTema" />
+          <NavigationProperty Name="tbCategoriaHD" Relationship="BDInfoTransformacionModel.FK_tbCategoriaHD_tbAplicacion" FromRole="tbAplicacion" ToRole="tbCategoriaHD" />
         </EntityType>
         <EntityType Name="tbPasoAmbiente">
           <Key>
@@ -203,6 +340,7 @@
           <Property Name="RutaAdjunto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbAplicacion" Relationship="Self.FK_tbPasoAmbiente_tbAplicacion" FromRole="tbPasoAmbiente" ToRole="tbAplicacion" />
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_tbPasoAmbiente_tbUsuario" FromRole="tbPasoAmbiente" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbGruposInstalacion" Relationship="BDInfoTransformacionModel.FK_tbGruposInstalacion_tbPasoAmbiente" FromRole="tbPasoAmbiente" ToRole="tbGruposInstalacion" />
         </EntityType>
         <EntityType Name="tbUsuario">
           <Key>
@@ -267,6 +405,32 @@
           <AssociationSet Name="FK_tbAdjunto_tbItemTemaProyecto" Association="BDInfoTransformacionModel.FK_tbAdjunto_tbItemTemaProyecto">
             <End Role="tbContenido" EntitySet="tbContenido" />
             <End Role="tbAdjunto" EntitySet="tbAdjunto" />
+          </AssociationSet>
+          <EntitySet Name="tbAmbiente" EntityType="BDInfoTransformacionModel.tbAmbiente" />
+          <EntitySet Name="tbCategoriaHD" EntityType="BDInfoTransformacionModel.tbCategoriaHD" />
+          <EntitySet Name="tbGruposInstalacion" EntityType="BDInfoTransformacionModel.tbGruposInstalacion" />
+          <EntitySet Name="tbHojaDatos" EntityType="BDInfoTransformacionModel.tbHojaDatos" />
+          <AssociationSet Name="FK_tbCategoriaHD_tbAplicacion" Association="BDInfoTransformacionModel.FK_tbCategoriaHD_tbAplicacion">
+            <End Role="tbAplicacion" EntitySet="tbAplicacion" />
+            <End Role="tbCategoriaHD" EntitySet="tbCategoriaHD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbGruposInstalacion_tbPasoAmbiente" Association="BDInfoTransformacionModel.FK_tbGruposInstalacion_tbPasoAmbiente">
+            <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+            <End Role="tbGruposInstalacion" EntitySet="tbGruposInstalacion" />
+          </AssociationSet>
+          <EntitySet Name="tbItemSubcategoria" EntityType="BDInfoTransformacionModel.tbItemSubcategoria" />
+          <EntitySet Name="tbSubCategoriaHD" EntityType="BDInfoTransformacionModel.tbSubCategoriaHD" />
+          <AssociationSet Name="FK_tbItemSubcategoria_tbAmbiente" Association="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbAmbiente">
+            <End Role="tbAmbiente" EntitySet="tbAmbiente" />
+            <End Role="tbItemSubcategoria" EntitySet="tbItemSubcategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSubCategoriaHD_tbCategoriaHD" Association="BDInfoTransformacionModel.FK_tbSubCategoriaHD_tbCategoriaHD">
+            <End Role="tbCategoriaHD" EntitySet="tbCategoriaHD" />
+            <End Role="tbSubCategoriaHD" EntitySet="tbSubCategoriaHD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbItemSubcategoria_tbSubCategoriaHD" Association="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbSubCategoriaHD">
+            <End Role="tbSubCategoriaHD" EntitySet="tbSubCategoriaHD" />
+            <End Role="tbItemSubcategoria" EntitySet="tbItemSubcategoria" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbContenido">
@@ -334,6 +498,124 @@
             </Principal>
             <Dependent Role="tbAdjunto">
               <PropertyRef Name="IdContenido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbAmbiente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbItemSubcategoria" Relationship="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbAmbiente" FromRole="tbAmbiente" ToRole="tbItemSubcategoria" />
+        </EntityType>
+        <EntityType Name="tbCategoriaHD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAplicacion" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbAplicacion" Relationship="BDInfoTransformacionModel.FK_tbCategoriaHD_tbAplicacion" FromRole="tbCategoriaHD" ToRole="tbAplicacion" />
+          <NavigationProperty Name="tbSubCategoriaHD" Relationship="BDInfoTransformacionModel.FK_tbSubCategoriaHD_tbCategoriaHD" FromRole="tbCategoriaHD" ToRole="tbSubCategoriaHD" />
+        </EntityType>
+        <EntityType Name="tbGruposInstalacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdPaso" Type="Int32" />
+          <Property Name="NombreGrupo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Responsable" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbPasoAmbiente" Relationship="BDInfoTransformacionModel.FK_tbGruposInstalacion_tbPasoAmbiente" FromRole="tbGruposInstalacion" ToRole="tbPasoAmbiente" />
+        </EntityType>
+        <EntityType Name="tbHojaDatos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProyecto" Type="Int32" />
+          <Property Name="IdAmbiente" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_tbCategoriaHD_tbAplicacion">
+          <End Type="BDInfoTransformacionModel.tbAplicacion" Role="tbAplicacion" Multiplicity="0..1" />
+          <End Type="BDInfoTransformacionModel.tbCategoriaHD" Role="tbCategoriaHD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAplicacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbCategoriaHD">
+              <PropertyRef Name="IdAplicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbGruposInstalacion_tbPasoAmbiente">
+          <End Type="BDInfoTransformacionModel.tbPasoAmbiente" Role="tbPasoAmbiente" Multiplicity="0..1" />
+          <End Type="BDInfoTransformacionModel.tbGruposInstalacion" Role="tbGruposInstalacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPasoAmbiente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbGruposInstalacion">
+              <PropertyRef Name="IdPaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbItemSubcategoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAmbiente" Type="Int32" />
+          <Property Name="IdSubcategoria" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbAmbiente" Relationship="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbAmbiente" FromRole="tbItemSubcategoria" ToRole="tbAmbiente" />
+          <NavigationProperty Name="tbSubCategoriaHD" Relationship="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbSubCategoriaHD" FromRole="tbItemSubcategoria" ToRole="tbSubCategoriaHD" />
+        </EntityType>
+        <EntityType Name="tbSubCategoriaHD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCategoria" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbCategoriaHD" Relationship="BDInfoTransformacionModel.FK_tbSubCategoriaHD_tbCategoriaHD" FromRole="tbSubCategoriaHD" ToRole="tbCategoriaHD" />
+          <NavigationProperty Name="tbItemSubcategoria" Relationship="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbSubCategoriaHD" FromRole="tbSubCategoriaHD" ToRole="tbItemSubcategoria" />
+        </EntityType>
+        <Association Name="FK_tbItemSubcategoria_tbAmbiente">
+          <End Type="BDInfoTransformacionModel.tbAmbiente" Role="tbAmbiente" Multiplicity="0..1" />
+          <End Type="BDInfoTransformacionModel.tbItemSubcategoria" Role="tbItemSubcategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAmbiente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbItemSubcategoria">
+              <PropertyRef Name="IdAmbiente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSubCategoriaHD_tbCategoriaHD">
+          <End Type="BDInfoTransformacionModel.tbCategoriaHD" Role="tbCategoriaHD" Multiplicity="0..1" />
+          <End Type="BDInfoTransformacionModel.tbSubCategoriaHD" Role="tbSubCategoriaHD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCategoriaHD">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbSubCategoriaHD">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbItemSubcategoria_tbSubCategoriaHD">
+          <End Type="BDInfoTransformacionModel.tbSubCategoriaHD" Role="tbSubCategoriaHD" Multiplicity="0..1" />
+          <End Type="BDInfoTransformacionModel.tbItemSubcategoria" Role="tbItemSubcategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSubCategoriaHD">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbItemSubcategoria">
+              <PropertyRef Name="IdSubcategoria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -416,6 +698,62 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="RutaAdjunto" ColumnName="RutaAdjunto" />
                 <ScalarProperty Name="IdContenido" ColumnName="IdContenido" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbAmbiente">
+            <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbAmbiente">
+              <MappingFragment StoreEntitySet="tbAmbiente">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCategoriaHD">
+            <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbCategoriaHD">
+              <MappingFragment StoreEntitySet="tbCategoriaHD">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdAplicacion" ColumnName="IdAplicacion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbGruposInstalacion">
+            <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbGruposInstalacion">
+              <MappingFragment StoreEntitySet="tbGruposInstalacion">
+                <ScalarProperty Name="Responsable" ColumnName="Responsable" />
+                <ScalarProperty Name="NombreGrupo" ColumnName="NombreGrupo" />
+                <ScalarProperty Name="IdPaso" ColumnName="IdPaso" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbHojaDatos">
+            <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbHojaDatos">
+              <MappingFragment StoreEntitySet="tbHojaDatos">
+                <ScalarProperty Name="IdAmbiente" ColumnName="IdAmbiente" />
+                <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbItemSubcategoria">
+            <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbItemSubcategoria">
+              <MappingFragment StoreEntitySet="tbItemSubcategoria">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdSubcategoria" ColumnName="IdSubcategoria" />
+                <ScalarProperty Name="IdAmbiente" ColumnName="IdAmbiente" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSubCategoriaHD">
+            <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbSubCategoriaHD">
+              <MappingFragment StoreEntitySet="tbSubCategoriaHD">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

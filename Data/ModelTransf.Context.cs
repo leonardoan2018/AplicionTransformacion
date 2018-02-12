@@ -32,5 +32,11 @@ namespace Data
         public virtual DbSet<tbContenido> tbContenido { get; set; }
         public virtual DbSet<tbTema> tbTema { get; set; }
         public virtual DbSet<tbAdjunto> tbAdjunto { get; set; }
+        public virtual DbSet<tbAmbiente> tbAmbiente { get; set; }
+        public virtual DbSet<tbCategoriaHD> tbCategoriaHD { get; set; }
+        public virtual DbSet<tbGruposInstalacion> tbGruposInstalacion { get; set; }
+        public virtual DbSet<tbHojaDatos> tbHojaDatos { get; set; }
+        public virtual DbSet<tbItemSubcategoria> tbItemSubcategoria { get; set; }
+        public virtual DbSet<tbSubCategoriaHD> tbSubCategoriaHD { get; set; }
     }
 }
