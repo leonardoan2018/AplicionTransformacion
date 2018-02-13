@@ -223,6 +223,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Forms\FrmAdministacion.aspx" />
     <Content Include="Forms\FrmHojaDatos.aspx" />
+    <Content Include="Forms\FrmPasosAmbientes.aspx" />
     <Content Include="Forms\FrmTemasContenido.aspx" />
     <Content Include="Librerias\AjaxControlToolkit.dll" />
     <Content Include="Scripts\bootstrap.js" />
@@ -419,6 +420,13 @@
     </Compile>
     <Compile Include="Forms\FrmHojaDatos.aspx.designer.cs">
       <DependentUpon>FrmHojaDatos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmPasosAmbientes.aspx.cs">
+      <DependentUpon>FrmPasosAmbientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmPasosAmbientes.aspx.designer.cs">
+      <DependentUpon>FrmPasosAmbientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmTemasContenido.aspx.cs">
       <DependentUpon>FrmTemasContenido.aspx</DependentUpon>

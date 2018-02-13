@@ -7,10 +7,7 @@
       <Diagram DiagramId="517b027242d346968d0b4dc2e433416f" Name="Diagram1">
         <EntityTypeShape EntityType="BDInfoTransformacionModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BDInfoTransformacionModel.tbAplicacion" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDInfoTransformacionModel.tbPasoAmbiente" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BDInfoTransformacionModel.tbUsuario" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbPasoAmbiente_tbAplicacion" ManuallyRouted="false" />
-        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbPasoAmbiente_tbUsuario" ManuallyRouted="false" />
         <EntityTypeShape EntityType="BDInfoTransformacionModel.tbContenido" Width="1.5" PointX="5.25" PointY="5.125" />
         <EntityTypeShape EntityType="BDInfoTransformacionModel.tbTema" Width="1.5" PointX="3" PointY="5.375" />
         <AssociationConnector Association="BDInfoTransformacionModel.FK_tbContenido_tbProyecto" />
@@ -22,12 +19,19 @@
         <EntityTypeShape EntityType="BDInfoTransformacionModel.tbGruposInstalacion" Width="1.5" PointX="5.25" PointY="1.375" />
         <EntityTypeShape EntityType="BDInfoTransformacionModel.tbHojaDatos" Width="1.5" PointX="7.375" PointY="0.75" />
         <AssociationConnector Association="BDInfoTransformacionModel.FK_tbCategoriaHD_tbAplicacion" />
-        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbGruposInstalacion_tbPasoAmbiente" />
         <EntityTypeShape EntityType="BDInfoTransformacionModel.tbItemSubcategoria" Width="1.5" PointX="7.5" PointY="10.875" />
         <EntityTypeShape EntityType="BDInfoTransformacionModel.tbSubCategoriaHD" Width="1.5" PointX="5.25" PointY="12.5" />
         <AssociationConnector Association="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbAmbiente" />
         <AssociationConnector Association="BDInfoTransformacionModel.FK_tbSubCategoriaHD_tbCategoriaHD" />
         <AssociationConnector Association="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbSubCategoriaHD" />
+        <EntityTypeShape EntityType="BDInfoTransformacionModel.tbApoyoPasoAmbiente" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="BDInfoTransformacionModel.tbAreaApoyo" Width="1.5" PointX="3" PointY="19.125" />
+        <EntityTypeShape EntityType="BDInfoTransformacionModel.tbPasoAmbiente" Width="1.5" PointX="3" PointY="4.125" />
+        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbPasoAmbiente_tbAplicacion" />
+        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbApoyoPasoAmbiente_tbAreaApoyo" />
+        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbApoyoPasoAmbiente_tbPasoAmbiente" />
+        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbGruposInstalacion_tbPasoAmbiente" />
+        <AssociationConnector Association="BDInfoTransformacionModel.FK_tbPasoAmbiente_tbUsuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

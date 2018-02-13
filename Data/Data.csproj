@@ -79,6 +79,12 @@
     <Compile Include="tbAplicacion.cs">
       <DependentUpon>ModelTransf.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbApoyoPasoAmbiente.cs">
+      <DependentUpon>ModelTransf.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbAreaApoyo.cs">
+      <DependentUpon>ModelTransf.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbCategoriaHD.cs">
       <DependentUpon>ModelTransf.tt</DependentUpon>
     </Compile>

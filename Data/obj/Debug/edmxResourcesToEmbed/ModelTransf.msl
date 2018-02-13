@@ -21,24 +21,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbPasoAmbiente">
-      <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbPasoAmbiente">
-        <MappingFragment StoreEntitySet="tbPasoAmbiente">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="IdAplicacion" ColumnName="IdAplicacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Ambiente" ColumnName="Ambiente" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="NumeroOC" ColumnName="NumeroOC" />
-          <ScalarProperty Name="Resultado" ColumnName="Resultado" />
-          <ScalarProperty Name="Harvest" ColumnName="Harvest" />
-          <ScalarProperty Name="RutaAdjunto" ColumnName="RutaAdjunto" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbUsuario">
       <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbUsuario">
         <MappingFragment StoreEntitySet="tbUsuario">
+          <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
           <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
@@ -130,6 +116,40 @@
         <MappingFragment StoreEntitySet="tbSubCategoriaHD">
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbApoyoPasoAmbiente">
+      <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbApoyoPasoAmbiente">
+        <MappingFragment StoreEntitySet="tbApoyoPasoAmbiente">
+          <ScalarProperty Name="TelefonoContacto" ColumnName="TelefonoContacto" />
+          <ScalarProperty Name="PersonaApoyo" ColumnName="PersonaApoyo" />
+          <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+          <ScalarProperty Name="IdPasoAmbiente" ColumnName="IdPasoAmbiente" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbAreaApoyo">
+      <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbAreaApoyo">
+        <MappingFragment StoreEntitySet="tbAreaApoyo">
+          <ScalarProperty Name="NombreArea" ColumnName="NombreArea" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbPasoAmbiente">
+      <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbPasoAmbiente">
+        <MappingFragment StoreEntitySet="tbPasoAmbiente">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Harvest" ColumnName="Harvest" />
+          <ScalarProperty Name="Resultado" ColumnName="Resultado" />
+          <ScalarProperty Name="NumeroOC" ColumnName="NumeroOC" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdAmbiente" ColumnName="IdAmbiente" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdAplicacion" ColumnName="IdAplicacion" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

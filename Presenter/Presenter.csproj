@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="PAdministracion.cs" />
     <Compile Include="PHojaDatos.cs" />
+    <Compile Include="PPasosAmbientes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PTemaContenido.cs" />
   </ItemGroup>

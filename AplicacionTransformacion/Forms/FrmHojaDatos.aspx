@@ -26,6 +26,14 @@
 
                                 <div class="container row top-buffer">
                                     <div class="col-xs-12 col-md-6">
+                                        <asp:Label ID="Label5" runat="server" Text="Aplicaciones" CssClass="fuenteTextoNormal"></asp:Label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-signal" aria-hidden="true"></i></span>
+                                            <asp:DropDownList ID="dpAplicacion" runat="server" CssClass="form-control input-md" OnSelectedIndexChanged="dpAplicacion_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6">
                                         <asp:Label ID="Label1" runat="server" Text="Nombre de la categoría" CssClass="form-label fuenteTextoNormal"></asp:Label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-tag" aria-hidden="true"></i></span>
@@ -33,8 +41,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-12 col-md-6">
-                                    </div>
+
                                 </div>
 
                                 <div class="container row top-buffer">

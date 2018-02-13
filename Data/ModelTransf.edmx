@@ -39,6 +39,23 @@
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
           <Property Name="AW" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="tbApoyoPasoAmbiente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPasoAmbiente" Type="int" />
+          <Property Name="IdArea" Type="int" />
+          <Property Name="PersonaApoyo" Type="nvarchar" MaxLength="100" />
+          <Property Name="TelefonoContacto" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbAreaApoyo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreArea" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="tbCategoriaHD">
           <Key>
             <PropertyRef Name="Id" />
@@ -91,12 +108,12 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdAplicacion" Type="int" />
           <Property Name="IdUsuario" Type="int" />
-          <Property Name="Ambiente" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdAmbiente" Type="int" />
           <Property Name="Fecha" Type="datetime" />
           <Property Name="NumeroOC" Type="nvarchar" MaxLength="10" />
           <Property Name="Resultado" Type="nvarchar(max)" />
           <Property Name="Harvest" Type="nvarchar" MaxLength="20" />
-          <Property Name="RutaAdjunto" Type="nvarchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="2000" />
         </EntityType>
         <EntityType Name="tbSubCategoriaHD">
           <Key>
@@ -124,6 +141,7 @@
           <Property Name="PrimerApellido" Type="nvarchar" MaxLength="50" />
           <Property Name="SegundoApellido" Type="nvarchar" MaxLength="50" />
           <Property Name="Celular" Type="nvarchar" MaxLength="50" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_tbAdjunto_tbItemTemaProyecto">
           <End Role="tbContenido" Type="Self.tbContenido" Multiplicity="0..1" />
@@ -134,6 +152,30 @@
             </Principal>
             <Dependent Role="tbAdjunto">
               <PropertyRef Name="IdContenido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbApoyoPasoAmbiente_tbAreaApoyo">
+          <End Role="tbAreaApoyo" Type="Self.tbAreaApoyo" Multiplicity="0..1" />
+          <End Role="tbApoyoPasoAmbiente" Type="Self.tbApoyoPasoAmbiente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAreaApoyo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbApoyoPasoAmbiente">
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbApoyoPasoAmbiente_tbPasoAmbiente">
+          <End Role="tbPasoAmbiente" Type="Self.tbPasoAmbiente" Multiplicity="0..1" />
+          <End Role="tbApoyoPasoAmbiente" Type="Self.tbApoyoPasoAmbiente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPasoAmbiente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbApoyoPasoAmbiente">
+              <PropertyRef Name="IdPasoAmbiente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -250,6 +292,8 @@
           <EntitySet Name="tbAdjunto" EntityType="Self.tbAdjunto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbAmbiente" EntityType="Self.tbAmbiente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbAplicacion" EntityType="Self.tbAplicacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbApoyoPasoAmbiente" EntityType="Self.tbApoyoPasoAmbiente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbAreaApoyo" EntityType="Self.tbAreaApoyo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbCategoriaHD" EntityType="Self.tbCategoriaHD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbContenido" EntityType="Self.tbContenido" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbGruposInstalacion" EntityType="Self.tbGruposInstalacion" Schema="dbo" store:Type="Tables" />
@@ -262,6 +306,14 @@
           <AssociationSet Name="FK_tbAdjunto_tbItemTemaProyecto" Association="Self.FK_tbAdjunto_tbItemTemaProyecto">
             <End Role="tbContenido" EntitySet="tbContenido" />
             <End Role="tbAdjunto" EntitySet="tbAdjunto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbApoyoPasoAmbiente_tbAreaApoyo" Association="Self.FK_tbApoyoPasoAmbiente_tbAreaApoyo">
+            <End Role="tbAreaApoyo" EntitySet="tbAreaApoyo" />
+            <End Role="tbApoyoPasoAmbiente" EntitySet="tbApoyoPasoAmbiente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbApoyoPasoAmbiente_tbPasoAmbiente" Association="Self.FK_tbApoyoPasoAmbiente_tbPasoAmbiente">
+            <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+            <End Role="tbApoyoPasoAmbiente" EntitySet="tbApoyoPasoAmbiente" />
           </AssociationSet>
           <AssociationSet Name="FK_tbCategoriaHD_tbAplicacion" Association="Self.FK_tbCategoriaHD_tbAplicacion">
             <End Role="tbAplicacion" EntitySet="tbAplicacion" />
@@ -321,26 +373,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AW" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbPasoAmbiente" Relationship="Self.FK_tbPasoAmbiente_tbAplicacion" FromRole="tbAplicacion" ToRole="tbPasoAmbiente" />
           <NavigationProperty Name="tbTema" Relationship="BDInfoTransformacionModel.FK_tbContenido_tbProyecto" FromRole="tbAplicacion" ToRole="tbTema" />
           <NavigationProperty Name="tbCategoriaHD" Relationship="BDInfoTransformacionModel.FK_tbCategoriaHD_tbAplicacion" FromRole="tbAplicacion" ToRole="tbCategoriaHD" />
-        </EntityType>
-        <EntityType Name="tbPasoAmbiente">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdAplicacion" Type="Int32" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="Ambiente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="DateTime" Precision="3" />
-          <Property Name="NumeroOC" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Resultado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Harvest" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="RutaAdjunto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbAplicacion" Relationship="Self.FK_tbPasoAmbiente_tbAplicacion" FromRole="tbPasoAmbiente" ToRole="tbAplicacion" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_tbPasoAmbiente_tbUsuario" FromRole="tbPasoAmbiente" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbGruposInstalacion" Relationship="BDInfoTransformacionModel.FK_tbGruposInstalacion_tbPasoAmbiente" FromRole="tbPasoAmbiente" ToRole="tbGruposInstalacion" />
+          <NavigationProperty Name="tbPasoAmbiente" Relationship="BDInfoTransformacionModel.FK_tbPasoAmbiente_tbAplicacion" FromRole="tbAplicacion" ToRole="tbPasoAmbiente" />
         </EntityType>
         <EntityType Name="tbUsuario">
           <Key>
@@ -352,45 +387,13 @@
           <Property Name="PrimerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SegundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Celular" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbPasoAmbiente" Relationship="Self.FK_tbPasoAmbiente_tbUsuario" FromRole="tbUsuario" ToRole="tbPasoAmbiente" />
+          <NavigationProperty Name="tbPasoAmbiente" Relationship="BDInfoTransformacionModel.FK_tbPasoAmbiente_tbUsuario" FromRole="tbUsuario" ToRole="tbPasoAmbiente" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_tbPasoAmbiente_tbAplicacion">
-          <End Role="tbAplicacion" Type="Self.tbAplicacion" Multiplicity="0..1" />
-          <End Role="tbPasoAmbiente" Type="Self.tbPasoAmbiente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbAplicacion">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tbPasoAmbiente">
-              <PropertyRef Name="IdAplicacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tbPasoAmbiente_tbUsuario">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbPasoAmbiente" Type="Self.tbPasoAmbiente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tbPasoAmbiente">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="BDInfoTransformacionEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="tbAplicacion" EntityType="Self.tbAplicacion" />
-          <EntitySet Name="tbPasoAmbiente" EntityType="Self.tbPasoAmbiente" />
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" />
-          <AssociationSet Name="FK_tbPasoAmbiente_tbAplicacion" Association="Self.FK_tbPasoAmbiente_tbAplicacion">
-            <End Role="tbAplicacion" EntitySet="tbAplicacion" />
-            <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tbPasoAmbiente_tbUsuario" Association="Self.FK_tbPasoAmbiente_tbUsuario">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
-          </AssociationSet>
           <EntitySet Name="tbContenido" EntityType="BDInfoTransformacionModel.tbContenido" />
           <EntitySet Name="tbTema" EntityType="BDInfoTransformacionModel.tbTema" />
           <AssociationSet Name="FK_tbContenido_tbProyecto" Association="BDInfoTransformacionModel.FK_tbContenido_tbProyecto">
@@ -414,10 +417,6 @@
             <End Role="tbAplicacion" EntitySet="tbAplicacion" />
             <End Role="tbCategoriaHD" EntitySet="tbCategoriaHD" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbGruposInstalacion_tbPasoAmbiente" Association="BDInfoTransformacionModel.FK_tbGruposInstalacion_tbPasoAmbiente">
-            <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
-            <End Role="tbGruposInstalacion" EntitySet="tbGruposInstalacion" />
-          </AssociationSet>
           <EntitySet Name="tbItemSubcategoria" EntityType="BDInfoTransformacionModel.tbItemSubcategoria" />
           <EntitySet Name="tbSubCategoriaHD" EntityType="BDInfoTransformacionModel.tbSubCategoriaHD" />
           <AssociationSet Name="FK_tbItemSubcategoria_tbAmbiente" Association="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbAmbiente">
@@ -431,6 +430,29 @@
           <AssociationSet Name="FK_tbItemSubcategoria_tbSubCategoriaHD" Association="BDInfoTransformacionModel.FK_tbItemSubcategoria_tbSubCategoriaHD">
             <End Role="tbSubCategoriaHD" EntitySet="tbSubCategoriaHD" />
             <End Role="tbItemSubcategoria" EntitySet="tbItemSubcategoria" />
+          </AssociationSet>
+          <EntitySet Name="tbApoyoPasoAmbiente" EntityType="BDInfoTransformacionModel.tbApoyoPasoAmbiente" />
+          <EntitySet Name="tbAreaApoyo" EntityType="BDInfoTransformacionModel.tbAreaApoyo" />
+          <EntitySet Name="tbPasoAmbiente" EntityType="BDInfoTransformacionModel.tbPasoAmbiente" />
+          <AssociationSet Name="FK_tbPasoAmbiente_tbAplicacion" Association="BDInfoTransformacionModel.FK_tbPasoAmbiente_tbAplicacion">
+            <End Role="tbAplicacion" EntitySet="tbAplicacion" />
+            <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbApoyoPasoAmbiente_tbAreaApoyo" Association="BDInfoTransformacionModel.FK_tbApoyoPasoAmbiente_tbAreaApoyo">
+            <End Role="tbAreaApoyo" EntitySet="tbAreaApoyo" />
+            <End Role="tbApoyoPasoAmbiente" EntitySet="tbApoyoPasoAmbiente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbApoyoPasoAmbiente_tbPasoAmbiente" Association="BDInfoTransformacionModel.FK_tbApoyoPasoAmbiente_tbPasoAmbiente">
+            <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+            <End Role="tbApoyoPasoAmbiente" EntitySet="tbApoyoPasoAmbiente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbGruposInstalacion_tbPasoAmbiente" Association="BDInfoTransformacionModel.FK_tbGruposInstalacion_tbPasoAmbiente">
+            <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+            <End Role="tbGruposInstalacion" EntitySet="tbGruposInstalacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPasoAmbiente_tbUsuario" Association="BDInfoTransformacionModel.FK_tbPasoAmbiente_tbUsuario">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbContenido">
@@ -549,18 +571,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbGruposInstalacion_tbPasoAmbiente">
-          <End Type="BDInfoTransformacionModel.tbPasoAmbiente" Role="tbPasoAmbiente" Multiplicity="0..1" />
-          <End Type="BDInfoTransformacionModel.tbGruposInstalacion" Role="tbGruposInstalacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbPasoAmbiente">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tbGruposInstalacion">
-              <PropertyRef Name="IdPaso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="tbItemSubcategoria">
           <Key>
             <PropertyRef Name="Id" />
@@ -619,6 +629,104 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tbApoyoPasoAmbiente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPasoAmbiente" Type="Int32" />
+          <Property Name="IdArea" Type="Int32" />
+          <Property Name="PersonaApoyo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonoContacto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbAreaApoyo" Relationship="BDInfoTransformacionModel.FK_tbApoyoPasoAmbiente_tbAreaApoyo" FromRole="tbApoyoPasoAmbiente" ToRole="tbAreaApoyo" />
+          <NavigationProperty Name="tbPasoAmbiente" Relationship="BDInfoTransformacionModel.FK_tbApoyoPasoAmbiente_tbPasoAmbiente" FromRole="tbApoyoPasoAmbiente" ToRole="tbPasoAmbiente" />
+        </EntityType>
+        <EntityType Name="tbAreaApoyo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreArea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbApoyoPasoAmbiente" Relationship="BDInfoTransformacionModel.FK_tbApoyoPasoAmbiente_tbAreaApoyo" FromRole="tbAreaApoyo" ToRole="tbApoyoPasoAmbiente" />
+        </EntityType>
+        <EntityType Name="tbPasoAmbiente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAplicacion" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="IdAmbiente" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="NumeroOC" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Resultado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Harvest" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbAplicacion" Relationship="BDInfoTransformacionModel.FK_tbPasoAmbiente_tbAplicacion" FromRole="tbPasoAmbiente" ToRole="tbAplicacion" />
+          <NavigationProperty Name="tbApoyoPasoAmbiente" Relationship="BDInfoTransformacionModel.FK_tbApoyoPasoAmbiente_tbPasoAmbiente" FromRole="tbPasoAmbiente" ToRole="tbApoyoPasoAmbiente" />
+          <NavigationProperty Name="tbGruposInstalacion" Relationship="BDInfoTransformacionModel.FK_tbGruposInstalacion_tbPasoAmbiente" FromRole="tbPasoAmbiente" ToRole="tbGruposInstalacion" />
+          <NavigationProperty Name="tbUsuario" Relationship="BDInfoTransformacionModel.FK_tbPasoAmbiente_tbUsuario" FromRole="tbPasoAmbiente" ToRole="tbUsuario" />
+        </EntityType>
+        <Association Name="FK_tbPasoAmbiente_tbAplicacion">
+          <End Type="BDInfoTransformacionModel.tbAplicacion" Role="tbAplicacion" Multiplicity="0..1" />
+          <End Type="BDInfoTransformacionModel.tbPasoAmbiente" Role="tbPasoAmbiente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAplicacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbPasoAmbiente">
+              <PropertyRef Name="IdAplicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbApoyoPasoAmbiente_tbAreaApoyo">
+          <End Type="BDInfoTransformacionModel.tbAreaApoyo" Role="tbAreaApoyo" Multiplicity="0..1" />
+          <End Type="BDInfoTransformacionModel.tbApoyoPasoAmbiente" Role="tbApoyoPasoAmbiente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAreaApoyo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbApoyoPasoAmbiente">
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbApoyoPasoAmbiente_tbPasoAmbiente">
+          <End Type="BDInfoTransformacionModel.tbPasoAmbiente" Role="tbPasoAmbiente" Multiplicity="0..1" />
+          <End Type="BDInfoTransformacionModel.tbApoyoPasoAmbiente" Role="tbApoyoPasoAmbiente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPasoAmbiente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbApoyoPasoAmbiente">
+              <PropertyRef Name="IdPasoAmbiente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbGruposInstalacion_tbPasoAmbiente">
+          <End Type="BDInfoTransformacionModel.tbPasoAmbiente" Role="tbPasoAmbiente" Multiplicity="0..1" />
+          <End Type="BDInfoTransformacionModel.tbGruposInstalacion" Role="tbGruposInstalacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPasoAmbiente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbGruposInstalacion">
+              <PropertyRef Name="IdPaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPasoAmbiente_tbUsuario">
+          <End Type="BDInfoTransformacionModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="BDInfoTransformacionModel.tbPasoAmbiente" Role="tbPasoAmbiente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbPasoAmbiente">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -645,24 +753,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbPasoAmbiente">
-            <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbPasoAmbiente">
-              <MappingFragment StoreEntitySet="tbPasoAmbiente">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdAplicacion" ColumnName="IdAplicacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Ambiente" ColumnName="Ambiente" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="NumeroOC" ColumnName="NumeroOC" />
-                <ScalarProperty Name="Resultado" ColumnName="Resultado" />
-                <ScalarProperty Name="Harvest" ColumnName="Harvest" />
-                <ScalarProperty Name="RutaAdjunto" ColumnName="RutaAdjunto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbUsuario">
             <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbUsuario">
               <MappingFragment StoreEntitySet="tbUsuario">
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
                 <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
@@ -754,6 +848,40 @@
               <MappingFragment StoreEntitySet="tbSubCategoriaHD">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbApoyoPasoAmbiente">
+            <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbApoyoPasoAmbiente">
+              <MappingFragment StoreEntitySet="tbApoyoPasoAmbiente">
+                <ScalarProperty Name="TelefonoContacto" ColumnName="TelefonoContacto" />
+                <ScalarProperty Name="PersonaApoyo" ColumnName="PersonaApoyo" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IdPasoAmbiente" ColumnName="IdPasoAmbiente" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbAreaApoyo">
+            <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbAreaApoyo">
+              <MappingFragment StoreEntitySet="tbAreaApoyo">
+                <ScalarProperty Name="NombreArea" ColumnName="NombreArea" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPasoAmbiente">
+            <EntityTypeMapping TypeName="BDInfoTransformacionModel.tbPasoAmbiente">
+              <MappingFragment StoreEntitySet="tbPasoAmbiente">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Harvest" ColumnName="Harvest" />
+                <ScalarProperty Name="Resultado" ColumnName="Resultado" />
+                <ScalarProperty Name="NumeroOC" ColumnName="NumeroOC" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdAmbiente" ColumnName="IdAmbiente" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdAplicacion" ColumnName="IdAplicacion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

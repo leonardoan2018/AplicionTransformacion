@@ -51,6 +51,11 @@ namespace IInterface
         object Ambientes { set; get; }
 
         /// <summary>
+        /// Clase de tipo Interface que proporciona campos para comunicar la Vista y el Presentador PAdminEntidades
+        /// </summary>
+        object Aplicaciones { set; get; }
+
+        /// <summary>
         /// Clase de tipo Interface para comunicar la Vista y el Presentador 
         /// </summary>
         string NombreItem { set; get; }

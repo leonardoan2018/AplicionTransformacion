@@ -26,6 +26,7 @@ namespace Data
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
         public string Celular { get; set; }
+        public string NombreCompleto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbPasoAmbiente> tbPasoAmbiente { get; set; }

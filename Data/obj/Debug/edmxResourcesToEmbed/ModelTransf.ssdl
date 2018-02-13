@@ -34,6 +34,23 @@
     <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
     <Property Name="AW" Type="nvarchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="tbApoyoPasoAmbiente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPasoAmbiente" Type="int" />
+    <Property Name="IdArea" Type="int" />
+    <Property Name="PersonaApoyo" Type="nvarchar" MaxLength="100" />
+    <Property Name="TelefonoContacto" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbAreaApoyo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreArea" Type="nvarchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="tbCategoriaHD">
     <Key>
       <PropertyRef Name="Id" />
@@ -86,12 +103,12 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdAplicacion" Type="int" />
     <Property Name="IdUsuario" Type="int" />
-    <Property Name="Ambiente" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdAmbiente" Type="int" />
     <Property Name="Fecha" Type="datetime" />
     <Property Name="NumeroOC" Type="nvarchar" MaxLength="10" />
     <Property Name="Resultado" Type="nvarchar(max)" />
     <Property Name="Harvest" Type="nvarchar" MaxLength="20" />
-    <Property Name="RutaAdjunto" Type="nvarchar" MaxLength="100" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="2000" />
   </EntityType>
   <EntityType Name="tbSubCategoriaHD">
     <Key>
@@ -119,6 +136,7 @@
     <Property Name="PrimerApellido" Type="nvarchar" MaxLength="50" />
     <Property Name="SegundoApellido" Type="nvarchar" MaxLength="50" />
     <Property Name="Celular" Type="nvarchar" MaxLength="50" />
+    <Property Name="NombreCompleto" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <Association Name="FK_tbAdjunto_tbItemTemaProyecto">
     <End Role="tbContenido" Type="Self.tbContenido" Multiplicity="0..1" />
@@ -129,6 +147,30 @@
       </Principal>
       <Dependent Role="tbAdjunto">
         <PropertyRef Name="IdContenido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbApoyoPasoAmbiente_tbAreaApoyo">
+    <End Role="tbAreaApoyo" Type="Self.tbAreaApoyo" Multiplicity="0..1" />
+    <End Role="tbApoyoPasoAmbiente" Type="Self.tbApoyoPasoAmbiente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbAreaApoyo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbApoyoPasoAmbiente">
+        <PropertyRef Name="IdArea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbApoyoPasoAmbiente_tbPasoAmbiente">
+    <End Role="tbPasoAmbiente" Type="Self.tbPasoAmbiente" Multiplicity="0..1" />
+    <End Role="tbApoyoPasoAmbiente" Type="Self.tbApoyoPasoAmbiente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbPasoAmbiente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbApoyoPasoAmbiente">
+        <PropertyRef Name="IdPasoAmbiente" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -245,6 +287,8 @@
     <EntitySet Name="tbAdjunto" EntityType="Self.tbAdjunto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbAmbiente" EntityType="Self.tbAmbiente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbAplicacion" EntityType="Self.tbAplicacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbApoyoPasoAmbiente" EntityType="Self.tbApoyoPasoAmbiente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbAreaApoyo" EntityType="Self.tbAreaApoyo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbCategoriaHD" EntityType="Self.tbCategoriaHD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbContenido" EntityType="Self.tbContenido" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbGruposInstalacion" EntityType="Self.tbGruposInstalacion" Schema="dbo" store:Type="Tables" />
@@ -257,6 +301,14 @@
     <AssociationSet Name="FK_tbAdjunto_tbItemTemaProyecto" Association="Self.FK_tbAdjunto_tbItemTemaProyecto">
       <End Role="tbContenido" EntitySet="tbContenido" />
       <End Role="tbAdjunto" EntitySet="tbAdjunto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbApoyoPasoAmbiente_tbAreaApoyo" Association="Self.FK_tbApoyoPasoAmbiente_tbAreaApoyo">
+      <End Role="tbAreaApoyo" EntitySet="tbAreaApoyo" />
+      <End Role="tbApoyoPasoAmbiente" EntitySet="tbApoyoPasoAmbiente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbApoyoPasoAmbiente_tbPasoAmbiente" Association="Self.FK_tbApoyoPasoAmbiente_tbPasoAmbiente">
+      <End Role="tbPasoAmbiente" EntitySet="tbPasoAmbiente" />
+      <End Role="tbApoyoPasoAmbiente" EntitySet="tbApoyoPasoAmbiente" />
     </AssociationSet>
     <AssociationSet Name="FK_tbCategoriaHD_tbAplicacion" Association="Self.FK_tbCategoriaHD_tbAplicacion">
       <End Role="tbAplicacion" EntitySet="tbAplicacion" />

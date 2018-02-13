@@ -12,30 +12,18 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class tbPasoAmbiente
+    public partial class tbAreaApoyo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbPasoAmbiente()
+        public tbAreaApoyo()
         {
             this.tbApoyoPasoAmbiente = new HashSet<tbApoyoPasoAmbiente>();
-            this.tbGruposInstalacion = new HashSet<tbGruposInstalacion>();
         }
     
         public int Id { get; set; }
-        public Nullable<int> IdAplicacion { get; set; }
-        public Nullable<int> IdUsuario { get; set; }
-        public Nullable<int> IdAmbiente { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
-        public string NumeroOC { get; set; }
-        public string Resultado { get; set; }
-        public string Harvest { get; set; }
-        public string Descripcion { get; set; }
+        public string NombreArea { get; set; }
     
-        public virtual tbAplicacion tbAplicacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbApoyoPasoAmbiente> tbApoyoPasoAmbiente { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbGruposInstalacion> tbGruposInstalacion { get; set; }
-        public virtual tbUsuario tbUsuario { get; set; }
     }
 }

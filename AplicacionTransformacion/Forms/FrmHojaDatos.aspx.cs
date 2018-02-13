@@ -139,6 +139,23 @@ namespace AplicacionTransformacion.Forms
         /// <summary>
         /// Gets or sets -  Obtiene y asigna el nombre del formato y lo envia hacia la interface IConsultaHallazgos
         /// </summary>
+        public object Aplicaciones
+        {
+            set
+            {
+                dpAplicacion.DataSource = value;
+                dpAplicacion.DataValueField = "Id";
+                dpAplicacion.DataTextField = "Nombre";
+                dpAplicacion.DataBind();
+            }
+            get
+            {
+                return dpAplicacion.SelectedValue;
+            }
+        }
+        /// <summary>
+        /// Gets or sets -  Obtiene y asigna el nombre del formato y lo envia hacia la interface IConsultaHallazgos
+        /// </summary>
         public object Ambientes
         {
             set
@@ -255,7 +272,7 @@ namespace AplicacionTransformacion.Forms
 
         protected void btnCrearCategoria_Click(object sender, EventArgs e)
         {
-
+            presenter.CrearCategoria();
         }
 
         protected void btnActualizarCategoria_Click(object sender, EventArgs e)
@@ -353,6 +370,11 @@ namespace AplicacionTransformacion.Forms
         }
 
         protected void imgbttEliminarItemSub_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dpAplicacion_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

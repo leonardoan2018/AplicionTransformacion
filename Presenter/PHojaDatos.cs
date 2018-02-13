@@ -40,6 +40,11 @@ namespace Presenter
             interfaceHojaDatos = vista;
         }
 
+
+        #endregion
+
+        #region Catgoria
+
         /// <summary>
         /// Método para cargar la grilla Aplicaciones
         /// </summary>
@@ -47,6 +52,7 @@ namespace Presenter
         {
             try
             {
+                CargarAplicaciones();
                 CargarGrillaCategorias();
                 CargarGrillaSubcateogorias();
 
@@ -116,17 +122,17 @@ namespace Presenter
         {
             try
             {
-                var subcategorias = (from c in contexto.tbCategoriaHD 
-                                       join s in contexto.tbSubCategoriaHD  on c.Id  equals s.IdCategoria
-                                      
-                                       select new
-                                       {
-                                           s.Id,
-                                           s.IdCategoria,
-                                           NombreCategoria=c.Nombre,
-                                           NombreSubcategoria=s.Nombre  
+                var subcategorias = (from c in contexto.tbCategoriaHD
+                                     join s in contexto.tbSubCategoriaHD on c.Id equals s.IdCategoria
 
-                                       }
+                                     select new
+                                     {
+                                         s.Id,
+                                         s.IdCategoria,
+                                         NombreCategoria = c.Nombre,
+                                         NombreSubcategoria = s.Nombre
+
+                                     }
                                   ).ToList();
 
                 interfaceHojaDatos.GrillaSubcategorias = subcategorias;
@@ -145,20 +151,20 @@ namespace Presenter
         {
             try
             {
-                
+
                 int ambiente = Convert.ToInt32(interfaceHojaDatos.Ambientes);
                 var itemSubcategorias = (from i in contexto.tbItemSubcategoria
-                                     join a in contexto.tbAmbiente on i.IdAmbiente equals a.Id
-                                     where i.IdAmbiente==ambiente
-                                     select new
-                                     {
-                                         i.Id,
-                                         Ambiente=a.Nombre,
-                                         NombreItem=i.Nombre,
-                                         i.Descripcion
-                                         
+                                         join a in contexto.tbAmbiente on i.IdAmbiente equals a.Id
+                                         where i.IdAmbiente == ambiente
+                                         select new
+                                         {
+                                             i.Id,
+                                             Ambiente = a.Nombre,
+                                             NombreItem = i.Nombre,
+                                             i.Descripcion
 
-                                     }
+
+                                         }
                                   ).ToList();
 
                 interfaceHojaDatos.GrillaItemSubcategorias = itemSubcategorias;
@@ -169,6 +175,95 @@ namespace Presenter
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método para crear un Aplicación
+        /// </summary>
+        public void CrearCategoria()
+        {
+            try
+            {
+                var existe = contexto.tbCategoriaHD.Where(x => x.Nombre == interfaceHojaDatos.NombreCategoria).ToList();
+                if (existe.Count > 0)
+                {
+                    EnviarMensajeUsuario("La aplicación ya existe");
+                }
+                else
+                {
+                    int idAplicacion = Convert.ToInt32(interfaceHojaDatos.Aplicaciones);
+                    tbCategoriaHD categoria = new tbCategoriaHD();
+                    categoria.IdAplicacion = idAplicacion;
+                    categoria.Nombre = interfaceHojaDatos.NombreCategoria;
+                    contexto.tbCategoriaHD.Add(categoria);
+                    contexto.SaveChanges();
+                    interfaceHojaDatos.NombreCategoria = "";
+                    CargarGrillaCategorias();
+                    EnviarMensajeUsuario("Registro creado satisfactoriamente");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Método para cargar la grilla Aplicaciones
+        /// </summary>
+        public void EliminarCategoria(int idCategoria)
+        {
+            try
+            {
+                //tbCategoriaHD categoria = contexto.tbCategoriaHD.Where(x => x.Id == idCategoria).First();
+                //contexto.tbCategoriaHD.Remove(ca
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Método para cargar la grilla Aplicaciones
+        /// </summary>
+        public void CargarAplicaciones()
+        {
+            try
+            {
+                var aplicaciones = contexto.tbAplicacion.ToList();
+                interfaceHojaDatos.Aplicaciones = aplicaciones;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region Mensajes
+
+        /// <summary>
+        /// Método que se encarga de enviar un mensaje al usuario junto con un icono que muestra la gravedad del mensaje.
+        /// </summary>
+        /// <param name="mensaje">Parámero que se encarga de traer el valor del mesaje que será mostrado al usuario.</param>
+        /// <param name="tipoMensaje">Parámtero que se encarga de traer el tipo de mensaje que será mostrado al usuario.</param>
+        public void EnviarMensajeUsuario(string mensaje)
+        {
+            // Se capturan los errores que se puedan presentar en la ejecución de las instrucciones del método.
+            try
+            {
+
+                this.interfaceHojaDatos.MensajePopud = mensaje;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #endregion
     }
 }
