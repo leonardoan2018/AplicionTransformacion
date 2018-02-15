@@ -22,6 +22,15 @@ namespace AplicacionTransformacion.Forms {
         protected global::System.Web.UI.UpdatePanel upPasosAmbientes;
         
         /// <summary>
+        /// pnlInfoPasos1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlInfoPasos1;
+        
+        /// <summary>
         /// lblNombreAplicacion control.
         /// </summary>
         /// <remarks>
@@ -211,6 +220,24 @@ namespace AplicacionTransformacion.Forms {
         protected global::System.Web.UI.WebControls.LinkButton btnConsultarInfoPasos;
         
         /// <summary>
+        /// btnLimpiar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnLimpiar;
+        
+        /// <summary>
+        /// pnlInfoPasos2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlInfoPasos2;
+        
+        /// <summary>
         /// gvInfoPasos control.
         /// </summary>
         /// <remarks>
@@ -218,5 +245,32 @@ namespace AplicacionTransformacion.Forms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvInfoPasos;
+        
+        /// <summary>
+        /// pnlApoyoPasos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlApoyoPasos;
+        
+        /// <summary>
+        /// btnvolverInfoPasos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnvolverInfoPasos;
+        
+        /// <summary>
+        /// gvApoyoPasos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvApoyoPasos;
     }
 }

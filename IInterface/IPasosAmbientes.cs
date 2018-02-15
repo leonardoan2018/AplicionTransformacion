@@ -15,6 +15,7 @@ namespace IInterface
         string Resultado { set; get; }
         string NroHarvest { get; set; }
         object GrillaInfoPasos { set; }
+        object GrillaApoyoPasos { set; }
         string FechaInstalacion { get; set; }
         string Descripcion { get; set; }
         string MensajePopup { set; }

@@ -145,6 +145,25 @@ namespace Presenter
             }
         }
 
+        public void CargarGrillaInfoApoyo(int id)
+        {
+            object infoApoyo = (from a in contexto.tbPasoAmbiente
+                                join b in contexto.tbApoyoPasoAmbiente on a.Id equals b.IdPasoAmbiente
+                                join c in contexto.tbAreaApoyo on b.IdArea equals c.Id
+                                where a.Id == id
+                                select new
+                                {
+                                    a.Id,
+                                    b.IdArea,
+                                    c.NombreArea,
+                                    b.PersonaApoyo,
+                                    b.TelefonoContacto
+                                }).ToList();
+
+            interfacePasosAmbientes.GrillaApoyoPasos = infoApoyo;
+
+        }
+
         public void BuscarInfoPasos()
         {
             try
@@ -229,6 +248,7 @@ namespace Presenter
             }
         }
 
+
         public string CargarInfoPasoAmbiente(int id)
         {
             var infoPaso = contexto.tbPasoAmbiente.Where(x => x.Id == id).First();
@@ -266,23 +286,6 @@ namespace Presenter
             contexto.SaveChanges();
             CargarGrillaInfoPasos();
             PopupMensajes("Registro Editado");
-        }
-
-        public void Limpiar()
-        {
-            try
-            {
-
-                interfacePasosAmbientes.FechaInstalacion = "";
-                interfacePasosAmbientes.NroOC = "";
-                interfacePasosAmbientes.NroHarvest = "";
-                interfacePasosAmbientes.Descripcion = "";
-                interfacePasosAmbientes.Resultado = "";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
 
         #endregion

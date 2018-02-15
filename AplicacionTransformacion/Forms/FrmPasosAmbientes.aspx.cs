@@ -119,6 +119,16 @@ namespace AplicacionTransformacion.Forms
             }
         }
 
+        public object GrillaApoyoPasos
+        {
+            set
+            {
+                this.gvApoyoPasos.DataSource = value;
+                this.gvApoyoPasos.DataBind();
+                this.gvApoyoPasos.SelectedIndex = -1;
+            }
+        }
+
         public string FechaInstalacion
         {
             set
@@ -156,7 +166,6 @@ namespace AplicacionTransformacion.Forms
                 {
                     presenterPasosAmbientes.CargaInicial();
                 }
-
             }
             catch (Exception ex)
             {
@@ -213,21 +222,28 @@ namespace AplicacionTransformacion.Forms
 
         protected void imgbttEditarInfoPaso_Click(object sender, EventArgs e)
         {
-            LinkButton lbtnEditarInfoPaso = (LinkButton)sender;
-            TableCell celda = (TableCell)lbtnEditarInfoPaso.Parent;
-            GridViewRow filaSeleccionar = (GridViewRow)celda.Parent;
-            int id = Convert.ToInt32(gvInfoPasos.DataKeys[filaSeleccionar.RowIndex].Value.ToString());
-            Session["idPaso"] = id;
-            int idPaso = Convert.ToInt32(Session["idPaso"]);
+            try
+            {
+                LinkButton lbtnEditarInfoPaso = (LinkButton)sender;
+                TableCell celda = (TableCell)lbtnEditarInfoPaso.Parent;
+                GridViewRow filaSeleccionar = (GridViewRow)celda.Parent;
+                int id = Convert.ToInt32(gvInfoPasos.DataKeys[filaSeleccionar.RowIndex].Value.ToString());
+                Session["idPaso"] = id;
+                int idPaso = Convert.ToInt32(Session["idPaso"]);
 
-            ddlNomAplicacion.SelectedValue = presenterPasosAmbientes.CargarInfoPaso(id);
-            ddlUsuarios.SelectedValue = presenterPasosAmbientes.CargarInfoPasoUsuarios(id);
-            ddlAmbiente.SelectedValue = presenterPasosAmbientes.CargarInfoPasoAmbiente(id);
+                ddlNomAplicacion.SelectedValue = presenterPasosAmbientes.CargarInfoPaso(id);
+                ddlUsuarios.SelectedValue = presenterPasosAmbientes.CargarInfoPasoUsuarios(id);
+                ddlAmbiente.SelectedValue = presenterPasosAmbientes.CargarInfoPasoAmbiente(id);
 
-            txtFechaPaso.Visible = true;
+                txtFechaPaso.Visible = true;
 
-            btnGuardarInfoPaso.Visible = false;
-            btnGuardarEdicionPaso.Visible = true;
+                btnGuardarInfoPaso.Visible = false;
+                btnGuardarEdicionPaso.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         protected void imgbttEliminarInfoPaso_Click(object sender, EventArgs e)
@@ -252,11 +268,79 @@ namespace AplicacionTransformacion.Forms
             int idPaso = Convert.ToInt32(Session["idPaso"]);
             presenterPasosAmbientes.GuardarEdicionPaso(idPaso);
             btnGuardarEdicionPaso.Visible = false;
+            btnGuardarInfoPaso.Visible = true;
         }
 
         protected void btnConsultarInfoPasos_Click(object sender, EventArgs e)
         {
             presenterPasosAmbientes.BuscarInfoPasos();
+        }
+
+        protected void imgbttDetalleInfoPaso_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                pnlInfoPasos1.Visible = true;
+                pnlInfoPasos2.Visible = false;
+                pnlApoyoPasos.Visible = true;
+
+                btnConsultarInfoPasos.Visible = false;
+                btnGuardarEdicionPaso.Visible = false;
+                btnGuardarInfoPaso.Visible = false;
+
+                LinkButton lbtnApoyoPaso = (LinkButton)sender;
+                TableCell celda = (TableCell)lbtnApoyoPaso.Parent;
+                GridViewRow filaSeleccionar = (GridViewRow)celda.Parent;
+                int id = Convert.ToInt32(gvInfoPasos.DataKeys[filaSeleccionar.RowIndex].Value.ToString());
+                Session["idDetallePaso"] = id;
+                int idDetallePaso = Convert.ToInt32(Session["idDetallePaso"]);
+
+                ddlNomAplicacion.SelectedValue = presenterPasosAmbientes.CargarInfoPaso(id);
+                ddlAmbiente.SelectedValue = presenterPasosAmbientes.CargarInfoPasoAmbiente(id);
+                ddlUsuarios.SelectedValue = presenterPasosAmbientes.CargarInfoPasoUsuarios(id);
+                presenterPasosAmbientes.CargarGrillaInfoApoyo(id);
+
+                txtFechaPaso.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        protected void btnvolverInfoPasos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtFechaPaso.Visible = false;
+                pnlInfoPasos2.Visible = true;
+                pnlApoyoPasos.Visible = false;
+                btnConsultarInfoPasos.Visible = true;
+                btnGuardarInfoPaso.Visible = true;
+                Limpiar();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Limpiar()
+        {
+            txtFechaPaso.Text = "";
+            txtNroOC.Text = "";
+            txtNumHarvest.Text = "";
+            txtDescripcionPaso.Text = "";
+            ddlResultado.ClearSelection();
+            ddlNomAplicacion.ClearSelection();
+            ddlUsuarios.ClearSelection();
+            ddlAmbiente.ClearSelection();
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            Limpiar();
         }
     }
 }
