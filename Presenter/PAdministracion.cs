@@ -42,6 +42,7 @@ namespace Presenter
         #endregion
 
         #region Cargue Inicial
+
         /// <summary>
         /// Método para cargar la grilla categorias
         /// </summary>
@@ -59,6 +60,7 @@ namespace Presenter
                 throw ex;
             }
         }
+
         #endregion
 
         #region Aplicaciones

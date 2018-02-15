@@ -38,7 +38,7 @@ namespace IInterface
         /// <summary>
         /// Clase de tipo Interface para comunicar la Vista y el Presentador 
         /// </summary>
-        string NombreASubcategoria { set; get; }
+        string NombreSubcategoria { set; get; }
 
         /// <summary>
         /// Clase de tipo Interface que proporciona campos para comunicar la Vista y el Presentador PAdminEntidades
@@ -64,6 +64,26 @@ namespace IInterface
         /// Clase de tipo Interface para comunicar la Vista y el Presentador 
         /// </summary>
         string DescripcionItem { set; get; }
+
+        /// <summary>
+        /// Clase de tipo Interface que proporciona campos para comunicar la Vista y el Presentador PAdminEntidades
+        /// </summary>
+        object AmbientesReporte { set; get; }
+
+        /// <summary>
+        /// Clase de tipo Interface que proporciona campos para comunicar la Vista y el Presentador PAdminEntidades
+        /// </summary>
+        object CategoriasReporte { set; get; }
+
+        /// <summary>
+        /// Clase de tipo Interface que proporciona campos para comunicar la Vista y el Presentador PAdminEntidades
+        /// </summary>
+        object SubcategoriasReporte { set; get; }
+
+        /// <summary>
+        /// Clase de tipo Interface que proporciona campos para comunicar la Vista y el Presentador PAdminEntidades
+        /// </summary>
+        object ReporteHojaDatos { set; get; }
 
         /// <summary>
         /// Clase de tipo Interface para comunicar la Vista y el Presentador 

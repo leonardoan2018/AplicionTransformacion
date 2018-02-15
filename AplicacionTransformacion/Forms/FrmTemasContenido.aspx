@@ -3,11 +3,11 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="../Scripts/Transversal.js"></script>
+
 
     <script>
 
-        $(document).ready(function () {
+  <%--      $(document).ready(function () {
 
             $.datepicker.setDefaults($.datepicker.regional["es"]);
 
@@ -17,7 +17,7 @@
             });
 
 
-        });
+        });--%>
 
 
         function verificarEntradaContenido() {
@@ -50,24 +50,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentContenido" runat="server">
 
 
-     <div class="row top-buffer">
-
-                    <div class="col-xs-12 col-md-6">
-                        <asp:Label ID="Label6" runat="server" Text="Nombre del producto" CssClass="form-label fuenteTextoNormal"></asp:Label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-apple" aria-hidden="true"></i></span>
-                            <asp:TextBox ID="txtProductoNombre" runat="server" CssClass="form-control input-md"></asp:TextBox>
-                            <div id="listPlacement" style="max-height: 500px; overflow-y: scroll;"></div>
-                            <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender2" CompletionListElementID="listPlacement" runat="server" TargetControlID="txtProductoNombre" ServiceMethod="GetCompletionList" UseContextKey="true" CompletionInterval="10" MinimumPrefixLength="1" EnableCaching="false" CompletionSetCount="1" FirstRowSelected="false" CompletionListCssClass="completionList" CompletionListItemCssClass="listItem" CompletionListHighlightedItemCssClass="itemHighlighted"></ajaxToolkit:AutoCompleteExtender>
-                        </div>
-                    </div>
-         </div>
-
-
-
-
-
-    <div class="container row">
+<%--    <div class="container row">
 
         <div class="col-xs-12 col-md-2">
             <asp:Label ID="Label5" runat="server" Text="Fecha hallazgo" CssClass="fuenteTextoNormal"></asp:Label>
@@ -76,7 +59,7 @@
                 <asp:TextBox ID="txtFechaHallazgo" runat="server" CssClass="form-control input-md"></asp:TextBox>
             </div>
         </div>
-    </div>
+    </div>--%>
 
     <asp:UpdatePanel ID="upAplicacionesTemas" runat="server">
         <ContentTemplate>

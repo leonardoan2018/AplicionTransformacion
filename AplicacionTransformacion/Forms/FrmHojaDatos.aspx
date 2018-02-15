@@ -1,6 +1,71 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmHojaDatos.aspx.cs" Inherits="AplicacionTransformacion.Forms.FrmHojaDatos" %>
 
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <script>
+
+        function verificarEntradaCategoria() {
+            $("p").remove();
+            var verificarVacios = "true";
+
+            if (document.getElementById("<%= txtNombreCategoria.ClientID %>").value == '') {
+                $("#contenidoPopudMensaje").append("<p>- Debe ingresar la categoria</p>");
+                verificarVacios = "false";
+            }
+            if (verificarVacios == "false") {
+                $("#myModalMensaje").modal('show');
+                return false;
+            }
+            else { return true }
+        }
+
+
+        function verificarEntradaSubcategoria() {
+            $("p").remove();
+            var verificarVacios = "true";
+
+            if (document.getElementById("<%= txtNombreSubcategoria.ClientID %>").value == '') {
+                $("#contenidoPopudMensaje").append("<p>- Debe ingresar la subcategoria</p>");
+                verificarVacios = "false";
+            }
+
+            if (verificarVacios == "false") {
+                $("#myModalMensaje").modal('show');
+                return false;
+            }
+            else { return true }
+        }
+
+        function verificarEntradaItemSubCategoria() {
+            $("p").remove();
+            var verificarVacios = "true";
+
+            if (document.getElementById("<%= txtNombreItem.ClientID %>").value == '') {
+                $("#contenidoPopudMensaje").append("<p>- Debe ingresar un nombre</p>");
+                verificarVacios = "false";
+            }
+
+            if (document.getElementById("<%= txtDescripcionItem.ClientID %>").value == '') {
+                   $("#contenidoPopudMensaje").append("<p>- Debe ingresar una descripción</p>");
+                   verificarVacios = "false";
+               }
+
+            if (verificarVacios == "false") {
+                $("#myModalMensaje").modal('show');
+                return false;
+            }
+            else { return true }
+           }
+
+           function abrirModalAdjuntar() {
+               $("#modalAdjuntos").modal('show');
+           }
+    </script>
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentContenido" runat="server">
 
@@ -146,9 +211,9 @@
                                     <div class="container row top-buffer">
                                         <div class="col-xs-12 col-md-6">
                                             <div class="input-group">
-                                                <asp:LinkButton ID="btnCrearSubcategoria" runat="server" CssClass="btn btnEstilo" OnClick="btnCrearSubcategoria_Click" OnClientClick="return verificarEntradaSubCategoria()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
+                                                <asp:LinkButton ID="btnCrearSubcategoria" runat="server" CssClass="btn btnEstilo" OnClick="btnCrearSubcategoria_Click" OnClientClick="return verificarEntradaSubcategoria()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
 
-                                                <asp:LinkButton ID="btnActualizarSubcategoria" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="btnActualizarSubcategoria_Click" OnClientClick="return verificarEntradaSubCategoria()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
+                                                <asp:LinkButton ID="btnActualizarSubcategoria" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="btnActualizarSubcategoria_Click" OnClientClick="return verificarEntradaSubcategoria()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
 
                                                 <asp:LinkButton ID="btnCancelarSubcategoria" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="btnCancelarSubcategoria_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
                                             </div>
@@ -217,7 +282,7 @@
                                     </div>
 
                                     <div class="container row fuenteSubtitulo">
-                                        Detalle Subcategoria
+                                        <asp:Label ID="lblDetalleSubcategoria" runat="server" Text="Ambiente" CssClass="fuenteSubtitulo"></asp:Label>
                                     </div>
 
                                     <div class="container row top-buffer">
@@ -255,9 +320,9 @@
                                     <div class="container row top-buffer">
                                         <div class="col-xs-12 col-md-6">
                                             <div class="input-group">
-                                                <asp:LinkButton ID="lbtCrearItemSub" runat="server" CssClass="btn btnEstilo" OnClick="lbtCrearItemSub_Click" OnClientClick="return verificarEntradaSubCategoria()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
+                                                <asp:LinkButton ID="lbtCrearItemSub" runat="server" CssClass="btn btnEstilo" OnClick="lbtCrearItemSub_Click" OnClientClick="return verificarEntradaItemSubCategoria()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
 
-                                                <asp:LinkButton ID="lbtEditarItemSub" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="lbtEditarItemSub_Click" OnClientClick="return verificarEntradaSubCategoria()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
+                                                <asp:LinkButton ID="lbtEditarItemSub" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="lbtEditarItemSub_Click" OnClientClick="return verificarEntradaItemSubCategoria()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
 
                                                 <asp:LinkButton ID="lbtCancelarItemSub" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="lbtCancelarItemSub_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
                                             </div>
@@ -311,7 +376,83 @@
                                 </asp:Panel>
 
 
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%-- Reporte --%>
+
+    <div class="row top-buffer ">
+        <div class="container">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="fuenteTituloAcordion" data-toggle="collapse" href="#collReporte">Reporte</a>
+                    </div>
+                    <div id="collReporte" class="panel-collapse collapse">
+
+
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+
+                                <div class="container row top-buffer">
+                                    <div class="col-xs-12 col-md-4">
+                                        <asp:Label ID="Label6" runat="server" Text="Categorias" CssClass="fuenteTextoNormal"></asp:Label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-signal" aria-hidden="true"></i></span>
+                                            <asp:DropDownList ID="dpCategoriaReporte" runat="server" CssClass="form-control input-md" OnSelectedIndexChanged="dpCategoriaReporte_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-4">
+                                        <asp:Label ID="Label8" runat="server" Text="Subcategorias" CssClass="fuenteTextoNormal"></asp:Label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-signal" aria-hidden="true"></i></span>
+                                            <asp:DropDownList ID="dpSubcategoriaReporte" runat="server" CssClass="form-control input-md"></asp:DropDownList>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-4">
+                                        <asp:Label ID="Label9" runat="server" Text="Ambientes" CssClass="fuenteTextoNormal"></asp:Label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-signal" aria-hidden="true"></i></span>
+                                            <asp:DropDownList ID="dpAmbienteReporte" runat="server" CssClass="form-control input-md"></asp:DropDownList>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="container row top-buffer">
+                                    <div class="col-xs-12 col-md-2">
+                                        <div class="input-group">
+                                            <asp:Button ID="btnGenerar" runat="server" Text="Generar" CssClass="btn btn-success" OnClick="btnGenerar_Click" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container row top-buffer fuenteSubtitulo">
+                                    <asp:Label ID="lblSubtituloReporte" runat="server" Text="Hoja de datos" Visible="false"></asp:Label>
+                                </div>
+
+                                <div class="row top-buffer">
+                                    <div class="col-md-offset-2">
+
+                                        <asp:Panel ID="pnlHojaDatos" CssClass="pnlReporte" ScrollBars="Auto" runat="server" Height="1px">
+
+
+                                            <rsweb:ReportViewer ID="rvReporteHojaDatos" runat="server" Width="800px" Height="780px" CssClass="rvReporte">
+                                                <LocalReport ReportPath="Reportes\ReporteHojaDatos.rdlc"></LocalReport>
+                                            </rsweb:ReportViewer>
+
+                                        </asp:Panel>
+                                    </div>
+                                </div>
 
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -321,5 +462,14 @@
             </div>
         </div>
     </div>
+
+
+
+    <div class="top-buffer">
+    </div>
+
+    <div class="top-buffer">
+    </div>
+
 </asp:Content>
 

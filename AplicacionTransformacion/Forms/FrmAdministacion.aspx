@@ -2,9 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <script src="../Scripts/Transversal.js"></script>
-
-
+  
     <script>
 
         function verificarEntradasAplicacion() {
