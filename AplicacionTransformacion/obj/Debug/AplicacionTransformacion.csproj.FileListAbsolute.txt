@@ -229,7 +229,6 @@ D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\System.Web
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\System.Web.Providers.dll
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\WebGrease.dll
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\Data.dll
-D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\Microsoft.SqlServer.Types.dll
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\IInterface.pdb
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\Presenter.pdb
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\Microsoft.AI.DependencyCollector.xml
@@ -259,16 +258,6 @@ D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\Microsoft.
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\Microsoft.Owin.Security.OAuth.xml
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\Data.pdb
-D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\de\Microsoft.SqlServer.Types.resources.dll
-D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\es\Microsoft.SqlServer.Types.resources.dll
-D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\fr\Microsoft.SqlServer.Types.resources.dll
-D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\it\Microsoft.SqlServer.Types.resources.dll
-D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\ja\Microsoft.SqlServer.Types.resources.dll
-D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\ko\Microsoft.SqlServer.Types.resources.dll
-D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\pt\Microsoft.SqlServer.Types.resources.dll
-D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\ru\Microsoft.SqlServer.Types.resources.dll
-D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
-D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\obj\Debug\AplicacionTransformacion.csprojResolveAssemblyReference.cache
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\obj\Debug\RdlCompile.cache
 D:\ProyectosGit\AplicacionTransformacion\AplicacionTransformacion\obj\Debug\RdlCompile.compiled

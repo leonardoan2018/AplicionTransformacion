@@ -71,11 +71,11 @@
 
 
     <div class="container row top-buffer fuenteTitulo">
-        Hoja de datos
+        Hoja de datos 
     </div>
 
 
-    <%-- Categoria --%>
+    <%-- Categoría --%>
 
     <div class="row top-buffer ">
         <div class="container">
