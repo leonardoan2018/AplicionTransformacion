@@ -488,7 +488,7 @@ namespace AplicacionTransformacion.Forms
 
         protected void dpAplicacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            presenter.CargarGrillaItemSubcategoria(Convert.ToInt32(Session["idSubcategoria"]));
+            //presenter.CargarGrillaItemSubcategoria(Convert.ToInt32(Session["idSubcategoria"]));
         }
 
         protected void btnGenerar_Click(object sender, EventArgs e)
