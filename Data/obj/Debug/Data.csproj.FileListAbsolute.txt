@@ -25,5 +25,6 @@ D:\ProyectosGit\AplicacionTransformacion\Data\bin\Debug\EntityFramework.dll
 D:\ProyectosGit\AplicacionTransformacion\Data\bin\Debug\EntityFramework.SqlServer.dll
 D:\ProyectosGit\AplicacionTransformacion\Data\bin\Debug\EntityFramework.xml
 D:\ProyectosGit\AplicacionTransformacion\Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\ProyectosGit\AplicacionTransformacion\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
 D:\ProyectosGit\AplicacionTransformacion\Data\obj\Debug\Data.dll
 D:\ProyectosGit\AplicacionTransformacion\Data\obj\Debug\Data.pdb

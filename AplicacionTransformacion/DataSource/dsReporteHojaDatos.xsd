@@ -12,7 +12,7 @@
   <xs:element name="dsReporteHojaDatos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReporteHojaDatos" msprop:Generator_UserDSName="dsReporteHojaDatos">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DataTableHD" msprop:Generator_TableClassName="DataTableHDDataTable" msprop:Generator_TableVarName="tableDataTableHD" msprop:Generator_RowChangedName="DataTableHDRowChanged" msprop:Generator_TablePropName="DataTableHD" msprop:Generator_RowDeletingName="DataTableHDRowDeleting" msprop:Generator_RowChangingName="DataTableHDRowChanging" msprop:Generator_RowEvHandlerName="DataTableHDRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTableHDRowDeleted" msprop:Generator_RowClassName="DataTableHDRow" msprop:Generator_UserTableName="DataTableHD" msprop:Generator_RowEvArgName="DataTableHDRowChangeEvent">
+        <xs:element name="DataTableHD" msprop:Generator_TableClassName="DataTableHDDataTable" msprop:Generator_TableVarName="tableDataTableHD" msprop:Generator_TablePropName="DataTableHD" msprop:Generator_RowDeletingName="DataTableHDRowDeleting" msprop:Generator_RowChangingName="DataTableHDRowChanging" msprop:Generator_RowEvHandlerName="DataTableHDRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTableHDRowDeleted" msprop:Generator_UserTableName="DataTableHD" msprop:Generator_RowChangedName="DataTableHDRowChanged" msprop:Generator_RowEvArgName="DataTableHDRowChangeEvent" msprop:Generator_RowClassName="DataTableHDRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NombreCategoria" msprop:Generator_ColumnVarNameInTable="columnNombreCategoria" msprop:Generator_ColumnPropNameInRow="NombreCategoria" msprop:Generator_ColumnPropNameInTable="NombreCategoriaColumn" msprop:Generator_UserColumnName="NombreCategoria" type="xs:string" minOccurs="0" />
@@ -20,7 +20,7 @@
               <xs:element name="Ambiente" msprop:Generator_ColumnVarNameInTable="columnAmbiente" msprop:Generator_ColumnPropNameInRow="Ambiente" msprop:Generator_ColumnPropNameInTable="AmbienteColumn" msprop:Generator_UserColumnName="Ambiente" type="xs:string" minOccurs="0" />
               <xs:element name="ItemNombre" msprop:Generator_ColumnVarNameInTable="columnItemNombre" msprop:Generator_ColumnPropNameInRow="ItemNombre" msprop:Generator_ColumnPropNameInTable="ItemNombreColumn" msprop:Generator_UserColumnName="ItemNombre" type="xs:string" minOccurs="0" />
               <xs:element name="ItemDescripcion" msprop:Generator_ColumnVarNameInTable="columnItemDescripcion" msprop:Generator_ColumnPropNameInRow="ItemDescripcion" msprop:Generator_ColumnPropNameInTable="ItemDescripcionColumn" msprop:Generator_UserColumnName="ItemDescripcion" type="xs:string" minOccurs="0" />
-              <xs:element name="Aplicacion" msprop:Generator_ColumnVarNameInTable="columnAplicacion" msprop:Generator_ColumnPropNameInRow="Aplicacion" msprop:Generator_ColumnPropNameInTable="AplicacionColumn" msprop:Generator_UserColumnName="Aplicacion" type="xs:string" minOccurs="0" />
+              <xs:element name="Proyecto" msprop:Generator_ColumnVarNameInTable="columnProyecto" msprop:Generator_ColumnPropNameInRow="Proyecto" msprop:Generator_ColumnPropNameInTable="ProyectoColumn" msprop:Generator_UserColumnName="Proyecto" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -31,6 +31,15 @@ namespace AplicacionTransformacion.Forms {
         protected global::System.Web.UI.WebControls.Panel pnlInfoPasos1;
         
         /// <summary>
+        /// btnvolverInfoPasos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnvolverInfoPasos;
+        
+        /// <summary>
         /// lblNombreAplicacion control.
         /// </summary>
         /// <remarks>
@@ -85,13 +94,13 @@ namespace AplicacionTransformacion.Forms {
         protected global::System.Web.UI.WebControls.DropDownList ddlAmbiente;
         
         /// <summary>
-        /// lblFechaInstalacion control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaInstalacion;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// txtFechaPaso control.
@@ -101,24 +110,6 @@ namespace AplicacionTransformacion.Forms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFechaPaso;
-        
-        /// <summary>
-        /// imgCalendario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton imgCalendario;
-        
-        /// <summary>
-        /// clrFechaPaso control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar clrFechaPaso;
         
         /// <summary>
         /// lblNroOC control.
@@ -157,24 +148,6 @@ namespace AplicacionTransformacion.Forms {
         protected global::System.Web.UI.WebControls.TextBox txtNumHarvest;
         
         /// <summary>
-        /// lblDescripcion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescripcion;
-        
-        /// <summary>
-        /// txtDescripcionPaso control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcionPaso;
-        
-        /// <summary>
         /// lblResultado control.
         /// </summary>
         /// <remarks>
@@ -191,6 +164,24 @@ namespace AplicacionTransformacion.Forms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlResultado;
+        
+        /// <summary>
+        /// lblDescripcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDescripcion;
+        
+        /// <summary>
+        /// txtDescripcionPaso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcionPaso;
         
         /// <summary>
         /// btnGuardarInfoPaso control.
@@ -229,6 +220,141 @@ namespace AplicacionTransformacion.Forms {
         protected global::System.Web.UI.WebControls.LinkButton btnLimpiar;
         
         /// <summary>
+        /// lbtGruposApoyo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtGruposApoyo;
+        
+        /// <summary>
+        /// pnlApoyoPasos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlApoyoPasos;
+        
+        /// <summary>
+        /// lblGrupoApoyo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGrupoApoyo;
+        
+        /// <summary>
+        /// ddlGrupoApoyo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlGrupoApoyo;
+        
+        /// <summary>
+        /// lblNomPersonaApoyo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNomPersonaApoyo;
+        
+        /// <summary>
+        /// txtNomPersonaApoyo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNomPersonaApoyo;
+        
+        /// <summary>
+        /// lblTelPersonaApoyo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTelPersonaApoyo;
+        
+        /// <summary>
+        /// txtTelPersonaApoyo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTelPersonaApoyo;
+        
+        /// <summary>
+        /// lblAgregarApoyo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAgregarApoyo;
+        
+        /// <summary>
+        /// btnAgregarApoyoPaso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAgregarApoyoPaso;
+        
+        /// <summary>
+        /// gvApoyoPasos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvApoyoPasos;
+        
+        /// <summary>
+        /// pnlAdjuntos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAdjuntos;
+        
+        /// <summary>
+        /// upGrillaAdjuntos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upGrillaAdjuntos;
+        
+        /// <summary>
+        /// btnAdjuntarArchivosPaso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAdjuntarArchivosPaso;
+        
+        /// <summary>
+        /// gvAdjuntos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvAdjuntos;
+        
+        /// <summary>
         /// pnlInfoPasos2 control.
         /// </summary>
         /// <remarks>
@@ -247,30 +373,66 @@ namespace AplicacionTransformacion.Forms {
         protected global::System.Web.UI.WebControls.GridView gvInfoPasos;
         
         /// <summary>
-        /// pnlApoyoPasos control.
+        /// pnAdjuntar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlApoyoPasos;
+        protected global::System.Web.UI.WebControls.Panel pnAdjuntar;
         
         /// <summary>
-        /// btnvolverInfoPasos control.
+        /// Label18 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnvolverInfoPasos;
+        protected global::System.Web.UI.WebControls.Label Label18;
         
         /// <summary>
-        /// gvApoyoPasos control.
+        /// fileUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvApoyoPasos;
+        protected global::System.Web.UI.WebControls.FileUpload fileUpload;
+        
+        /// <summary>
+        /// lbtCargarArchivos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtCargarArchivos;
+        
+        /// <summary>
+        /// lnkbAdjuntar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkbAdjuntar;
+        
+        /// <summary>
+        /// lbxArchivosAdjuntos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lbxArchivosAdjuntos;
+        
+        /// <summary>
+        /// lbtEliminarAdjunto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtEliminarAdjunto;
     }
 }

@@ -21,13 +21,12 @@ namespace Data
         }
     
         public int Id { get; set; }
-        public Nullable<int> IdAplicacion { get; set; }
         public Nullable<int> IdTema { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
     
-        public virtual tbTema tbTema { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAdjunto> tbAdjunto { get; set; }
+        public virtual tbTema tbTema { get; set; }
     }
 }

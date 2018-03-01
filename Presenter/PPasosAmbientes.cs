@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IInterface;
-using System.Data.Entity.Validation;
-using System.Data.SqlClient;
-using System.Data.Objects.DataClasses;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity;
 using System.Data.Objects;
+using System.Data.Objects.DataClasses;
+using System.Data.Objects.SqlClient;
+using System.Data.Objects.ELinq;
+using System.Data.Objects.Internal;
+using System.Data.Entity.Infrastructure;
+using System.Data;
+using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Globalization;
+using System.Configuration;
+using System.Data.Entity.Validation;
+using IInterface;
 using Data;
 
 namespace Presenter
@@ -49,8 +55,16 @@ namespace Presenter
                             break;
                         }
                     case "Registro Eliminado":
-                        interfacePasosAmbientes.MensajePopup = valor;
-                        break;
+                        {
+                            interfacePasosAmbientes.MensajePopup = valor;
+                            break;
+                        }
+
+                    case "Apoyo guardado":
+                        {
+                            interfacePasosAmbientes.MensajePopup = valor;
+                            break;
+                        }
                 }
             }
             catch (Exception ex)
@@ -64,9 +78,11 @@ namespace Presenter
             try
             {
                 CargaAmbientes();
-                CargarAplicaciones();
+                CargarIniciativas();
                 CargaUsuarios();
                 CargarGrillaInfoPasos();
+                CargarAreaApoyoPasos();
+
             }
             catch (Exception ex)
             {
@@ -78,24 +94,57 @@ namespace Presenter
         {
             try
             {
-                object ambiente = contexto.tbAmbiente.Select(x => new { x.Nombre, x.Id }).ToList();
+                List<tbAmbiente> listaAmbiente = new List<tbAmbiente>();
+
+                tbAmbiente amb = new tbAmbiente();
+                amb.Id = 0;
+                amb.Nombre = "Seleccione un valor...";
+                listaAmbiente.Add(amb);
+
+                var ambiente = contexto.tbAmbiente.Select(x => new { x.Nombre, x.Id }).OrderBy(x => x.Nombre).ToList();
+
+                foreach (var item in ambiente)
+                {
+                    tbAmbiente amb2 = new tbAmbiente();
+                    amb2.Id = item.Id;
+                    amb2.Nombre = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(item.Nombre);
+                    listaAmbiente.Add(amb2);
+                }
 
                 //var consulta = (from a in contexto.tbAmbiente select new {a.Id, a.Nombre }).ToList();
-                interfacePasosAmbientes.Ambientes = ambiente;
+                interfacePasosAmbientes.Ambientes = listaAmbiente;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public void CargarAplicaciones()
+        public void CargarIniciativas()
         {
             try
             {
+                List<tbIniciativa> listaIniciativas = new List<tbIniciativa>();
 
-                var aplicacion = (from a in contexto.tbAplicacion select new { a.Id, a.Nombre, a.AW }).ToList();
+                tbIniciativa ini = new tbIniciativa();
+                ini.Id = 0;
+                ini.Nombre = "Seleccione un valor...";
+                listaIniciativas.Add(ini);
+
+                var aplicacion = contexto.tbIniciativa.Select(x => new { x.Nombre, x.Id }).OrderBy(x => x.Nombre).ToList();
+
+                //var aplicacion = (from a in contexto.tbAplicacion select new { a.Id, a.Nombre, a.AW }).ToList();
+
+                foreach (var item in aplicacion)
+                {
+                    tbIniciativa apl2 = new tbIniciativa();
+                    apl2.Id = item.Id;
+                    apl2.Nombre = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(item.Nombre);
+                    listaIniciativas.Add(apl2);
+                }
+
+                //var aplicacion = (from a in contexto.tbAplicacion select new { a.Id, a.Nombre, a.AW }).ToList();
                 //object aplicacion = contexto.tbAplicacion.Select(x => new { x.Id, x.Nombre, x.AW }).ToList();
-                interfacePasosAmbientes.Aplicaciones = aplicacion;
+                interfacePasosAmbientes.Aplicaciones = listaIniciativas;
             }
             catch (Exception ex)
             {
@@ -107,8 +156,26 @@ namespace Presenter
         {
             try
             {
-                var usuario = (from a in contexto.tbUsuario select new { a.Id, a.NombreCompleto }).ToList();
-                interfacePasosAmbientes.Persona = usuario;
+
+                List<tbUsuario> listaUsuario = new List<tbUsuario>();
+
+                tbUsuario usu = new tbUsuario();
+                usu.Id = 0;
+                usu.NombreCompleto = "Seleccione un valor...";
+                listaUsuario.Add(usu);
+
+                var usuario = contexto.tbUsuario.Select(x => new { x.NombreCompleto, x.Id }).OrderBy(x => x.NombreCompleto).ToList();
+
+                foreach (var item in usuario)
+                {
+                    tbUsuario usu2 = new tbUsuario();
+                    usu2.Id = item.Id;
+                    usu2.NombreCompleto = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(item.NombreCompleto);
+                    listaUsuario.Add(usu2);
+                }
+
+                //var usuario = (from a in contexto.tbUsuario select new { a.Id, a.NombreCompleto }).ToList();
+                interfacePasosAmbientes.Persona = listaUsuario;
             }
             catch (Exception ex)
             {
@@ -122,7 +189,7 @@ namespace Presenter
             {
                 object infoPasos = (from a in contexto.tbPasoAmbiente
                                     join b in contexto.tbAmbiente on a.IdAmbiente equals b.Id
-                                    join c in contexto.tbAplicacion on a.IdAplicacion equals c.Id
+                                    join c in contexto.tbIniciativa on a.IdIniciativa equals c.Id
                                     join d in contexto.tbUsuario on a.IdUsuario equals d.Id
                                     select new
                                     {
@@ -145,12 +212,12 @@ namespace Presenter
             }
         }
 
-        public void CargarGrillaInfoApoyo(int id)
+        public void CargarGrillaInfoApoyo(int idPasoAmbiente)
         {
             object infoApoyo = (from a in contexto.tbPasoAmbiente
                                 join b in contexto.tbApoyoPasoAmbiente on a.Id equals b.IdPasoAmbiente
                                 join c in contexto.tbAreaApoyo on b.IdArea equals c.Id
-                                where a.Id == id
+                                where a.Id == idPasoAmbiente
                                 select new
                                 {
                                     a.Id,
@@ -170,14 +237,17 @@ namespace Presenter
             {
                 var infoPasos = (from a in contexto.tbPasoAmbiente
                                  join b in contexto.tbAmbiente on a.IdAmbiente equals b.Id
-                                 join c in contexto.tbAplicacion on a.IdAplicacion equals c.Id
+                                 join c in contexto.tbIniciativa on a.IdIniciativa equals c.Id
                                  join d in contexto.tbUsuario on a.IdUsuario equals d.Id
                                  select new
                                  {
                                      a.Id,
+                                     idAmbiente = b.Id,
                                      NombreAmbiente = b.Nombre,
                                      NombreAplicacion = c.Nombre,
+                                     idAplicacion = c.Id,
                                      NombreUsuario = d.NombreCompleto,
+                                     idUsuario = d.Id,
                                      FechaInstalacion = a.Fecha,
                                      a.NumeroOC,
                                      a.Resultado,
@@ -196,6 +266,26 @@ namespace Presenter
                     infoPasos = infoPasos.Where(x => x.NumeroOC == interfacePasosAmbientes.NroOC).ToList();
                 }
 
+                if (Convert.ToString(interfacePasosAmbientes.Ambientes) != "0")
+                {
+                    infoPasos = infoPasos.Where(x => x.idAmbiente == Convert.ToInt32(interfacePasosAmbientes.Ambientes)).ToList();
+                }
+
+                if (Convert.ToString(interfacePasosAmbientes.Aplicaciones) != "0")
+                {
+                    infoPasos = infoPasos.Where(x => x.idAplicacion == Convert.ToInt32(interfacePasosAmbientes.Aplicaciones)).ToList();
+                }
+
+                if (Convert.ToString(interfacePasosAmbientes.Persona) != "0")
+                {
+                    infoPasos = infoPasos.Where(x => x.idUsuario == Convert.ToInt32(interfacePasosAmbientes.Persona)).ToList();
+                }
+
+                if (Convert.ToString(interfacePasosAmbientes.Resultado) != "Seleccione un valor...")
+                {
+                    infoPasos = infoPasos.Where(x => Convert.ToString(x.Resultado) == Convert.ToString(interfacePasosAmbientes.Resultado)).ToList();
+                }
+
                 interfacePasosAmbientes.GrillaInfoPasos = infoPasos;
             }
             catch (Exception ex)
@@ -204,12 +294,12 @@ namespace Presenter
             }
         }
 
-        public void GuardarPasoAmbiente()
+        public int GuardarPasoAmbiente()
         {
             try
             {
                 tbPasoAmbiente pasoAmbiente = new tbPasoAmbiente();
-                pasoAmbiente.IdAplicacion = Convert.ToInt32(interfacePasosAmbientes.Aplicaciones);
+                pasoAmbiente.IdIniciativa = Convert.ToInt32(interfacePasosAmbientes.Aplicaciones);
                 pasoAmbiente.IdUsuario = Convert.ToInt32(interfacePasosAmbientes.Persona);
                 pasoAmbiente.IdAmbiente = Convert.ToInt32(interfacePasosAmbientes.Ambientes);
                 pasoAmbiente.NumeroOC = interfacePasosAmbientes.NroOC;
@@ -219,8 +309,11 @@ namespace Presenter
                 pasoAmbiente.Descripcion = interfacePasosAmbientes.Descripcion;
                 contexto.tbPasoAmbiente.Add(pasoAmbiente);
                 contexto.SaveChanges();
+                int scope_pasoAmbiente_id = pasoAmbiente.Id;
                 CargarGrillaInfoPasos();
                 PopupMensajes("Registro Guardado");
+
+                return scope_pasoAmbiente_id;
             }
             catch (Exception ex)
             {
@@ -239,7 +332,7 @@ namespace Presenter
                 interfacePasosAmbientes.Descripcion = infoPaso.Descripcion;
                 interfacePasosAmbientes.FechaInstalacion = Convert.ToString(infoPaso.Fecha);
 
-                return infoPaso.IdAplicacion.ToString();
+                return infoPaso.IdIniciativa.ToString();
 
             }
             catch (Exception ex)
@@ -265,6 +358,16 @@ namespace Presenter
 
         public void EliminarInfoPaso(int id)
         {
+            var apoyoPasos = contexto.tbApoyoPasoAmbiente.Where(x => x.IdPasoAmbiente == id).ToList();
+
+            foreach (var item in apoyoPasos)
+            {
+                var apoyoPaso = contexto.tbApoyoPasoAmbiente.Where(x => x.Id == item.Id).First();
+                contexto.tbApoyoPasoAmbiente.Remove(apoyoPaso);
+            }
+
+            contexto.SaveChanges();
+
             var infoPaso = contexto.tbPasoAmbiente.Where(x => x.Id == id).First();
             contexto.tbPasoAmbiente.Remove(infoPaso);
             contexto.SaveChanges();
@@ -275,7 +378,7 @@ namespace Presenter
         public void GuardarEdicionPaso(int idPaso)
         {
             var infoPaso = contexto.tbPasoAmbiente.Where(x => x.Id == idPaso).First();
-            infoPaso.IdAplicacion = Convert.ToInt32(interfacePasosAmbientes.Aplicaciones);
+            infoPaso.IdIniciativa = Convert.ToInt32(interfacePasosAmbientes.Aplicaciones);
             infoPaso.IdUsuario = Convert.ToInt32(interfacePasosAmbientes.Persona);
             infoPaso.IdAmbiente = Convert.ToInt32(interfacePasosAmbientes.Ambientes);
             infoPaso.Fecha = Convert.ToDateTime(interfacePasosAmbientes.FechaInstalacion);
@@ -286,6 +389,102 @@ namespace Presenter
             contexto.SaveChanges();
             CargarGrillaInfoPasos();
             PopupMensajes("Registro Editado");
+        }
+
+        public void GuardarApoyoPasos(int idPasoAmbiente)
+        {
+            try
+            {
+                tbApoyoPasoAmbiente apoyoPaso = new tbApoyoPasoAmbiente();
+                apoyoPaso.IdPasoAmbiente = Convert.ToInt32(idPasoAmbiente);
+                apoyoPaso.IdArea = Convert.ToInt32(interfacePasosAmbientes.GrupoApoyo);
+                apoyoPaso.PersonaApoyo = interfacePasosAmbientes.PersonaApoyo;
+                apoyoPaso.TelefonoContacto = interfacePasosAmbientes.TelPersonaApoyo;
+                contexto.tbApoyoPasoAmbiente.Add(apoyoPaso);
+                contexto.SaveChanges();
+                PopupMensajes("Apoyo guardado");
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void CargarAreaApoyoPasos()
+        {
+            try
+            {
+                object apoyoPasos = contexto.tbAreaApoyo.Select(x => new { x.NombreArea, x.Id }).ToList();
+
+                //var consulta = (from a in contexto.tbAmbiente select new {a.Id, a.Nombre }).ToList();
+                interfacePasosAmbientes.GrupoApoyo = apoyoPasos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
+
+        #region Adjuntos
+
+        /// <summary>
+        /// Método para cargar la grilla Aplicaciones
+        /// </summary>
+        public void CargarGrillaAdjuntosDetalle(int idPasoAmbiente)
+        {
+            try
+            {
+                var adjuntos = contexto.tbAdjuntoPasoAmbiente.Where(x => x.IdPaso == idPasoAmbiente).ToList();
+                interfacePasosAmbientes.GrillaAdjuntos = adjuntos;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// Método para cargar la lista de los estados
+        /// </summary>
+        public void CrearAdjunto(int idPasoAmbiente, string nombreArchivo, string rutaAdjunto)
+        {
+            try
+            {
+                tbAdjuntoPasoAmbiente adjunto = new tbAdjuntoPasoAmbiente();
+                adjunto.IdPaso = idPasoAmbiente;
+                adjunto.NombreArchivo = nombreArchivo;
+                adjunto.Ruta = rutaAdjunto;
+                contexto.tbAdjuntoPasoAmbiente.Add(adjunto);
+                contexto.SaveChanges();
+                CargarGrillaAdjuntosDetalle(idPasoAmbiente);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// Método para cargar la lista de los estados
+        /// </summary>
+        public void EliminarAdjunto(int idAdjunto, int idDetallePaso)
+        {
+            try
+            {
+                tbAdjuntoPasoAmbiente adjunto = contexto.tbAdjuntoPasoAmbiente.Where(x => x.Id == idAdjunto).First();
+                contexto.tbAdjuntoPasoAmbiente.Remove(adjunto);
+                contexto.SaveChanges();
+                CargarGrillaAdjuntosDetalle(idDetallePaso);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #endregion

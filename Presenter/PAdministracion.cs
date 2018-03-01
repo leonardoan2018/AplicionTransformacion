@@ -50,7 +50,8 @@ namespace Presenter
         {
             try
             {
-                CargarAplicaciones();
+                CargarProyectos();
+                CargarIniciativas();
                 CargarTemas();
                                
 
@@ -63,18 +64,18 @@ namespace Presenter
 
         #endregion
 
-        #region Aplicaciones
+        #region Proyectos
 
         /// <summary>
         /// Método para cargar la grilla Aplicaciones
         /// </summary>
-        public void CargarAplicaciones()
+        public void CargarProyectos()
         {
             try
             {
-                var aplicaciones = contexto.tbAplicacion.ToList();
-                interfaceAdministacion.GrillaAplicaciones = aplicaciones;
-                interfaceAdministacion.AplicacionesTema = aplicaciones;
+                var proyectos = contexto.tbProyecto.ToList();
+                interfaceAdministacion.GrillaProyectos = proyectos;
+                interfaceAdministacion.ProyectosIniciativas = proyectos;
                
             }
             catch (Exception ex)
@@ -87,24 +88,24 @@ namespace Presenter
         /// <summary>
         /// Método para crear un Aplicación
         /// </summary>
-        public void CrearAplicacion()
+        public void CrearProtecto()
         {
             try
             {
-                var existe = contexto.tbAplicacion.Where(x => x.Nombre == interfaceAdministacion.NombreAplicacion).ToList();
+                var existe = contexto.tbProyecto.Where(x => x.Nombre == interfaceAdministacion.NombreProyecto).ToList();
                 if (existe.Count > 0)
                 {
                     EnviarMensajeUsuario("La aplicación ya existe");
                 }
                 else
                 {
-                    tbAplicacion aplicacion = new tbAplicacion();
-                    aplicacion.Nombre = interfaceAdministacion.NombreAplicacion;
+                    tbProyecto aplicacion = new tbProyecto();
+                    aplicacion.Nombre = interfaceAdministacion.NombreProyecto;
                     aplicacion.AW = interfaceAdministacion.AW;
-                    contexto.tbAplicacion.Add(aplicacion);
+                    contexto.tbProyecto.Add(aplicacion);
                     contexto.SaveChanges();
-                    CargarAplicaciones();
-                    interfaceAdministacion.NombreAplicacion = "";
+                    CargarProyectos();
+                    interfaceAdministacion.NombreProyecto = "";
                     interfaceAdministacion.AW = "";
                     EnviarMensajeUsuario("Registro creado satisfactoriamente");
                 }
@@ -119,18 +120,18 @@ namespace Presenter
         /// <summary>
         /// Método para editar un registro de la grilla categoria Aplicaciones
         /// </summary>
-        public void ActualizarAplicacion(int idAplicacion)
+        public void ActualizarProyecto(int idProyecto)
         {
             try
             {
-                var aplicacion = contexto.tbAplicacion.Where(x => x.Id == idAplicacion).First();
+                var aplicacion = contexto.tbProyecto.Where(x => x.Id == idProyecto).First();
 
-                aplicacion.Nombre = interfaceAdministacion.NombreAplicacion;
+                aplicacion.Nombre = interfaceAdministacion.NombreProyecto;
                 aplicacion.AW = interfaceAdministacion.AW;
                 contexto.SaveChanges();
-                interfaceAdministacion.NombreAplicacion = "";
+                interfaceAdministacion.NombreProyecto = "";
                 interfaceAdministacion.AW = "";
-                CargarAplicaciones();
+                CargarProyectos();
                 EnviarMensajeUsuario("Registro actualizado satisfactoriamente");
             }
             catch (Exception ex)
@@ -142,14 +143,14 @@ namespace Presenter
         /// <summary>
         /// Método para editar un registro de la grilla categoria Aplicaciones
         /// </summary>
-        public void CargarInfoAplicacion(int idAplicacion)
+        public void CargarInfoProyecto(int idProyecto)
         {
             try
             {
-                var aplicacion = contexto.tbAplicacion.Where(x => x.Id == idAplicacion).First();
+                var proyecto = contexto.tbProyecto.Where(x => x.Id == idProyecto).First();
 
-                interfaceAdministacion.NombreAplicacion = aplicacion.Nombre;
-                interfaceAdministacion.AW = aplicacion.AW;
+                interfaceAdministacion.NombreProyecto = proyecto.Nombre;
+                interfaceAdministacion.AW = proyecto.AW;
             
             }
             catch (Exception ex)
@@ -161,22 +162,142 @@ namespace Presenter
         /// <summary>
         /// Método para eliminar un registro de la grilla Aplicaciones
         /// </summary>
-        public void EliminarAplicacion(int idAplicacion)
+        public void EliminarProyecto(int idProyecto)
         {
             try
             {
-                tbAplicacion aplicacion = contexto.tbAplicacion.Where(x => x.Id == idAplicacion).First();
-                contexto.tbAplicacion.Remove(aplicacion);
+                tbProyecto aplicacion = contexto.tbProyecto.Where(x => x.Id == idProyecto).First();
+                contexto.tbProyecto.Remove(aplicacion);
                 contexto.SaveChanges();
-                CargarAplicaciones();
+                CargarProyectos();
                 EnviarMensajeUsuario("Registro eliminado satisfactoriamente");
             }
             catch (Exception ex)
             {
-                EnviarMensajeUsuario("No se puede eliminar el registro debido a que se encuentran contenidos asociados a la aplicación");
+                EnviarMensajeUsuario("No se puede eliminar el registro debido a que se encuentran contenidos asociados a la Iniciativa");
             }
         }
-    
+
+        #endregion
+
+        #region Iniciativas
+
+        /// <summary>
+        /// Método para cargar la grilla Iniciativas
+        /// </summary>
+        public void CargarIniciativas()
+        {
+            try
+            {
+                int idProyecto = Convert.ToInt32(interfaceAdministacion.ProyectosIniciativas);
+                var iniciativas = contexto.tbIniciativa.Where(x=>x.IdProyecto==idProyecto).ToList();
+                interfaceAdministacion.GrillaIniciativas = iniciativas;
+                interfaceAdministacion.IniciativasTema = iniciativas;
+      
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        /// <summary>
+        /// Método para crear un Aplicación
+        /// </summary>
+        public void CrearIniciativa()
+        {
+            try
+            {
+                var existe = contexto.tbIniciativa.Where(x => x.Nombre == interfaceAdministacion.NombreIniciativa).ToList();
+                if (existe.Count > 0)
+                {
+                    EnviarMensajeUsuario("La iniciativa ya existe");
+                }
+                else
+                {
+
+                    int idProyecto = Convert.ToInt32(interfaceAdministacion.ProyectosIniciativas);
+                    tbIniciativa iniciativa = new tbIniciativa();
+                    iniciativa.IdProyecto= idProyecto;
+                    iniciativa.Nombre = interfaceAdministacion.NombreIniciativa;
+                    iniciativa.PMO = interfaceAdministacion.PMOIniciativa;
+                    contexto.tbIniciativa.Add(iniciativa);
+                    contexto.SaveChanges();
+                    CargarIniciativas();
+                    interfaceAdministacion.NombreIniciativa = "";
+                    interfaceAdministacion.PMOIniciativa = "";
+                    EnviarMensajeUsuario("Registro creado satisfactoriamente");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Método para editar un registro de la grilla categoria Aplicaciones
+        /// </summary>
+        public void ActualizarIniciativa(int idIniciativa)
+        {
+            try
+            {
+                var iniciativa = contexto.tbIniciativa.Where(x => x.Id == idIniciativa).First();
+                iniciativa.IdProyecto = Convert.ToInt32(interfaceAdministacion.ProyectosIniciativas);
+                iniciativa.Nombre = interfaceAdministacion.NombreProyecto;
+                iniciativa.PMO = interfaceAdministacion.PMOIniciativa;
+                contexto.SaveChanges();
+                interfaceAdministacion.NombreIniciativa = "";
+                interfaceAdministacion.PMOIniciativa = "";
+                CargarIniciativas();
+                EnviarMensajeUsuario("Registro actualizado satisfactoriamente");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Método para editar un registro de la grilla categoria Aplicaciones
+        /// </summary>
+        public void CargarInfoIniativa(int idIniciativa)
+        {
+            try
+            {
+                var iniciativa = contexto.tbIniciativa.Where(x => x.Id == idIniciativa).First();
+                interfaceAdministacion.NombreIniciativa = iniciativa.Nombre;
+                interfaceAdministacion.PMOIniciativa = iniciativa.PMO;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Método para eliminar un registro de la grilla Aplicaciones
+        /// </summary>
+        public void EliminarIniciativa(int idIniciativa)
+        {
+            try
+            {
+                tbIniciativa iniciativa = contexto.tbIniciativa.Where(x => x.Id == idIniciativa).First();
+                contexto.tbIniciativa.Remove(iniciativa);
+                contexto.SaveChanges();
+                CargarIniciativas();
+                EnviarMensajeUsuario("Registro eliminado satisfactoriamente");
+            }
+            catch (Exception ex)
+            {
+                EnviarMensajeUsuario("No se puede eliminar el registro debido a que se encuentran contenidos asociados a la Iniciativa");
+            }
+        }
+
         #endregion
 
         #region Contenidos
@@ -188,8 +309,8 @@ namespace Presenter
         {
             try
             {
-                int idAplicacion = Convert.ToInt32(interfaceAdministacion.AplicacionesTema);
-                var temas = contexto.tbTema.Where(x=> x.IdAplicacion==idAplicacion).ToList();
+                int idIniciativa = Convert.ToInt32(interfaceAdministacion.IniciativasTema);
+                var temas = contexto.tbTema.Where(x=> x.IdIniciativa== idIniciativa).ToList();
                 interfaceAdministacion.GrillaTemas = temas;
 
             }
@@ -206,8 +327,8 @@ namespace Presenter
         {
             try
             {
-                int idAplicacion = Convert.ToInt32(interfaceAdministacion.AplicacionesTema);
-                var existe = contexto.tbTema.Where(x => x.Nombre == interfaceAdministacion.NombreTema && x.IdAplicacion== idAplicacion).ToList();
+                int idIniciativa = Convert.ToInt32(interfaceAdministacion.IniciativasTema);
+                var existe = contexto.tbTema.Where(x => x.Nombre == interfaceAdministacion.NombreTema && x.IdIniciativa== idIniciativa).ToList();
                 if (existe.Count > 0)
                 {
                     EnviarMensajeUsuario("El tema ya existe");
@@ -215,7 +336,7 @@ namespace Presenter
                 else
                 {
                     tbTema tema = new tbTema();
-                    tema.IdAplicacion = idAplicacion;
+                    tema.IdIniciativa = idIniciativa;
                     tema.Nombre = interfaceAdministacion.NombreTema;
                     contexto.tbTema.Add(tema);
                     contexto.SaveChanges();
@@ -243,8 +364,8 @@ namespace Presenter
                 tema.Nombre = interfaceAdministacion.NombreTema;
                 contexto.SaveChanges();
                 interfaceAdministacion.NombreTema = "";
-                int idAplicacion = Convert.ToInt32(tema.IdAplicacion);
-                var temas = contexto.tbTema.Where(x => x.IdAplicacion == idAplicacion).ToList();
+                int idIniciativa = Convert.ToInt32(tema.IdIniciativa);
+                var temas = contexto.tbTema.Where(x => x.IdIniciativa == idIniciativa).ToList();
                 interfaceAdministacion.GrillaTemas = temas;
                 EnviarMensajeUsuario("Registro actualizado satisfactoriamente");
             }
@@ -282,8 +403,8 @@ namespace Presenter
                 tbTema tema = contexto.tbTema.Where(x => x.Id == idTema).First();
                 contexto.tbTema.Remove(tema);
                 contexto.SaveChanges();
-                int idAplicacion = Convert.ToInt32(interfaceAdministacion.AplicacionesTema);
-                var temas = contexto.tbTema.Where(x => x.IdAplicacion == idAplicacion).ToList();
+                int idIniciativa = Convert.ToInt32(interfaceAdministacion.IniciativasTema);
+                var temas = contexto.tbTema.Where(x => x.IdIniciativa == idIniciativa).ToList();
                 interfaceAdministacion.GrillaTemas = temas;
                 EnviarMensajeUsuario("Registro eliminado satisfactoriamente");
             }

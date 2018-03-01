@@ -52,7 +52,8 @@ namespace Presenter
         {
             try
             {
-                CargarAplicaciones();
+                CargarProyectos();
+                CargarIniciativas();
                 CargarGrillaCategorias();
                 CargarGrillaSubcategorias();
                 CargarCategoriasReporte();
@@ -315,9 +316,9 @@ namespace Presenter
                 }
                 else
                 {
-                    int idAplicacion = Convert.ToInt32(interfaceHojaDatos.Aplicaciones);
+                    int idIniciativa = Convert.ToInt32(interfaceHojaDatos.Iniciativas);
                     tbCategoriaHD categoria = new tbCategoriaHD();
-                    categoria.IdAplicacion = idAplicacion;
+                    categoria.IdIniciativa = idIniciativa;
                     categoria.Nombre = interfaceHojaDatos.NombreCategoria;
                     contexto.tbCategoriaHD.Add(categoria);
                     contexto.SaveChanges();
@@ -380,10 +381,10 @@ namespace Presenter
         {
             try
             {
-                int idAplicacion = Convert.ToInt32(interfaceHojaDatos.Aplicaciones);
+                int idIniciativa = Convert.ToInt32(interfaceHojaDatos.Iniciativas);
                 var categoria = contexto.tbCategoriaHD.Where(x => x.Id == idCategoria).First();
                 categoria.Nombre = interfaceHojaDatos.NombreCategoria;
-                categoria.IdAplicacion = idAplicacion;
+                categoria.IdIniciativa = idIniciativa;
                 contexto.SaveChanges();
                 CargarGrillaCategorias();
                 interfaceHojaDatos.NombreCategoria = "";
@@ -403,12 +404,12 @@ namespace Presenter
         /// <summary>
         /// Método para cargar la grilla Aplicaciones
         /// </summary>
-        public void CargarAplicaciones()
+        public void CargarProyectos()
         {
             try
             {
-                var aplicaciones = contexto.tbAplicacion.ToList();
-                interfaceHojaDatos.Aplicaciones = aplicaciones;
+                var proyectos = contexto.tbProyecto.ToList();
+                interfaceHojaDatos.Proyectos = proyectos;
 
             }
             catch (Exception ex)
@@ -417,6 +418,23 @@ namespace Presenter
             }
         }
 
+        /// <summary>
+        /// Método para cargar la grilla Aplicaciones
+        /// </summary>
+        public void CargarIniciativas()
+        {
+            try
+            {
+                int idProyecto = Convert.ToInt32(interfaceHojaDatos.Proyectos);
+                var iniciativas = contexto.tbIniciativa.Where(x=>x.IdProyecto==idProyecto).ToList();
+                interfaceHojaDatos.Iniciativas = iniciativas;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region Subcategoria
@@ -535,7 +553,8 @@ namespace Presenter
                                 join s in contexto.tbSubCategoriaHD on c.Id equals s.IdCategoria
                                 join i in contexto.tbItemSubcategoria on s.Id equals i.IdSubcategoria
                                 join a in contexto.tbAmbiente on i.IdAmbiente equals a.Id
-                                join ap in contexto.tbAplicacion on c.IdAplicacion equals ap.Id
+                                join ini in contexto.tbIniciativa on c.IdIniciativa equals ini.Id
+                                join py in contexto.tbProyecto on ini.IdProyecto equals py.Id
                                 select new
                                 {
                                     NombreCategoria = c.Nombre,
@@ -543,7 +562,7 @@ namespace Presenter
                                     Ambiente = a.Nombre,
                                     ItemNombre = i.Nombre,
                                     ItemDescripcion = i.Descripcion,
-                                    Aplicacion = ap.Nombre,
+                                    Proyecto = py.Nombre,
                                     IdCategoria=c.Id,
                                     IdSubcategoria=i.IdSubcategoria,
                                     IdAmbiente=i.IdAmbiente
@@ -593,8 +612,8 @@ namespace Presenter
                 cat.Nombre = "Seleccionar";
                 listaCategoria.Add(cat);
 
-                int idAplicacion = Convert.ToInt32(interfaceHojaDatos.Aplicaciones);
-                var categorias = contexto.tbCategoriaHD.Where(x=>x.IdAplicacion==idAplicacion).OrderBy(x => x.Nombre).ToList();
+                int idIniciativas = Convert.ToInt32(interfaceHojaDatos.Iniciativas);
+                var categorias = contexto.tbCategoriaHD.Where(x=>x.IdIniciativa== idIniciativas).OrderBy(x => x.Nombre).ToList();
 
                 foreach (var item in categorias)
                 {

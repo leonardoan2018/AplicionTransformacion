@@ -49,20 +49,20 @@
             }
 
             if (document.getElementById("<%= txtDescripcionItem.ClientID %>").value == '') {
-                   $("#contenidoPopudMensaje").append("<p>- Debe ingresar una descripción</p>");
-                   verificarVacios = "false";
-               }
+                $("#contenidoPopudMensaje").append("<p>- Debe ingresar una descripción</p>");
+                verificarVacios = "false";
+            }
 
             if (verificarVacios == "false") {
                 $("#myModalMensaje").modal('show');
                 return false;
             }
             else { return true }
-           }
+        }
 
-           function abrirModalAdjuntar() {
-               $("#modalAdjuntos").modal('show');
-           }
+        function abrirModalAdjuntar() {
+            $("#modalAdjuntos").modal('show');
+        }
     </script>
 
 
@@ -89,20 +89,40 @@
                         <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
 
+
+                                <%--     <div class="col-xs-12 col-md-6">
+                                    <asp:Label ID="Label10" runat="server" Text="Nombre del producto" CssClass="form-label fuenteTextoNormal"></asp:Label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i></span>
+                                        <asp:TextBox ID="txtNombreProducto" runat="server" CssClass="form-control input-md" AutoPostBack="true"></asp:TextBox>
+                                        <div id="listPlacement" style="max-height: 500px; overflow-y: scroll;"></div>
+                                        <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender2" CompletionListElementID="listPlacement" runat="server"
+                                            TargetControlID="txtNombreProducto" ServiceMethod="GetCompletionList" UseContextKey="true"
+                                            CompletionInterval="10" MinimumPrefixLength="1" EnableCaching="false" CompletionSetCount="1"
+                                            FirstRowSelected="false" CompletionListCssClass="completionList"
+                                            CompletionListItemCssClass="listItem" CompletionListHighlightedItemCssClass="itemHighlighted">
+                                        </ajaxToolkit:AutoCompleteExtender>
+                                    </div>
+                                </div>--%>
+
+
+
+
+
                                 <div class="container row top-buffer">
                                     <div class="col-xs-12 col-md-6">
                                         <asp:Label ID="Label5" runat="server" Text="Aplicaciones" CssClass="fuenteTextoNormal"></asp:Label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-signal" aria-hidden="true"></i></span>
-                                            <asp:DropDownList ID="dpAplicacion" runat="server" CssClass="form-control input-md" OnSelectedIndexChanged="dpAplicacion_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                            <asp:DropDownList ID="dpProyectos" runat="server" CssClass="form-control input-md" OnSelectedIndexChanged="dpProyectos_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                         </div>
                                     </div>
 
                                     <div class="col-xs-12 col-md-6">
-                                        <asp:Label ID="Label1" runat="server" Text="Nombre de la categoría" CssClass="form-label fuenteTextoNormal"></asp:Label>
+                                        <asp:Label ID="Label10" runat="server" Text="Aplicaciones" CssClass="fuenteTextoNormal"></asp:Label>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-tag" aria-hidden="true"></i></span>
-                                            <asp:TextBox ID="txtNombreCategoria" runat="server" CssClass="form-control input-md"></asp:TextBox>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-signal" aria-hidden="true"></i></span>
+                                            <asp:DropDownList ID="dpIniciativa" runat="server" CssClass="form-control input-md" OnSelectedIndexChanged="dpProyectos_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                         </div>
                                     </div>
 
@@ -111,12 +131,23 @@
 
                                 <div class="container row top-buffer">
                                     <div class="col-xs-12 col-md-6">
+                                        <asp:Label ID="Label1" runat="server" Text="Nombre de la categoría" CssClass="form-label fuenteTextoNormal"></asp:Label>
                                         <div class="input-group">
-                                            <asp:LinkButton ID="btnCrearCategoria" runat="server" CssClass="btn btnEstilo" OnClick="btnCrearCategoria_Click" OnClientClick="return verificarEntradaCategoria()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-tag" aria-hidden="true"></i></span>
+                                            <asp:TextBox ID="txtNombreCategoria" runat="server" CssClass="form-control input-md"></asp:TextBox>
+                                        </div>
+                                    </div>
 
-                                            <asp:LinkButton ID="btnActualizarCategoria" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="btnActualizarCategoria_Click" OnClientClick="return verificarEntradaCategoria()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
+                                </div>
 
-                                            <asp:LinkButton ID="btnCancelarCategoria" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="btnCancelarCategoria_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
+                                <div class="container row top-buffer">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="input-group">
+                                            <asp:LinkButton ID="btnCrearCategoria" runat="server" CssClass="btn btn-btnEstilo" OnClick="btnCrearCategoria_Click" OnClientClick="return verificarEntradaCategoria()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
+
+                                            <asp:LinkButton ID="btnActualizarCategoria" runat="server" CssClass="btn btn-btnEstilo espacioBotones" OnClick="btnActualizarCategoria_Click" OnClientClick="return verificarEntradaCategoria()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
+
+                                            <asp:LinkButton ID="btnCancelarCategoria" runat="server" CssClass="btn btn-btnEstilo espacioBotones" OnClick="btnCancelarCategoria_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
 
                                         </div>
                                     </div>
@@ -211,11 +242,11 @@
                                     <div class="container row top-buffer">
                                         <div class="col-xs-12 col-md-6">
                                             <div class="input-group">
-                                                <asp:LinkButton ID="btnCrearSubcategoria" runat="server" CssClass="btn btnEstilo" OnClick="btnCrearSubcategoria_Click" OnClientClick="return verificarEntradaSubcategoria()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
+                                                <asp:LinkButton ID="btnCrearSubcategoria" runat="server" CssClass="btn btn-btnEstilo" OnClick="btnCrearSubcategoria_Click" OnClientClick="return verificarEntradaSubcategoria()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
 
-                                                <asp:LinkButton ID="btnActualizarSubcategoria" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="btnActualizarSubcategoria_Click" OnClientClick="return verificarEntradaSubcategoria()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
+                                                <asp:LinkButton ID="btnActualizarSubcategoria" runat="server" CssClass="btn btn-btnEstilo espacioBotones" OnClick="btnActualizarSubcategoria_Click" OnClientClick="return verificarEntradaSubcategoria()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
 
-                                                <asp:LinkButton ID="btnCancelarSubcategoria" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="btnCancelarSubcategoria_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
+                                                <asp:LinkButton ID="btnCancelarSubcategoria" runat="server" CssClass="btn btn-btnEstilo espacioBotones" OnClick="btnCancelarSubcategoria_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
                                             </div>
                                         </div>
                                     </div>
@@ -320,11 +351,11 @@
                                     <div class="container row top-buffer">
                                         <div class="col-xs-12 col-md-6">
                                             <div class="input-group">
-                                                <asp:LinkButton ID="lbtCrearItemSub" runat="server" CssClass="btn btnEstilo" OnClick="lbtCrearItemSub_Click" OnClientClick="return verificarEntradaItemSubCategoria()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
+                                                <asp:LinkButton ID="lbtCrearItemSub" runat="server" CssClass="btn btn-btnEstilo" OnClick="lbtCrearItemSub_Click" OnClientClick="return verificarEntradaItemSubCategoria()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
 
-                                                <asp:LinkButton ID="lbtEditarItemSub" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="lbtEditarItemSub_Click" OnClientClick="return verificarEntradaItemSubCategoria()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
+                                                <asp:LinkButton ID="lbtEditarItemSub" runat="server" CssClass="btn btn-btnEstilo espacioBotones" OnClick="lbtEditarItemSub_Click" OnClientClick="return verificarEntradaItemSubCategoria()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
 
-                                                <asp:LinkButton ID="lbtCancelarItemSub" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="lbtCancelarItemSub_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
+                                                <asp:LinkButton ID="lbtCancelarItemSub" runat="server" CssClass="btn btn-btnEstilo espacioBotones" OnClick="lbtCancelarItemSub_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
                                             </div>
                                         </div>
                                     </div>

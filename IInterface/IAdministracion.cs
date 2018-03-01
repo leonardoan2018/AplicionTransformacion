@@ -13,7 +13,12 @@ namespace IInterface
         /// <summary>
         /// Clase de tipo Interface para comunicar la Vista y el Presentador 
         /// </summary>
-        object GrillaAplicaciones { set; }
+        object GrillaProyectos { set; }
+
+        /// <summary>
+        /// Clase de tipo Interface para comunicar la Vista y el Presentador 
+        /// </summary>
+        object GrillaIniciativas { set; }
 
         /// <summary>
         /// Clase de tipo Interface para comunicar la Vista y el Presentador 
@@ -27,7 +32,7 @@ namespace IInterface
         /// <summary>
         /// Clase de tipo Interface para comunicar la Vista y el Presentador 
         /// </summary>
-        string NombreAplicacion { set; get; }
+        string NombreProyecto { set; get; }
 
         /// <summary>
         /// Clase de tipo Interface para comunicar la Vista y el Presentador 
@@ -35,14 +40,32 @@ namespace IInterface
         string AW { set; get; }
 
         /// <summary>
+        /// Clase de tipo Interface que proporciona campos para comunicar la Vista y el Presentador PAdminEntidades
+        /// </summary>
+        object ProyectosIniciativas { set; get; }
+
+        /// <summary>
         /// Clase de tipo Interface para comunicar la Vista y el Presentador 
+        /// </summary>
+        string NombreIniciativa { set; get; }
+
+
+        /// <summary>
+        /// Clase de tipo Interface para comunicar la Vista y el Presentador 
+        /// </summary>
+        string PMOIniciativa { set; get; }
+
+        /// <summary>
+        /// Clase de tipo Interface para comunicar la Vista y el Presentador 
+        /// </summary>
+        /// 
         /// </summary>
         string NombreTema { set; get; }
 
         /// <summary>
         /// Clase de tipo Interface que proporciona campos para comunicar la Vista y el Presentador PAdminEntidades
         /// </summary>
-        object AplicacionesTema { set; get; }
+        object IniciativasTema { set; get; }
 
         /// <summary>
         /// Clase de tipo Interface para comunicar la Vista y el Presentador 

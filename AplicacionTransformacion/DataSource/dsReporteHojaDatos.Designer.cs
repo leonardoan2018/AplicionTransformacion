@@ -289,7 +289,7 @@ namespace AplicacionTransformacion.DataSource {
             
             private global::System.Data.DataColumn columnItemDescripcion;
             
-            private global::System.Data.DataColumn columnAplicacion;
+            private global::System.Data.DataColumn columnProyecto;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -366,9 +366,9 @@ namespace AplicacionTransformacion.DataSource {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn AplicacionColumn {
+            public global::System.Data.DataColumn ProyectoColumn {
                 get {
-                    return this.columnAplicacion;
+                    return this.columnProyecto;
                 }
             }
             
@@ -409,7 +409,7 @@ namespace AplicacionTransformacion.DataSource {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataTableHDRow AddDataTableHDRow(string NombreCategoria, string NombreSubcategoria, string Ambiente, string ItemNombre, string ItemDescripcion, string Aplicacion) {
+            public DataTableHDRow AddDataTableHDRow(string NombreCategoria, string NombreSubcategoria, string Ambiente, string ItemNombre, string ItemDescripcion, string Proyecto) {
                 DataTableHDRow rowDataTableHDRow = ((DataTableHDRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         NombreCategoria,
@@ -417,7 +417,7 @@ namespace AplicacionTransformacion.DataSource {
                         Ambiente,
                         ItemNombre,
                         ItemDescripcion,
-                        Aplicacion};
+                        Proyecto};
                 rowDataTableHDRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTableHDRow);
                 return rowDataTableHDRow;
@@ -445,7 +445,7 @@ namespace AplicacionTransformacion.DataSource {
                 this.columnAmbiente = base.Columns["Ambiente"];
                 this.columnItemNombre = base.Columns["ItemNombre"];
                 this.columnItemDescripcion = base.Columns["ItemDescripcion"];
-                this.columnAplicacion = base.Columns["Aplicacion"];
+                this.columnProyecto = base.Columns["Proyecto"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -461,8 +461,8 @@ namespace AplicacionTransformacion.DataSource {
                 base.Columns.Add(this.columnItemNombre);
                 this.columnItemDescripcion = new global::System.Data.DataColumn("ItemDescripcion", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItemDescripcion);
-                this.columnAplicacion = new global::System.Data.DataColumn("Aplicacion", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAplicacion);
+                this.columnProyecto = new global::System.Data.DataColumn("Proyecto", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProyecto);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -685,17 +685,17 @@ namespace AplicacionTransformacion.DataSource {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Aplicacion {
+            public string Proyecto {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTableHD.AplicacionColumn]));
+                        return ((string)(this[this.tableDataTableHD.ProyectoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Aplicacion\' in table \'DataTableHD\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Proyecto\' in table \'DataTableHD\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTableHD.AplicacionColumn] = value;
+                    this[this.tableDataTableHD.ProyectoColumn] = value;
                 }
             }
             
@@ -761,14 +761,14 @@ namespace AplicacionTransformacion.DataSource {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsAplicacionNull() {
-                return this.IsNull(this.tableDataTableHD.AplicacionColumn);
+            public bool IsProyectoNull() {
+                return this.IsNull(this.tableDataTableHD.ProyectoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetAplicacionNull() {
-                this[this.tableDataTableHD.AplicacionColumn] = global::System.Convert.DBNull;
+            public void SetProyectoNull() {
+                this[this.tableDataTableHD.ProyectoColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -31,13 +31,13 @@ namespace AplicacionTransformacion.Forms {
         protected global::System.Web.UI.WebControls.Label lblNombreAplicacion;
         
         /// <summary>
-        /// txtNombreAplicacion control.
+        /// txtNombreProyecto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreAplicacion;
+        protected global::System.Web.UI.WebControls.TextBox txtNombreProyecto;
         
         /// <summary>
         /// lblAW control.
@@ -58,40 +58,139 @@ namespace AplicacionTransformacion.Forms {
         protected global::System.Web.UI.WebControls.TextBox txtAW;
         
         /// <summary>
-        /// btnCrearAplicacion control.
+        /// btnCrearProyecto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCrearAplicacion;
+        protected global::System.Web.UI.WebControls.LinkButton btnCrearProyecto;
         
         /// <summary>
-        /// btnActualizarAplicacion control.
+        /// btnActualizarProyecto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnActualizarAplicacion;
+        protected global::System.Web.UI.WebControls.LinkButton btnActualizarProyecto;
         
         /// <summary>
-        /// btnCancelarAplicacion control.
+        /// btnCancelarProyecto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCancelarAplicacion;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancelarProyecto;
         
         /// <summary>
-        /// gvAplicaciones control.
+        /// gvProyectos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvAplicaciones;
+        protected global::System.Web.UI.WebControls.GridView gvProyectos;
+        
+        /// <summary>
+        /// UpdatePanel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        
+        /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
+        /// dpProyectosIniciativas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dpProyectosIniciativas;
+        
+        /// <summary>
+        /// Label4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4;
+        
+        /// <summary>
+        /// txtNombreIniciativa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombreIniciativa;
+        
+        /// <summary>
+        /// Label5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label5;
+        
+        /// <summary>
+        /// txtPMO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPMO;
+        
+        /// <summary>
+        /// lbtCrearIniciativa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtCrearIniciativa;
+        
+        /// <summary>
+        /// lbtEditarIniciativa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtEditarIniciativa;
+        
+        /// <summary>
+        /// lbtCancelarIniciativa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtCancelarIniciativa;
+        
+        /// <summary>
+        /// gvIniciativa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvIniciativa;
         
         /// <summary>
         /// UpdatePanel1 control.
@@ -112,13 +211,13 @@ namespace AplicacionTransformacion.Forms {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// dpAplicacionesTema control.
+        /// dpIniciativasTema control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dpAplicacionesTema;
+        protected global::System.Web.UI.WebControls.DropDownList dpIniciativasTema;
         
         /// <summary>
         /// Label2 control.

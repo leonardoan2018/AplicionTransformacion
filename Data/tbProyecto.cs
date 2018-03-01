@@ -12,14 +12,12 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class tbAplicacion
+    public partial class tbProyecto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbAplicacion()
+        public tbProyecto()
         {
-            this.tbTema = new HashSet<tbTema>();
-            this.tbCategoriaHD = new HashSet<tbCategoriaHD>();
-            this.tbPasoAmbiente = new HashSet<tbPasoAmbiente>();
+            this.tbIniciativa = new HashSet<tbIniciativa>();
         }
     
         public int Id { get; set; }
@@ -27,10 +25,6 @@ namespace Data
         public string AW { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTema> tbTema { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCategoriaHD> tbCategoriaHD { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPasoAmbiente> tbPasoAmbiente { get; set; }
+        public virtual ICollection<tbIniciativa> tbIniciativa { get; set; }
     }
 }

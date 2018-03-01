@@ -21,10 +21,10 @@ namespace Data
         }
     
         public int Id { get; set; }
-        public Nullable<int> IdAplicacion { get; set; }
+        public Nullable<int> IdIniciativa { get; set; }
         public string Nombre { get; set; }
     
-        public virtual tbAplicacion tbAplicacion { get; set; }
+        public virtual tbIniciativa tbIniciativa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSubCategoriaHD> tbSubCategoriaHD { get; set; }
     }

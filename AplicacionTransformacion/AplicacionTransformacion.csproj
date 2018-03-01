@@ -223,6 +223,26 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="Bootstrap\Css\bootstrap-theme.css" />
+    <Content Include="Bootstrap\Css\bootstrap-theme.min.css" />
+    <Content Include="Bootstrap\Css\bootstrap.css" />
+    <Content Include="Bootstrap\Css\bootstrap.min.css" />
+    <Content Include="Bootstrap\Css\estilosPropios.css" />
+    <Content Include="Bootstrap\Css\jquery-ui.css" />
+    <Content Include="Bootstrap\Css\jquery-ui.min.css" />
+    <Content Include="Bootstrap\Css\jquery-ui.structure.css" />
+    <Content Include="Bootstrap\Css\jquery-ui.structure.min.css" />
+    <Content Include="Bootstrap\Css\jquery-ui.theme.css" />
+    <Content Include="Bootstrap\Css\jquery-ui.theme.min.css" />
+    <Content Include="Bootstrap\Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Bootstrap\Scripts\bootstrap.js" />
+    <Content Include="Bootstrap\Scripts\bootstrap.min.js" />
+    <Content Include="Bootstrap\Scripts\datapicker.js" />
+    <None Include="Bootstrap\Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Bootstrap\Scripts\jquery-2.1.4.js" />
+    <Content Include="Bootstrap\Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Bootstrap\Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Bootstrap\Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -246,6 +266,18 @@
     <Content Include="DataSource\dsReporteHojaDatos.xsc">
       <DependentUpon>dsReporteHojaDatos.xsd</DependentUpon>
     </Content>
+    <Content Include="Bootstrap\Css\bootstrap-theme.css.map" />
+    <Content Include="Bootstrap\Css\bootstrap-theme.min.css.map" />
+    <Content Include="Bootstrap\Css\bootstrap.css.map" />
+    <Content Include="Bootstrap\Css\bootstrap.min.css.map" />
+    <Content Include="Bootstrap\Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Bootstrap\Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Bootstrap\Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Bootstrap\Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Bootstrap\Fonts\source-sans-pro.bold.ttf" />
+    <Content Include="Bootstrap\Fonts\source-sans-pro.light.ttf" />
+    <Content Include="Bootstrap\Fonts\source-sans-pro.regular.ttf" />
+    <Content Include="Bootstrap\Scripts\jquery-2.1.4.min.map" />
     <None Include="DataSource\dsReporteHojaDatos.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -254,7 +286,6 @@
     <Content Include="DataSource\dsReporteHojaDatos.xss">
       <DependentUpon>dsReporteHojaDatos.xsd</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Forms\FrmAdministacion.aspx" />
     <Content Include="Forms\FrmHojaDatos.aspx" />
     <Content Include="Forms\FrmPasosAmbientes.aspx" />
@@ -262,15 +293,13 @@
     <Content Include="Librerias\AjaxControlToolkit.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\jquery-ui.js" />
-    <Content Include="Scripts\jquery-ui.min.js" />
-    <Content Include="Scripts\jquery.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\Transversal.js" />
+    <Content Include="Scripts\Funciones.js" />
+    <Content Include="Scripts\index.js" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jsUpdateProgress.js" />
+    <Content Include="Scripts\modernizrn.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />
@@ -292,7 +321,6 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="Scripts\_references.js" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -304,8 +332,8 @@
     <Content Include="Bundle.config" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

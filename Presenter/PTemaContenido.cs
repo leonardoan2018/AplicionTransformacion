@@ -73,7 +73,7 @@ namespace Presenter
         {
             try
             {
-                var aplicaciones = contexto.tbAplicacion.ToList();
+                var aplicaciones = contexto.tbIniciativa.ToList();
                 interfaceItemContenido.AplicacionesTema = aplicaciones;
 
             }
@@ -92,7 +92,7 @@ namespace Presenter
             try
             {
                 int idAplicacion = Convert.ToInt32(interfaceItemContenido.AplicacionesTema);
-                var temas = contexto.tbTema.Where(x=>x.IdAplicacion==idAplicacion).ToList();
+                var temas = contexto.tbTema.Where(x=>x.IdIniciativa==idAplicacion).ToList();
                 interfaceItemContenido.GrillaTemas = temas;
 
             }
@@ -109,7 +109,7 @@ namespace Presenter
         {
             try
             {
-                var contenidos = contexto.tbContenido.Where(x => x.IdAplicacion == idAplicacion && x.IdTema==idTema).ToList();
+                var contenidos = contexto.tbContenido.Where(x => x.Id == idAplicacion && x.IdTema==idTema).ToList();
                 interfaceItemContenido.GrillaContenidos = contenidos;
 
             }
@@ -145,14 +145,14 @@ namespace Presenter
         {
             try
             {
-                var contenido = contexto.tbContenido.Where(x => x.Id == idContenido).First();
-                contenido.Nombre= interfaceItemContenido.NombreContenido;
-                contenido.Descripcion= interfaceItemContenido.DescripcionContenido;
-                contexto.SaveChanges();
-                interfaceItemContenido.NombreContenido = "";
-                interfaceItemContenido.DescripcionContenido = "";
-                CargarGrillaContenidos(Convert.ToInt32(contenido.IdTema), Convert.ToInt32(contenido.IdAplicacion));
-                EnviarMensajeUsuario("Registro actualizado Satisfactoriamente");
+                //var contenido = contexto.tbContenido.Where(x => x.Id == idContenido).First();
+                //contenido.Nombre= interfaceItemContenido.NombreContenido;
+                //contenido.Descripcion= interfaceItemContenido.DescripcionContenido;
+                //contexto.SaveChanges();
+                //interfaceItemContenido.NombreContenido = "";
+                //interfaceItemContenido.DescripcionContenido = "";
+                //CargarGrillaContenidos(Convert.ToInt32(contenido.IdTema), Convert.ToInt32(contenido.IdAplicacion));
+                //EnviarMensajeUsuario("Registro actualizado Satisfactoriamente");
 
             }
             catch (Exception ex)
@@ -167,24 +167,24 @@ namespace Presenter
         {
             try
             {
-                var contenidos = contexto.tbContenido.Where(x => x.IdAplicacion == idAplicacion && x.IdTema == idTema).ToList();
+                //var contenidos = contexto.tbContenido.Where(x => x.IdAplicacion == idAplicacion && x.IdTema == idTema).ToList();
 
-                if (criterio == "Todo")
-                {
-                    contenidos = contexto.tbContenido.Where(x => x.Nombre.Contains(palabra) || x.Descripcion.Contains(palabra)).ToList();
+                //if (criterio == "Todo")
+                //{
+                //    contenidos = contexto.tbContenido.Where(x => x.Nombre.Contains(palabra) || x.Descripcion.Contains(palabra)).ToList();
 
-                }
-                else if (criterio == "Nombre")
-                {
-                    contenidos = contenidos.Where(x => x.Nombre.Contains(palabra)).ToList();
-                }
-                else
-                {
-                    contenidos = contenidos.Where(x => x.Descripcion.Contains(palabra)).ToList();
-                }
+                //}
+                //else if (criterio == "Nombre")
+                //{
+                //    contenidos = contenidos.Where(x => x.Nombre.Contains(palabra)).ToList();
+                //}
+                //else
+                //{
+                //    contenidos = contenidos.Where(x => x.Descripcion.Contains(palabra)).ToList();
+                //}
 
 
-                interfaceItemContenido.GrillaContenidos = contenidos;
+                //interfaceItemContenido.GrillaContenidos = contenidos;
 
             }
             catch (Exception ex)

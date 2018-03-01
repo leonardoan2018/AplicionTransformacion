@@ -72,7 +72,7 @@
 
                 <div class="container row top-buffer">
                     <div class="col-xs-12 col-md-6">
-                        <asp:Label ID="lblAplicaciones" runat="server" Text="Aplicaciones" CssClass="fuenteTextoNormal"></asp:Label>
+                        <asp:Label ID="lblAplicaciones" runat="server" Text="Iniciativas" CssClass="fuenteTextoNormal"></asp:Label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i></span>
                             <asp:DropDownList ID="dpAplicaciones" runat="server" CssClass="form-control input-md" AutoPostBack="true" OnSelectedIndexChanged="dpAplicaciones_SelectedIndexChanged"></asp:DropDownList>
@@ -299,8 +299,6 @@
 
 
             </asp:Panel>
-
-
 
             <asp:Panel ID="pnlAdjuntos" runat="server" Visible="false">
 

@@ -53,7 +53,13 @@ namespace IInterface
         /// <summary>
         /// Clase de tipo Interface que proporciona campos para comunicar la Vista y el Presentador PAdminEntidades
         /// </summary>
-        object Aplicaciones { set; get; }
+        object Proyectos { set; get; }
+
+
+        /// <summary>
+        /// Clase de tipo Interface que proporciona campos para comunicar la Vista y el Presentador PAdminEntidades
+        /// </summary>
+        object Iniciativas { set; get; }
 
         /// <summary>
         /// Clase de tipo Interface para comunicar la Vista y el Presentador 

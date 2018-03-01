@@ -20,6 +20,7 @@ namespace AplicacionTransformacion.Forms
         public string mensajePopud = "";
         public int num1 = 0;
         public int num2 = 0;
+        public int num3 = 0;
 
         #endregion
 
@@ -47,13 +48,26 @@ namespace AplicacionTransformacion.Forms
         /// <summary>
         /// Set - Obtiene la informacion de las aplicaciones desde la interface IAdmininistracion
         /// </summary>
-        public object GrillaAplicaciones
+        public object GrillaProyectos
         {
             set
             {
-                this.gvAplicaciones.DataSource = value;
-                this.gvAplicaciones.DataBind();
-                this.gvAplicaciones.SelectedIndex = -1;
+                this.gvProyectos.DataSource = value;
+                this.gvProyectos.DataBind();
+                this.gvProyectos.SelectedIndex = -1;
+            }
+        }
+
+        /// <summary>
+        /// Set - Obtiene la informacion de los contenidos desde la interface IAdmininistracion
+        /// </summary>
+        public object GrillaIniciativas
+        {
+            set
+            {
+                this.gvIniciativa.DataSource = value;
+                this.gvIniciativa.DataBind();
+                this.gvIniciativa.SelectedIndex = -1;
             }
         }
 
@@ -69,6 +83,8 @@ namespace AplicacionTransformacion.Forms
                 this.gvTemas.SelectedIndex = -1;
             }
         }
+
+     
         #endregion
 
         #region Controles
@@ -76,16 +92,16 @@ namespace AplicacionTransformacion.Forms
         /// <summary>
         /// Gets or sets -  Obtiene y asigna el nombre de la aplicacion y lo envia hacia la interface IAdmininistracion
         /// </summary>
-        public string NombreAplicacion
+        public string NombreProyecto
         {
             get
             {
-                return txtNombreAplicacion.Text;
+                return txtNombreProyecto.Text;
 
             }
             set
             {
-                txtNombreAplicacion.Text = value;
+                txtNombreProyecto.Text = value;
             }
         }
 
@@ -108,18 +124,70 @@ namespace AplicacionTransformacion.Forms
         /// <summary>
         /// Gets or sets -  Obtiene y asigna el nombre del formato y lo envia hacia la interface IConsultaHallazgos
         /// </summary>
-        public object AplicacionesTema
+        public object ProyectosIniciativas
         {
             set
             {
-                dpAplicacionesTema.DataSource = value;
-                dpAplicacionesTema.DataValueField = "Id";
-                dpAplicacionesTema.DataTextField = "Nombre";
-                dpAplicacionesTema.DataBind();
+                dpProyectosIniciativas.DataSource = value;
+                dpProyectosIniciativas.DataValueField = "Id";
+                dpProyectosIniciativas.DataTextField = "Nombre";
+                dpProyectosIniciativas.DataBind();
             }
             get
             {
-                return dpAplicacionesTema.SelectedValue;
+                return dpProyectosIniciativas.SelectedValue;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets -  Obtiene y asigna el nombre del contenido y lo envia hacia la interface IAdmininistracion
+        /// </summary>
+        public string NombreIniciativa
+        {
+            get
+            {
+                return txtNombreIniciativa.Text;
+
+            }
+            set
+            {
+                txtNombreIniciativa.Text = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets -  Obtiene y asigna el nombre del contenido y lo envia hacia la interface IAdmininistracion
+        /// </summary>
+        public string PMOIniciativa
+        {
+            get
+            {
+                return txtPMO.Text;
+
+            }
+            set
+            {
+                txtPMO.Text = value;
+            }
+        }
+
+       
+
+        /// <summary>
+        /// Gets or sets -  Obtiene y asigna el nombre del formato y lo envia hacia la interface IConsultaHallazgos
+        /// </summary>
+        public object IniciativasTema
+        {
+            set
+            {
+                dpIniciativasTema.DataSource = value;
+                dpIniciativasTema.DataValueField = "Id";
+                dpIniciativasTema.DataTextField = "Nombre";
+                dpIniciativasTema.DataBind();
+            }
+            get
+            {
+                return dpIniciativasTema.SelectedValue;
             }
         }
 
@@ -160,44 +228,126 @@ namespace AplicacionTransformacion.Forms
 
         #region Eventos
 
+        #region Proyecto
 
-        protected void btnCrearAplicacion_Click(object sender, EventArgs e)
+        protected void btnCrearProyecto_Click(object sender, EventArgs e)
         {
-            presenter.CrearAplicacion();
+            presenter.CrearProtecto();
         }
 
-        protected void btnActualizarAplicacion_Click(object sender, EventArgs e)
+        protected void btnActualizarProyecto_Click(object sender, EventArgs e)
         {
-            presenter.ActualizarAplicacion(Convert.ToInt32(Session["idAplicacion"]));
-            btnCrearAplicacion.Visible = true;
-            btnActualizarAplicacion.Visible = false;
+            presenter.ActualizarProyecto(Convert.ToInt32(Session["idProyecto"]));
+            btnCrearProyecto.Visible = true;
+            btnActualizarProyecto.Visible = false;
         }
 
-        protected void btnCancelarAplicacion_Click(object sender, EventArgs e)
+        protected void btnCancelarProyecto_Click(object sender, EventArgs e)
         {
-
+            txtNombreProyecto.Text = "";
+            txtAW.Text = "";
         }
 
-      
-
-        protected void imgbttEditarAplicacion_Click(object sender, EventArgs e)
+        protected void imgbttEditarProyecto_Click(object sender, EventArgs e)
         {
-            btnCrearAplicacion.Visible = false;
-            btnActualizarAplicacion.Visible = true;
+            btnCrearProyecto.Visible = false;
+            btnActualizarProyecto.Visible = true;
             LinkButton lbttEditar = (LinkButton)sender;
             TableCell celda = (TableCell)lbttEditar.Parent;
             GridViewRow filaSeleccionar = (GridViewRow)celda.Parent;
-            Session["idAplicacion"] = Convert.ToInt32(gvAplicaciones.DataKeys[filaSeleccionar.RowIndex].Value.ToString());
-            presenter.CargarInfoAplicacion(Convert.ToInt32(Session["idAplicacion"]));
+            Session["idProyecto"] = Convert.ToInt32(gvProyectos.DataKeys[filaSeleccionar.RowIndex].Value.ToString());
+            presenter.CargarInfoProyecto(Convert.ToInt32(Session["idProyecto"]));
         }
 
-        protected void imgbttEliminarAplicacion_Click(object sender, EventArgs e)
+        protected void imgbttEliminarProyecto_Click(object sender, EventArgs e)
         {
             LinkButton lbttEliminar = (LinkButton)sender;
             TableCell celda = (TableCell)lbttEliminar.Parent;
             GridViewRow filaSeleccionar = (GridViewRow)celda.Parent;
-            presenter.EliminarAplicacion(Convert.ToInt32(gvAplicaciones.DataKeys[filaSeleccionar.RowIndex].Value.ToString()));
+            presenter.EliminarProyecto(Convert.ToInt32(gvProyectos.DataKeys[filaSeleccionar.RowIndex].Value.ToString()));
         }
+
+        protected void gvProyectos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+
+                    Literal No = (Literal)e.Row.FindControl("ltralNo");
+                    num1 += 1;
+                    No.Text = num1.ToString() + ".";
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region Iniciativa
+        protected void lbtCrearIniciativa_Click(object sender, EventArgs e)
+        {
+            presenter.CrearIniciativa();
+        }
+
+        protected void lbtEditarIniciativa_Click(object sender, EventArgs e)
+        {
+            presenter.ActualizarIniciativa(Convert.ToInt32(Session["idIniciativa"]));
+            lbtCrearIniciativa.Visible = true;
+            lbtEditarIniciativa.Visible = false;
+        }
+
+        protected void lbtCancelarIniciativa_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        protected void imgbttEditarIniciativa_Click(object sender, EventArgs e)
+        {
+            lbtCrearIniciativa.Visible = false;
+            lbtEditarIniciativa.Visible = true;
+            LinkButton lbttEditar = (LinkButton)sender;
+            TableCell celda = (TableCell)lbttEditar.Parent;
+            GridViewRow filaSeleccionar = (GridViewRow)celda.Parent;
+            Session["idIniciativa"] = Convert.ToInt32(gvIniciativa.DataKeys[filaSeleccionar.RowIndex].Value.ToString());
+            presenter.CargarInfoIniativa(Convert.ToInt32(Session["idIniciativa"]));
+        }
+
+        protected void imgbttEliminarIniciativa_Click(object sender, EventArgs e)
+        {
+            LinkButton lbttEliminar = (LinkButton)sender;
+            TableCell celda = (TableCell)lbttEliminar.Parent;
+            GridViewRow filaSeleccionar = (GridViewRow)celda.Parent;
+            presenter.EliminarIniciativa(Convert.ToInt32(gvIniciativa.DataKeys[filaSeleccionar.RowIndex].Value.ToString()));
+        }
+
+        protected void gvIniciativa_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+
+                    Literal No = (Literal)e.Row.FindControl("ltralNo");
+                    num3 += 1;
+                    No.Text = num3.ToString() + ".";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
 
         protected void dpAplicacionesTema_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -247,16 +397,6 @@ namespace AplicacionTransformacion.Forms
         #endregion
 
 
-        /// <summary>
-        /// Método que se ejecuta cuando se digita una palabra en el texbox producto detalle factura
-        /// </summary>
-    
-
-
-        protected void imgbttTemas_Click(object sender, EventArgs e)
-        {
-           
-        }
 
         protected void gvTemas_DataBound(object sender, GridViewRowEventArgs e)
         {
@@ -298,6 +438,6 @@ namespace AplicacionTransformacion.Forms
             }
         }
 
-    
+      
     }
 }

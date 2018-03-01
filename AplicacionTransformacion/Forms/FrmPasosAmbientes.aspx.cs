@@ -10,6 +10,13 @@ using System.Threading;
 using System.Globalization;
 using System.Data.SqlClient;
 using System.Data.Entity;
+using System.IO.Compression;
+using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using ICSharpCode.SharpZipLib.Zip;
+using System.Drawing.Imaging;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
 
 namespace AplicacionTransformacion.Forms
 {
@@ -20,11 +27,29 @@ namespace AplicacionTransformacion.Forms
         PPasosAmbientes presenterPasosAmbientes;
 
         int numero = 0;
+        int num3 = 0;
 
         string mensajePopup = " ";
         #endregion
 
         #region METODOS SET Y GET
+
+        public object GrupoApoyo
+        {
+            get
+            {
+                return ddlGrupoApoyo.SelectedValue;
+            }
+
+            set
+            {
+
+                ddlGrupoApoyo.DataSource = value;
+                ddlGrupoApoyo.DataValueField = "Id";
+                ddlGrupoApoyo.DataTextField = "NombreArea";
+                ddlGrupoApoyo.DataBind();
+            }
+        }
         public object Ambientes
         {
             get
@@ -109,6 +134,20 @@ namespace AplicacionTransformacion.Forms
             }
         }
 
+        /// <summary>
+        /// Set - Obtiene la informacion de los contenidos desde la interface ITemacontenido
+        /// </summary>
+        public object GrillaAdjuntos
+        {
+            set
+            {
+                this.gvAdjuntos.DataSource = value;
+                this.gvAdjuntos.DataBind();
+                this.gvAdjuntos.SelectedIndex = -1;
+            }
+        }
+
+
         public object GrillaInfoPasos
         {
             set
@@ -154,6 +193,30 @@ namespace AplicacionTransformacion.Forms
 
         }
 
+        public string PersonaApoyo
+        {
+            get
+            {
+                return txtNomPersonaApoyo.Text;
+            }
+            set
+            {
+                txtNomPersonaApoyo.Text = value;
+            }
+        }
+
+        public string TelPersonaApoyo
+        {
+            get
+            {
+                return txtTelPersonaApoyo.Text;
+            }
+            set
+            {
+                txtTelPersonaApoyo.Text = value;
+            }
+        }
+
 
         #endregion}
         protected void Page_Load(object sender, EventArgs e)
@@ -165,6 +228,7 @@ namespace AplicacionTransformacion.Forms
                 if (!IsPostBack)
                 {
                     presenterPasosAmbientes.CargaInicial();
+
                 }
             }
             catch (Exception ex)
@@ -205,19 +269,22 @@ namespace AplicacionTransformacion.Forms
 
         protected void btnGuardarInfoPaso_Click(object sender, EventArgs e)
         {
-            presenterPasosAmbientes.GuardarPasoAmbiente();
+            Session["idPasoAmbiente"] = presenterPasosAmbientes.GuardarPasoAmbiente();
+            pnlInfoPasos2.Visible = false;
+            pnlApoyoPasos.Visible = true;
+
         }
 
         protected void imgCalendario_Click(object sender, EventArgs e)
         {
-            clrFechaPaso.Visible = true;
+            //clrFechaPaso.Visible = true;
         }
 
         protected void clrFechaPaso_SelectionChanged(object sender, EventArgs e)
         {
-            txtFechaPaso.Text = Convert.ToString(clrFechaPaso.SelectedDate);
-            clrFechaPaso.Visible = false;
-            txtFechaPaso.Visible = true;
+            //txtFechaPaso.Text = Convert.ToString(txtFechaPaso.SelectedDate);
+            //clrFechaPaso.Visible = false;
+            //txtFechaPaso.Visible = true;
         }
 
         protected void imgbttEditarInfoPaso_Click(object sender, EventArgs e)
@@ -280,13 +347,19 @@ namespace AplicacionTransformacion.Forms
         {
             try
             {
+                btnvolverInfoPasos.Visible = true;
                 pnlInfoPasos1.Visible = true;
                 pnlInfoPasos2.Visible = false;
                 pnlApoyoPasos.Visible = true;
+                pnlAdjuntos.Visible = true;
+
 
                 btnConsultarInfoPasos.Visible = false;
                 btnGuardarEdicionPaso.Visible = false;
                 btnGuardarInfoPaso.Visible = false;
+                btnAdjuntarArchivosPaso.Visible = true;
+                btnLimpiar.Visible = false;
+                lbtGruposApoyo.Visible = false;
 
                 LinkButton lbtnApoyoPaso = (LinkButton)sender;
                 TableCell celda = (TableCell)lbtnApoyoPaso.Parent;
@@ -299,6 +372,7 @@ namespace AplicacionTransformacion.Forms
                 ddlAmbiente.SelectedValue = presenterPasosAmbientes.CargarInfoPasoAmbiente(id);
                 ddlUsuarios.SelectedValue = presenterPasosAmbientes.CargarInfoPasoUsuarios(id);
                 presenterPasosAmbientes.CargarGrillaInfoApoyo(id);
+                presenterPasosAmbientes.CargarGrillaAdjuntosDetalle(id);
 
                 txtFechaPaso.Visible = true;
             }
@@ -312,12 +386,17 @@ namespace AplicacionTransformacion.Forms
         {
             try
             {
-                txtFechaPaso.Visible = false;
+                btnvolverInfoPasos.Visible = false;
+                txtFechaPaso.Visible = true;
                 pnlInfoPasos2.Visible = true;
                 pnlApoyoPasos.Visible = false;
+                pnlAdjuntos.Visible = false;
                 btnConsultarInfoPasos.Visible = true;
                 btnGuardarInfoPaso.Visible = true;
+                btnLimpiar.Visible = true;
+                btnAdjuntarArchivosPaso.Visible = false;
                 Limpiar();
+                lbtGruposApoyo.Visible = false;
 
             }
             catch (Exception ex)
@@ -336,12 +415,153 @@ namespace AplicacionTransformacion.Forms
             ddlNomAplicacion.ClearSelection();
             ddlUsuarios.ClearSelection();
             ddlAmbiente.ClearSelection();
+            presenterPasosAmbientes.CargarGrillaInfoPasos();
         }
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
             Limpiar();
         }
+
+        protected void btnAdjuntarArchivosPaso_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnAgregarApoyoPaso_Click(object sender, EventArgs e)
+        {
+            int idPasoAmbiente = Convert.ToInt32(Session["idPasoAmbiente"]);
+            presenterPasosAmbientes.GuardarApoyoPasos(idPasoAmbiente);
+            presenterPasosAmbientes.CargarGrillaInfoApoyo(idPasoAmbiente);
+            pnlApoyoPasos.Visible = true;
+
+        }
+
+        protected void lbtGruposApoyo_Click(object sender, EventArgs e)
+        {
+            pnlApoyoPasos.Visible = true;
+            presenterPasosAmbientes.CargarGrillaInfoApoyo(Convert.ToInt32(Session["idPasoAmbiente"]));
+        }
+
+        #region Adjuntos
+
+        //protected void imgbAdjuntos_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        LinkButton lbttSeleccionar = (LinkButton)sender;
+        //        TableCell celda = (TableCell)lbttSeleccionar.Parent;
+        //        GridViewRow filaSeleccionar = (GridViewRow)celda.Parent;
+
+        //        //business.CargarGrillaAdjuntos(Convert.ToInt32(gvRespuestas.DataKeys[filaSeleccionar.RowIndex].Value.ToString()));
+        //        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "KeyToIdentifythisScript", "abrirModalAdjuntar();", true);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+
+        //}
+
+
+        protected void imgbttDescargar_Click(object sender, EventArgs e)
+        {
+            LinkButton lbttSeleccionar = (LinkButton)sender;
+            TableCell celda = (TableCell)lbttSeleccionar.Parent;
+            GridViewRow filaSeleccionar = (GridViewRow)celda.Parent;
+            string nombreArchivo = gvAdjuntos.Rows[filaSeleccionar.RowIndex].Cells[2].Text.ToString();
+            string ruta = gvAdjuntos.DataKeys[filaSeleccionar.RowIndex].Value.ToString();
+
+            Response.ContentType = "application/octet-stream";
+            Response.AppendHeader("content-disposition", "attachment;filename=" + Server.HtmlDecode(nombreArchivo));
+            Response.TransmitFile(ruta);
+            Response.End();
+        }
+
+        protected void imgbttEliminarAdjuntoDetalle_Click(object sender, EventArgs e)
+        {
+            LinkButton lbttSeleccionar = (LinkButton)sender;
+            TableCell celda = (TableCell)lbttSeleccionar.Parent;
+            GridViewRow filaSeleccionar = (GridViewRow)celda.Parent;
+            string ruta = "../Adjuntos/";
+            string sourcePath = Server.MapPath(ruta);
+            string sourceFile = System.IO.Path.Combine(sourcePath, Server.HtmlDecode(gvAdjuntos.Rows[filaSeleccionar.RowIndex].Cells[2].Text.ToString()));
+            File.Delete(sourceFile);
+            presenterPasosAmbientes.EliminarAdjunto(Convert.ToInt32(gvAdjuntos.Rows[filaSeleccionar.RowIndex].Cells[0].Text.ToString()), Convert.ToInt32(Session["idDetallePaso"]));
+
+        }
+
+        protected void lbtCargarArchivos_Click(object sender, EventArgs e)
+        {
+            if (fileUpload.HasFile)
+            {
+                foreach (HttpPostedFile files in fileUpload.PostedFiles)
+                {
+                    string ruta = "../Adjuntos/";
+                    string path = Server.MapPath(ruta);
+                    if (Directory.Exists(path))
+                    {
+                        string[] extension = files.FileName.Split('.');
+                        fileUpload.SaveAs(Server.MapPath(ruta + "/" + extension[0].Trim() + "." + extension[1]));
+                        lbxArchivosAdjuntos.Items.Add(extension[0].Trim() + "." + extension[1]);
+                    }
+                    else
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(path);
+                        string[] extension = files.FileName.Split('.');
+                        fileUpload.SaveAs(Server.MapPath(ruta + extension[0].Trim() + "." + extension[1]));
+                        lbxArchivosAdjuntos.Items.Add(extension[0].Trim() + "." + extension[1]);
+                    }
+
+                }
+
+            }
+        }
+
+
+        protected void lnkbAdjuntar_Click(object sender, EventArgs e)
+        {
+            foreach (var item in lbxArchivosAdjuntos.Items)
+            {
+                string ruta = "~/Adjuntos/" + item;
+                presenterPasosAmbientes.CrearAdjunto(Convert.ToInt32(Session["idDetallePaso"]), item.ToString(), ruta);
+            }
+
+            lbxArchivosAdjuntos.Items.Clear();
+            MensajePopup = "Archivos cargados satisfactoriamente";
+
+        }
+
+        protected void lbtEliminarAdjunto_Click(object sender, EventArgs e)
+        {
+            string ruta = "../Adjuntos/";
+            string sourcePath = Server.MapPath(ruta);
+            string sourceFile = System.IO.Path.Combine(sourcePath, lbxArchivosAdjuntos.SelectedItem.Text.ToString());
+            File.Delete(sourceFile);
+            lbxArchivosAdjuntos.Items.Remove(lbxArchivosAdjuntos.SelectedItem);
+        }
+
+        protected void gvAdjuntos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+
+                    Literal No = (Literal)e.Row.FindControl("ltralNo");
+                    num3 += 1;
+                    No.Text = num3.ToString() + ".";
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
     }
 }
 

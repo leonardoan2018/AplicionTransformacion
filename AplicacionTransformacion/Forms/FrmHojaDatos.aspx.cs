@@ -141,21 +141,39 @@ namespace AplicacionTransformacion.Forms
         /// <summary>
         /// Gets or sets -  Obtiene y asigna el nombre del formato y lo envia hacia la interface IConsultaHallazgos
         /// </summary>
-        public object Aplicaciones
+        public object Proyectos
         {
             set
             {
-                dpAplicacion.DataSource = value;
-                dpAplicacion.DataValueField = "Id";
-                dpAplicacion.DataTextField = "Nombre";
-                dpAplicacion.DataBind();
+                dpProyectos.DataSource = value;
+                dpProyectos.DataValueField = "Id";
+                dpProyectos.DataTextField = "Nombre";
+                dpProyectos.DataBind();
             }
             get
             {
-                return dpAplicacion.SelectedValue;
+                return dpProyectos.SelectedValue;
             }
         }
 
+        /// <summary>
+        /// Gets or sets -  Obtiene y asigna el nombre del formato y lo envia hacia la interface IConsultaHallazgos
+        /// </summary>
+        public object Iniciativas
+        {
+            set
+            {
+                dpIniciativa.DataSource = value;
+                dpIniciativa.DataValueField = "Id";
+                dpIniciativa.DataTextField = "Nombre";
+                dpIniciativa.DataBind();
+            }
+            get
+            {
+                return dpIniciativa.SelectedValue;
+            }
+
+        }
         /// <summary>
         /// Gets or sets -  Obtiene y asigna el nombre del formato y lo envia hacia la interface IConsultaHallazgos
         /// </summary>
@@ -486,7 +504,7 @@ namespace AplicacionTransformacion.Forms
             presenter.EliminarItemSubCategoria(Convert.ToInt32(gvItemSubcategoria.DataKeys[filaSeleccionar.RowIndex].Value.ToString()), Convert.ToInt32(Session["idSubcategoria"]));
         }
 
-        protected void dpAplicacion_SelectedIndexChanged(object sender, EventArgs e)
+        protected void dpProyectos_SelectedIndexChanged(object sender, EventArgs e)
         {
             //presenter.CargarGrillaItemSubcategoria(Convert.ToInt32(Session["idSubcategoria"]));
         }
@@ -502,6 +520,28 @@ namespace AplicacionTransformacion.Forms
         protected void dpCategoriaReporte_SelectedIndexChanged(object sender, EventArgs e)
         {
             presenter.CargarSubCategoriasReporte();
+        }
+
+        /// <summary>
+        /// Método que se ejecuta cuando se digita una palabra en el texbox producto detalle factura
+        /// </summary>
+        [System.Web.Services.WebMethod]
+        [System.Web.Script.Services.ScriptMethod]
+        public static List<string> GetCompletionList(string prefixText, int count)
+        {
+            try
+            {
+                PConsultas presenter;
+                presenter = new PConsultas();
+                List<string> lista = new List<string>();
+                lista = presenter.BuscarProducto(prefixText);
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -2,15 +2,19 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-  
+    <script src="../Scripts/Transversal.js"></script>
+
+
     <script>
+
+        
 
         function verificarEntradasAplicacion() {
             $("p").remove();
             var verificarVacios = "true";
 
-            if (document.getElementById("<%= txtNombreAplicacion.ClientID %>").value == '') {
-                $("#contenidoPopudMensaje").append("<p>- Debe ingresar el nombre de la aplicación</p>");
+            if (document.getElementById("<%= txtNombreProyecto.ClientID %>").value == '') {
+                $("#contenidoPopudMensaje").append("<p>- Debe ingresar el nombre del proyecto</p>");
                 verificarVacios = "false";
             }
 
@@ -51,32 +55,29 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentContenido" runat="server">
 
     <div class="container row top-buffer fuenteTitulo">
-        Aplicaciones
+        Administración
     </div>
 
-    <%-- Aplicaciones --%>
-    <div class="row">
+
+    <%-- Proyectos --%>
+    <div class="row top-buffer">
         <div class="container">
             <div class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a class="fuenteTituloAcordion" data-toggle="collapse" href="#collapseApliciones">Aplicaciones</a>
+                        <a class="fuenteTituloAcordion" data-toggle="collapse" href="#collapseApliciones">Proyectos</a>
                     </div>
 
                     <div id="collapseApliciones" class="panel-collapse collapse">
                         <asp:UpdatePanel ID="upAplicaciones" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
 
-                                <div class="container row top-buffer fuenteSubtitulo">
-                                    Aplicaciones
-                                </div>
-
                                 <div class="container row top-buffer">
                                     <div class="col-xs-12 col-md-6">
                                         <asp:Label ID="lblNombreAplicacion" runat="server" Text="Nombre" CssClass="fuenteTextoNormal"></asp:Label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i></span>
-                                            <asp:TextBox ID="txtNombreAplicacion" runat="server" CssClass="form-control input-md"></asp:TextBox>
+                                            <asp:TextBox ID="txtNombreProyecto" runat="server" CssClass="form-control input-md"></asp:TextBox>
                                         </div>
                                     </div>
 
@@ -93,26 +94,26 @@
                                     <div class="col-xs-12 ">
                                         <div class="input-group">
 
-                                            <asp:LinkButton ID="btnCrearAplicacion" runat="server" CssClass="btn btnEstilo" OnClick="btnCrearAplicacion_Click" OnClientClick="return verificarEntradasAplicacion()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
+                                            <asp:LinkButton ID="btnCrearProyecto" runat="server" CssClass="btn btn-btnEstilo" OnClick="btnCrearProyecto_Click" OnClientClick="return verificarEntradasAplicacion()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
 
-                                            <asp:LinkButton ID="btnActualizarAplicacion" runat="server" CssClass="btn  btnEstilo espacioBotones" OnClick="btnActualizarAplicacion_Click" OnClientClick="return verificarEntradasAplicacion()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
+                                            <asp:LinkButton ID="btnActualizarProyecto" runat="server" CssClass="btn  btn-btnEstilo espacioBotones" OnClick="btnActualizarProyecto_Click" OnClientClick="return verificarEntradasAplicacion()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
 
-                                            <asp:LinkButton ID="btnCancelarAplicacion" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="btnCancelarAplicacion_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
+                                            <asp:LinkButton ID="btnCancelarProyecto" runat="server" CssClass="btn btn-btnEstilo espacioBotones" OnClick="btnCancelarProyecto_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
                                         </div>
                                     </div>
 
                                 </div>
 
                                 <div class="container row top-buffer fuenteSubtitulo">
-                                    Lista de Aplicaciones
+                                    Lista de Proyectos
                                 </div>
 
 
                                 <div class="container row top-buffer">
                                     <div class="col-xs-12">
-                                        <asp:GridView ID="gvAplicaciones" runat="server" AutoGenerateColumns="False"
+                                        <asp:GridView ID="gvProyectos" runat="server" AutoGenerateColumns="False"
                                             CssClass="container table table-hover table-striped" DataKeyNames="Id"
-                                            GridLines="None" ShowFooter="True" Width="100%" OnRowDataBound="gvAplicaciones_DataBound">
+                                            GridLines="None" ShowFooter="True" Width="100%" OnRowDataBound="gvProyectos_RowDataBound">
                                             <Columns>
                                                 <asp:BoundField DataField="Id" HeaderText="IdAplicacion" Visible="False" />
 
@@ -126,22 +127,133 @@
                                                     <HeaderStyle HorizontalAlign="Center" />
                                                 </asp:BoundField>
 
-                                                <asp:BoundField DataField="AW" HeaderText="AW" HeaderStyle-CssClass="headerGrilla" ItemStyle-CssClass="fuenteTextoNormal">
-                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                </asp:BoundField>
-
                                                 <asp:TemplateField HeaderText="Editar" HeaderStyle-CssClass="headerGrilla" ItemStyle-CssClass="headerGrilla">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="imgbttEditarAplicacion" runat="server" CssClass="btn btn-default btn-sm" OnClick="imgbttEditarAplicacion_Click"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                        <asp:LinkButton ID="imgbttEditarProyecto" runat="server" CssClass="btn btn-default btn-sm" OnClick="imgbttEditarProyecto_Click"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                     </ItemTemplate>
                                                     <HeaderStyle HorizontalAlign="Center" />
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Eliminar" HeaderStyle-CssClass="headerGrilla" ItemStyle-CssClass="headerGrilla">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="imgbttEliminarAplicacion" runat="server" CssClass="btn btn-default btn-sm" OnClick="imgbttEliminarAplicacion_Click"><span class="glyphicon glyphicon-trash"></span></asp:LinkButton>
+                                                        <asp:LinkButton ID="imgbttEliminarProyecto" runat="server" CssClass="btn btn-default btn-sm" OnClick="imgbttEliminarProyecto_Click"><span class="glyphicon glyphicon-trash"></span></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
+                                            </Columns>
+                                            <EmptyDataTemplate>
+                                                <asp:Label ID="lbGVVacio" runat="server" Text="No se encontraron datos." />
+                                            </EmptyDataTemplate>
+                                            <RowStyle HorizontalAlign="Left" />
+
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%-- Iniciativas --%>
+    <div class="row top-buffer">
+        <div class="container">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="fuenteTituloAcordion" data-toggle="collapse" href="#collapseIniciativas">Iniciativas</a>
+                    </div>
+
+                    <div id="collapseIniciativas" class="panel-collapse collapse">
+                        <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+
+
+                                <div class="container row top-buffer">
+                                    <div class="col-xs-12 col-md-6">
+                                        <asp:Label ID="Label3" runat="server" Text="Proyectos" CssClass="fuenteTextoNormal"></asp:Label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i></span>
+                                            <asp:DropDownList ID="dpProyectosIniciativas" runat="server" CssClass="form-control input-md"></asp:DropDownList>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6">
+                                        <asp:Label ID="Label4" runat="server" Text="Nombre de la iniativa" CssClass="fuenteTextoNormal"></asp:Label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i></span>
+                                            <asp:TextBox ID="txtNombreIniciativa" runat="server" CssClass="form-control input-md"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="container row top-buffer">
+                                    <div class="col-xs-12 col-md-6">
+                                        <asp:Label ID="Label5" runat="server" Text="PMO" CssClass="fuenteTextoNormal"></asp:Label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i></span>
+                                            <asp:TextBox ID="txtPMO" runat="server" CssClass="form-control input-md"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="container row top-buffer">
+                                    <div class="col-xs-12 ">
+                                        <div class="input-group">
+
+                                            <asp:LinkButton ID="lbtCrearIniciativa" runat="server" CssClass="btn btn-btnEstilo" OnClick="lbtCrearIniciativa_Click" OnClientClick="return verificarEntradaTema()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
+
+                                            <asp:LinkButton ID="lbtEditarIniciativa" runat="server" CssClass="btn  btn-btnEstilo espacioBotones" OnClick="lbtEditarIniciativa_Click" OnClientClick="return verificarEntradaTema()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
+
+                                            <asp:LinkButton ID="lbtCancelarIniciativa" runat="server" CssClass="btn btn-btnEstilo espacioBotones" OnClick="lbtCancelarIniciativa_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="container row top-buffer fuenteSubtitulo">
+                                    Lista de Iniciativas
+                                </div>
+
+
+                                <div class="container row top-buffer">
+                                    <div class="col-xs-12">
+                                        <asp:GridView ID="gvIniciativa" runat="server" AutoGenerateColumns="False"
+                                            CssClass="container table table-hover table-striped" DataKeyNames="Id"
+                                            GridLines="None" ShowFooter="True" Width="100%" OnRowDataBound="gvIniciativa_RowDataBound">
+                                            <Columns>
+                                                <asp:BoundField DataField="Id" HeaderText="IdContenido" Visible="False" />
+
+                                                <asp:TemplateField HeaderText="No." HeaderStyle-CssClass="headerGrilla" ItemStyle-CssClass="fuenteTextoNormal" HeaderStyle-Width="1%">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="ltralNo" runat="server" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" HeaderStyle-CssClass="headerGrilla" ItemStyle-CssClass="fuenteTextoNormal">
+                                                    <HeaderStyle HorizontalAlign="Center" />
+                                                </asp:BoundField>
+
+                                                <asp:BoundField DataField="PMO" HeaderText="PMO" HeaderStyle-CssClass="headerGrilla" ItemStyle-CssClass="fuenteTextoNormal">
+                                                    <HeaderStyle HorizontalAlign="Center" />
+                                                </asp:BoundField>
+
+                                                <asp:TemplateField HeaderText="Editar" HeaderStyle-CssClass="headerGrilla" ItemStyle-CssClass="headerGrilla">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="imgbttEditarIniciativa" runat="server" CssClass="btn btn-default btn-sm" OnClick="imgbttEditarIniciativa_Click"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                    <HeaderStyle HorizontalAlign="Center" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Eliminar" HeaderStyle-CssClass="headerGrilla" ItemStyle-CssClass="headerGrilla">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="imgbttEliminarIniciativa" runat="server" CssClass="btn btn-default btn-sm" OnClick="imgbttEliminarIniciativa_Click"><span class="glyphicon glyphicon-trash"></span></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
                                             </Columns>
                                             <EmptyDataTemplate>
                                                 <asp:Label ID="lbGVVacio" runat="server" Text="No se encontraron datos." />
@@ -180,15 +292,15 @@
 
                                 <div class="container row top-buffer">
                                     <div class="col-xs-12 col-md-6">
-                                        <asp:Label ID="Label1" runat="server" Text="Aplicación" CssClass="fuenteTextoNormal"></asp:Label>
+                                        <asp:Label ID="Label1" runat="server" Text="Iniciativa" CssClass="fuenteTextoNormal"></asp:Label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i></span>
-                                            <asp:DropDownList ID="dpAplicacionesTema" runat="server" CssClass="form-control input-md" AutoPostBack="true" OnSelectedIndexChanged="dpAplicacionesTema_SelectedIndexChanged"></asp:DropDownList>
+                                            <asp:DropDownList ID="dpIniciativasTema" runat="server" CssClass="form-control input-md" AutoPostBack="true"></asp:DropDownList>
                                         </div>
                                     </div>
 
                                     <div class="col-xs-12 col-md-6">
-                                        <asp:Label ID="Label2" runat="server" Text="Nombre" CssClass="fuenteTextoNormal"></asp:Label>
+                                        <asp:Label ID="Label2" runat="server" Text="Nombre del tema" CssClass="fuenteTextoNormal"></asp:Label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i></span>
                                             <asp:TextBox ID="txtNombreTema" runat="server" CssClass="form-control input-md"></asp:TextBox>
@@ -200,11 +312,11 @@
                                     <div class="col-xs-12 ">
                                         <div class="input-group">
 
-                                            <asp:LinkButton ID="lbtCrearTema" runat="server" CssClass="btn btnEstilo" OnClick="lbtCrearTema_Click" OnClientClick="return verificarEntradaTema()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
+                                            <asp:LinkButton ID="lbtCrearTema" runat="server" CssClass="btn btn-btnEstilo" OnClick="lbtCrearTema_Click" OnClientClick="return verificarEntradaTema()"><span aria-hidden="true" class="glyphicon glyphicon-book"></span> Registrar </asp:LinkButton>
 
-                                            <asp:LinkButton ID="lbtEditarTema" runat="server" CssClass="btn  btnEstilo espacioBotones" OnClick="lbtEditarTema_Click" OnClientClick="return verificarEntradaTema()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
+                                            <asp:LinkButton ID="lbtEditarTema" runat="server" CssClass="btn  btn-btnEstilo espacioBotones" OnClick="lbtEditarTema_Click" OnClientClick="return verificarEntradaTema()" Visible="false"><span aria-hidden="true" class="glyphicon glyphicon-floppy-disk"></span> Guardar</asp:LinkButton>
 
-                                            <asp:LinkButton ID="lbtCancelarTema" runat="server" CssClass="btn btnEstilo espacioBotones" OnClick="lbtCancelarTema_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
+                                            <asp:LinkButton ID="lbtCancelarTema" runat="server" CssClass="btn btn-btnEstilo espacioBotones" OnClick="lbtCancelarTema_Click"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Cancelar </asp:LinkButton>
                                         </div>
                                     </div>
 
